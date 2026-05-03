@@ -1,99 +1,99 @@
-AURAL Radio               Bank 17 Stacja 1   http://radio.auralradiokerala.com:1320/stream
-Bailrigg 95.3FM           Bank 17 Stacja 2   https://bfm-live.lancs.ac.uk/listen/bfm/flac
-Big Bang Radio            Bank 17 Stacja 3   https://audio-edge-cmc51.fra.h.radiomast.io/2b410ada-8653-40aa-a654-3e8954cf4a4d
-Dance Wave                Bank 17 Stacja 4   http://dancewave.online/dance.flac.ogg
-ForEver La Radio-Arcachon Bank 17 Stacja 5   http://stream.sweetfm.fr:8000/flac-forever-arc
-ForEver La Radio-Bordeaux Bank 17 Stacja 6   http://stream.sweetfm.fr:8000/flac-forever-bdx
-Greek Hits                Bank 17 Stacja 7   https://radio.newageradio.gr:8040/autodj.flac
-Haarlem 105               Bank 17 Stacja 8   http://studio.haarlem105.nl:8000/haarlem105DAB.flac?_res_tag_=audio
-Hi On Line Radio          Bank 17 Stacja 9   http://mscp2.live-streams.nl:8100/flac.flac
-SEKO Radio                Bank 17 Stacja 10  https://isekoi-radio.com/listen/isekoi/radio.flac
-SEKO Ambient              Bank 17 Stacja 11  https://isekoi-radio.com/listen/ambient/ambientradio.flac
-SEKO Chill Zone           Bank 17 Stacja 12  https://isekoi-radio.com/listen/chill/radio.flac
-Kiss Collector            Bank 17 Stacja 13  http://live7.avf.ch:8000/kisscollector_main
-Lux Radio                 Bank 17 Stacja 14  https://live7.avf.ch/lux_main
-OpenSky Radio             Bank 17 Stacja 15  https://audio.opensky.radio:8082/flac?_res_tag_=audio
-PureClassix Radio         Bank 17 Stacja 16  http://mscp4.live-streams.nl:8140/flac.ogg
-Pure Radio Holland-The UndBank 17 Stacja 17  https://streamserver.pure-isp.eu/radio/8000/flac
-Pure Radio Holland-Trance-Bank 17 Stacja 18  https://streamserver.pure-isp.eu/radio/8020/flac
-Pure Radio Holland-HardcorBank 17 Stacja 19  https://streamserver.pure-isp.eu/radio/8010/flac
-Pure Radio Holland-DownTemBank 17 Stacja 20  https://streamserver.pure-isp.eu/radio/8040/flac
-Pure Radio Channel-Live PaBank 17 Stacja 21  https://streamserver.pure-isp.eu/radio/8060/flac
-Pure Radio Channel-Dance CBank 17 Stacja 22  https://streamserver.pure-isp.eu/radio/8030/flac
-Pure Radio Channel-DJ R.I.Bank 17 Stacja 23  https://streamserver.pure-isp.eu/radio/8050/flac
-Pure Radio Channel-VariousBank 17 Stacja 24  https://streamserver.pure-isp.eu/radio/8070/flac
-Pure Radio Channel-Rap & HBank 17 Stacja 25  https://streamserver.pure-isp.eu/radio/8100/flac
-Radio Audiomastering      Bank 17 Stacja 26  https://transliacija.audiomastering.lt/pure
-Radio BluesFlac           Bank 17 Stacja 27  https://streams.radiomast.io/radioblues-flac
-Radio Campus Gremoble 90.8Bank 17 Stacja 28  https://live.campusgrenoble.org/dab
-Radio Haugaland           Bank 17 Stacja 29  http://radioip.no:443/flac
-Radio Juventus            Bank 17 Stacja 30  http://s2.audiostream.hu:8090/juventus_FLAC
-Radio Mast                Bank 17 Stacja 31  https://streams.radiomast.io/ref-lossless-ogg-flac-stereo
-Radio Tornagaleones       Bank 17 Stacja 32  http://tornagaleones.ddns.net:9000/Flac
-RIO Radio Internacional OdBank 17 Stacja 33  http://c30.radioboss.fm:8510/autodj
-RockStar Radio            Bank 17 Stacja 34  http://live7.avf.ch:8000/rockstar_main
-Rondo Klasu               Bank 17 Stacja 35  https://iradio.fi/klasu.flac
-Rondo Klasu Pro           Bank 17 Stacja 36  https://iradio.fi/klasupro.flac
-Sing Sing                 Bank 17 Stacja 37  http://stream.sing-sing-bis.org:8000/singsingFlac, http://stream.sing-sing-bis.org:8000/singsingFlacSansMetadata
-SUN                       Bank 17 Stacja 38  http://diffusion.lafrap.fr:8000/sun.flac
-The Cheese                Bank 17 Stacja 39  https://station.thecheese.co.nz/listen/the_cheese/flac
-URBN Radio                Bank 17 Stacja 40  http://live7.avf.ch:8000/urbn_main
-Violent Forces Radio      Bank 17 Stacja 41  https://tuneintoradio1.com:8000/stream.flac
-
-Violent Forces Radio      Bank 17 Stacja 42  https://tuneintoradio1.com:8010/stream.flac
-Yes FM                    Bank 17 Stacja 43  http://live7.avf.ch:8000/yesfm_main
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-AIDA Radio                Bank 1 Stacja 44  https://cdn05.radio.cloud:8128/AIDA-OMNIA-GAI
-BluesWave Radio           Bank 1 Stacja 45  http://blueswave.radio:8050/FlacBlues
-Classics Radio            Bank 1 Stacja 46  http://vriezenet.nl:11051/flac
-Free Music Radio          Bank 1 Stacja 47  http://stream.freemusicradio.nl:8100/stream.oga
-LapFox Radio              Bank 1 Stacja 48  https://radio.lapfoxradio.com/radio/8000/stream-flac.flac
-MaXXima                   Bank 1 Stacja 49  http://maxxima.mine.nu:8000/maxx.ogg
-Pure Lounge Radio         Bank 1 Stacja 50  https://mscp4.live-streams.nl:8142/lounge.ogg
-Radio Bias                Bank 1 Stacja 51  https://admin.biasradio.com/radio/8000/flac
-Radio Calico              Bank 1 Stacja 52  http://radio3.radio-calico.com:8080/calico
-Radio Calico (Roon stream)Bank 1 Stacja 53  http://roon.radio-calico.com:8000/roon
-Radio Radar   House       Bank 1 Stacja 54  https://radioradar.online/listen/r_house/r_house.ogg
-Radio X                   Bank 1 Stacja 55  https://mp3.radiox.ch/standard.ogg
-Rlocale Radio             Bank 1 Stacja 56  https://rlocale.org/listen/rlocale/rlocale-flac.ogg
-shadowfr69 Radio          Bank 1 Stacja 57  https://radio.shadowfr69.eu/lossless
-Sveriges Radio            Bank 1 Stacja 58  https://live1.sr.se/p2-flac
-TNM Radio                 Bank 1 Stacja 59  https://stream.tnm-radio.eu/ultra
+AURAL Radio              Bank 17 Station 1 http://radio.auralradiokerala.com:1320/stream
+Bailrigg 95.3FM          Bank 17 Station 2 https://bfm-live.lancs.ac.uk/listen/bfm/flac
+Big Bang Radio           Bank 17 Station 3 https://audio-edge-cmc51.fra.h.radiomast.io/2b410ada-8653-40aa-a654-3e8954cf4a4d
+Dance Wave               Bank 17 Station 4 http://dancewave.online/dance.flac.ogg
+ForEver La Radio-ArcachonBank 17 Station 5 http://stream.sweetfm.fr:8000/flac-forever-arc
+ForEver La Radio-BordeauxBank 17 Station 6 http://stream.sweetfm.fr:8000/flac-forever-bdx
+Greek Hits               Bank 17 Station 7 https://radio.newageradio.gr:8040/autodj.flac
+Haarlem 105              Bank 17 Station 8 http://studio.haarlem105.nl:8000/haarlem105DAB.flac?_res_tag_=audio
+Hi On Line Radio         Bank 17 Station 9 http://mscp2.live-streams.nl:8100/flac.flac
+SEKO Radio               Bank 17 Station 10 https://isekoi-radio.com/listen/isekoi/radio.flac
+SEKO Ambient             Bank 17 Station 11 https://isekoi-radio.com/listen/ambient/ambientradio.flac
+SEKO Chill Zone          Bank 17 Station 12 https://isekoi-radio.com/listen/chill/radio.flac
+Kiss Collector           Bank 17 Station 13 http://live7.avf.ch:8000/kisscollector_main
+Lux Radio                Bank 17 Station 14 https://live7.avf.ch/lux_main
+OpenSky Radio            Bank 17 Station 15 https://audio.opensky.radio:8082/flac?_res_tag_=audio
+PureClassix Radio        Bank 17 Station 16 http://mscp4.live-streams.nl:8140/flac.ogg
+Pure Radio Holland-The UndBank 17 Station 17 https://streamserver.pure-isp.eu/radio/8000/flac
+Pure Radio Holland-Trance-Bank 17 Station 18 https://streamserver.pure-isp.eu/radio/8020/flac
+Pure Radio Holland-HardcorBank 17 Station 19 https://streamserver.pure-isp.eu/radio/8010/flac
+Pure Radio Holland-DownTemBank 17 Station 20 https://streamserver.pure-isp.eu/radio/8040/flac
+Pure Radio Channel-Live PaBank 17 Station 21 https://streamserver.pure-isp.eu/radio/8060/flac
+Pure Radio Channel-Dance CBank 17 Station 22 https://streamserver.pure-isp.eu/radio/8030/flac
+Pure Radio Channel-DJ R.I.Bank 17 Station 23 https://streamserver.pure-isp.eu/radio/8050/flac
+Pure Radio Channel-VariousBank 17 Station 24 https://streamserver.pure-isp.eu/radio/8070/flac
+Pure Radio Channel-Rap & HBank 17 Station 25 https://streamserver.pure-isp.eu/radio/8100/flac
+Radio Audiomastering     Bank 17 Station 26 https://transliacija.audiomastering.lt/pure
+Radio BluesFlac          Bank 17 Station 27 https://streams.radiomast.io/radioblues-flac
+Radio Campus Gremoble 90.8Bank 17 Station 28  https://live.campusgrenoble.org/dab
+Radio Haugaland          Bank 17 Station 29 http://radioip.no:443/flac
+Radio Juventus           Bank 17 Station 30 http://s2.audiostream.hu:8090/juventus_FLAC
+Radio Mast               Bank 17 Station 31 https://streams.radiomast.io/ref-lossless-ogg-flac-stereo
+Radio Tornagaleones      Bank 17 Station 32 http://tornagaleones.ddns.net:9000/Flac
+RIO Radio Internacional OdBank 17 Station 33 http://c30.radioboss.fm:8510/autodj
+RockStar Radio           Bank 17 Station 34 http://live7.avf.ch:8000/rockstar_main
+Rondo Klasu              Bank 17 Station 35 https://iradio.fi/klasu.flac
+Rondo Klasu Pro          Bank 17 Station 36 https://iradio.fi/klasupro.flac
+Sing Sing                Bank 17 Station 37 http://stream.sing-sing-bis.org:8000/singsingFlac, http://stream.sing-sing-bis.org:8000/singsingFlacSansMetadata
+SUN                      Bank 17 Station 38 http://diffusion.lafrap.fr:8000/sun.flac
+The Cheese               Bank 17 Station 39 https://station.thecheese.co.nz/listen/the_cheese/flac
+URBN Radio               Bank 17 Station 40 http://live7.avf.ch:8000/urbn_main
+Violent Forces Radio     Bank 17 Station 41 https://tuneintoradio1.com:8000/stream.flac
+                           
+Violent Forces Radio     Bank 17 Station 42 https://tuneintoradio1.com:8010/stream.flac
+Yes FM                   Bank 17 Station 43 http://live7.avf.ch:8000/yesfm_main
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+AIDA Radio               Bank 1 Station 44  https://cdn05.radio.cloud:8128/AIDA-OMNIA-GAI
+BluesWave Radio          Bank 1 Station 45  http://blueswave.radio:8050/FlacBlues
+Classics Radio           Bank 1 Station 46  http://vriezenet.nl:11051/flac
+Free Music Radio         Bank 1 Station 47  http://stream.freemusicradio.nl:8100/stream.oga
+LapFox Radio             Bank 1 Station 48  https://radio.lapfoxradio.com/radio/8000/stream-flac.flac
+MaXXima                  Bank 1 Station 49  http://maxxima.mine.nu:8000/maxx.ogg
+Pure Lounge Radio        Bank 1 Station 50  https://mscp4.live-streams.nl:8142/lounge.ogg
+Radio Bias               Bank 1 Station 51  https://admin.biasradio.com/radio/8000/flac
+Radio Calico             Bank 1 Station 52  http://radio3.radio-calico.com:8080/calico
+Radio Calico (Roon stream)Bank 1 Station 53  http://roon.radio-calico.com:8000/roon
+Radio Radar   House      Bank 1 Station 54  https://radioradar.online/listen/r_house/r_house.ogg
+Radio X                  Bank 1 Station 55  https://mp3.radiox.ch/standard.ogg
+Rlocale Radio            Bank 1 Station 56  https://rlocale.org/listen/rlocale/rlocale-flac.ogg
+shadowfr69 Radio         Bank 1 Station 57  https://radio.shadowfr69.eu/lossless
+Sveriges Radio           Bank 1 Station 58  https://live1.sr.se/p2-flac
+TNM Radio                Bank 1 Station 59  https://stream.tnm-radio.eu/ultra
