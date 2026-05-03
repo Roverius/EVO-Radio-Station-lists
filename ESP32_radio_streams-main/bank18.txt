@@ -1,99 +1,42 @@
-RMF Swieta                                        http://195.150.20.7/rmf_swieta
-RMF - Top 30 Swieta                               https://rs6-krk2.rmfstream.pl/rmf_top_30_swieta
-Soma.FM Christmas Lounge                          https://ice5.somafm.com/christmas-256-mp3
-Radio Santa Claus                                 https://streaming.radiostreamlive.com/radiosantaclaus_devices?token=%3C?%20echo%20rand%20(1,200000);%20?%3E
-Radio North Pole                                  https://streaming.radiostreamlive.com/radionorthpole_devices?token=%3C?%20echo%20rand%20(1,200000);%20?%3E
-ZET Na swiêta                                     https://zt.cdn.eurozet.pl/ZETSWI.mp3
-Christmas Radio INT                               https://edg1-iad-gold.streamguys1.com/christmasradio?platform=website
-Christmas Evergreen                               https://emg.streamguys1.com/evergreen-website
-181.FM Christmas Kountry                          http://listen.livestreamingservice.com/181-xkkountry_128k.mp3
-181.FM Christmas Classics                         http://listen.livestreamingservice.com/181-xtraditional_128k.mp3
-181.FM Christmas Oldies                           http://listen.livestreamingservice.com/181-xoldies_128k.mp3
-181.FM Christmas Standard                         http://listen.livestreamingservice.com/181-xstandards_128k.mp3
-181.FM Christmas Country                          http://listen.livestreamingservice.com/181-xcountry_128k.mp3
-181.FM Christmas Power                            http://listen.livestreamingservice.com/181-xpower_128k.mp3
-181.FM Christmas Highway                          http://listen.livestreamingservice.com/181-xhighway_128k.mp3
-181.FM Christmas Soundtra                         http://listen.livestreamingservice.com/181-xsoundtrax_128k.mp3
-181.FM Christmas R&B                              http://listen.livestreamingservice.com/181-xtrue_128k.mp3
-181.FM Christmas Rock                             http://listen.livestreamingservice.com/181-xrock_128k.mp3
-181.FM Christmas Mix                              http://listen.livestreamingservice.com/181-xmix_128k.mp3
-181.FM Christmas Fun                              http://listen.livestreamingservice.com/181-xfun_128k.mp3
-181.FM Christmas Kids                             http://listen.livestreamingservice.com/181-xkids_128k.mp3
-181.FM Christmas                                  http://listen.livestreamingservice.com/181-xblender_128k.mp3
-181.FM Christmas Spirit                           http://listen.livestreamingservice.com/181-xspirit_128k.mp3
-181.FM Christmas SmoothJa                         http://listen.livestreamingservice.com/181-xsmooth_128k.mp3
-181.FM Christmas Gospel                           http://listen.livestreamingservice.com/181-xgospel_128k.mp3
-181.FM Christmas Swing                            http://listen.livestreamingservice.com/181-xswing_128k.mp3
-Christmas 1                                       http://89.39.189.44:8000/;
-Christmas 2                                       http://us9.maindigitalstream.com:7459/;
-Christmas FM                                      https://christmasfm.cdnstream1.com/2547_128.mp3
-Christmas 365                                     https://us3.streamingpulse.com/ssl/7038
-Christmas FM                                      http://janus.cdnstream.com:5024/live
-Christmas FM - Classical                          https://christmasfm.cdnstream1.com/2549_128.mp3
-Christmas Hits NL                                 https://stream06.dotpoint.nl:8006/stream
-Christmas Instrumentals                           http://proxima.shoutca.st:8071/;
-Christmas Lounge Radio                            https://ice3.somafm.com/christmas-128-mp3
-Christmas Radio Live                              http://s7.viastreaming.net:7000/;
-Christmas Radio Live                              http://sbouch00.radioca.st:8232/;
-Christmas Songs Radio                             https://cheetah.streemlion.com:1050/stream
-Xmas                                              https://live.radiostudio.be/xmasfm
-Xmasradio FM                                      https://xmasfm1.dmd2streaming.com/christmasradiofm-128.mp3
-Antyradio X-mass                                  https://an.cdn.eurozet.pl/ANTXMA.mp3
-Fility Merry Christmas Ra                         https://streaming.silvacast.com/XMAS.mp3
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+RMF Swieta               Bank 18 Station 1 http://195.150.20.7/rmf_swieta
+RMF - Top 30 Swieta      Bank 18 Station 2 https://rs6-krk2.rmfstream.pl/rmf_top_30_swieta
+Soma.FM Christmas Lounge Bank 18 Station 3 https://ice5.somafm.com/christmas-256-mp3
+Radio Santa Claus        Bank 18 Station 4 https://streaming.radiostreamlive.com/radiosantaclaus_devices?
+Radio North Pole         Bank 18 Station 5 https://streaming.radiostreamlive.com/radionorthpole_devices?
+ZET Na swiêta            Bank 18 Station 6 https://zt.cdn.eurozet.pl/ZETSWI.mp3
+Christmas Radio INT      Bank 18 Station 7 https://edg1-iad-gold.streamguys1.com/christmasradio?
+Christmas Evergreen      Bank 18 Station 8 https://emg.streamguys1.com/evergreen-website
+181.FM Christmas Country Bank 18 Station 9 http://listen.livestreamingservice.com/181-xkkountry_128k.mp3
+181.FM Christmas ClassicsBank 18 Station 10 http://listen.livestreamingservice.com/181-xtraditional_128k.mp3
+181.FM Christmas Oldies  Bank 18 Station 11 http://listen.livestreamingservice.com/181-xoldies_128k.mp3
+181.FM Christmas StandardBank 18 Station 12 http://listen.livestreamingservice.com/181-xstandards_128k.mp3
+181.FM Christmas Country Bank 18 Station 13 http://listen.livestreamingservice.com/181-xcountry_128k.mp3
+181.FM Christmas Power   Bank 18 Station 14 http://listen.livestreamingservice.com/181-xpower_128k.mp3
+181.FM Christmas Highway Bank 18 Station 15 http://listen.livestreamingservice.com/181-xhighway_128k.mp3
+181.FM Christmas SoundtraBank 18 Station 16 http://listen.livestreamingservice.com/181-xsoundtrax_128k.mp3
+181.FM Christmas R&B     Bank 18 Station 17 http://listen.livestreamingservice.com/181-xtrue_128k.mp3
+181.FM Christmas Rock    Bank 18 Station 18 http://listen.livestreamingservice.com/181-xrock_128k.mp3
+181.FM Christmas Mix     Bank 18 Station 19 http://listen.livestreamingservice.com/181-xmix_128k.mp3
+181.FM Christmas Fun     Bank 18 Station 20 http://listen.livestreamingservice.com/181-xfun_128k.mp3
+181.FM Christmas Kids    Bank 18 Station 21 http://listen.livestreamingservice.com/181-xkids_128k.mp3
+181.FM Christmas         Bank 18 Station 22 http://listen.livestreamingservice.com/181-xblender_128k.mp3
+181.FM Christmas Spirit  Bank 18 Station 23 http://listen.livestreamingservice.com/181-xspirit_128k.mp3
+181.FM Christmas SmoothJaBank 18 Station 24 http://listen.livestreamingservice.com/181-xsmooth_128k.mp3
+181.FM Christmas Gospel  Bank 18 Station 25 http://listen.livestreamingservice.com/181-xgospel_128k.mp3
+181.FM Christmas Swing   Bank 18 Station 26 http://listen.livestreamingservice.com/181-xswing_128k.mp3
+Christmas 1              Bank 18 Station 27 http://89.39.189.44:8000/;
+Christmas 2              Bank 18 Station 28 http://us9.maindigitalstream.com:7459/;
+Christmas FM             Bank 18 Station 29 https://christmasfm.cdnstream1.com/2547_128.mp3
+Christmas 365            Bank 18 Station 30 https://us3.streamingpulse.com/ssl/7038
+Christmas FM             Bank 18 Station 31 http://janus.cdnstream.com:5024/live
+Christmas FM - Classical Bank 18 Station 32 https://christmasfm.cdnstream1.com/2549_128.mp3
+Christmas Hits NL        Bank 18 Station 33 https://stream06.dotpoint.nl:8006/stream
+Christmas Instrumentals  Bank 18 Station 34 http://proxima.shoutca.st:8071/;
+Christmas Lounge Radio   Bank 18 Station 35 https://ice3.somafm.com/christmas-128-mp3
+Christmas Radio Live     Bank 18 Station 36 http://s7.viastreaming.net:7000/;
+Christmas Radio Live     Bank 18 Station 37 http://sbouch00.radioca.st:8232/;
+Christmas Songs Radio    Bank 18 Station 38 https://cheetah.streemlion.com:1050/stream
+Xmas                     Bank 18 Station 39 https://live.radiostudio.be/xmasfm
+Xmasradio FM             Bank 18 Station 40 https://xmasfm1.dmd2streaming.com/christmasradiofm-128.mp3
+Antyradio X-mass         Bank 18 Station 41 https://an.cdn.eurozet.pl/ANTXMA.mp3
+Fility Merry Christmas RaBank 18 Station 42 https://streaming.silvacast.com/XMAS.mp3
