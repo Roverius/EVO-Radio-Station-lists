@@ -3,7 +3,7 @@ RMF - Top 30 Swieta                               https://rs6-krk2.rmfstream.pl/
 Soma.FM Christmas Lounge                          https://ice5.somafm.com/christmas-256-mp3
 Radio Santa Claus                                 https://streaming.radiostreamlive.com/radiosantaclaus_devices?token=%3C?%20echo%20rand%20(1,200000);%20?%3E
 Radio North Pole                                  https://streaming.radiostreamlive.com/radionorthpole_devices?token=%3C?%20echo%20rand%20(1,200000);%20?%3E
-ZET Na swiêta                                     https://zt.cdn.eurozet.pl/ZETSWI.mp3
+ZET Na swiÃªta                                     https://zt.cdn.eurozet.pl/ZETSWI.mp3
 Christmas Radio INT                               https://edg1-iad-gold.streamguys1.com/christmasradio?platform=website
 Christmas Evergreen                               https://emg.streamguys1.com/evergreen-website
 181.FM Christmas Kountry                          http://listen.livestreamingservice.com/181-xkkountry_128k.mp3
