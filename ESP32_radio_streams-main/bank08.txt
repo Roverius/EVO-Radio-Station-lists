@@ -1,0 +1,99 @@
+0N 80s on Radio           Bank 8 Stacja 1   http://0n-70s.radionetz.de:8000/0n-80s.mp3
+Bialoruskie radio racja   Bank 8 Stacja 2   http://air.racyja.com:8000/racja256
+Euro Radio                Bank 8 Stacja 3   https://stream.laut.fm/euroradio
+Intense Radio Dance       Bank 8 Stacja 4   http://secure.live-streams.nl/flac.ogg
+KEXP                      Bank 8 Stacja 5   http://live-mp3-128.kexp.org/kexp128.mp3
+Krdp FM                   Bank 8 Stacja 6   http://s1.slotex.pl:7762/;
+Minimal Mix Radio         Bank 8 Stacja 7   http://orion.shoutca.st:8750
+Radio 1.FM All Euro 80s   Bank 8 Stacja 8   https://strm112.1.fm/80s_90s_mobile_mp3
+Radio 80s Forever Radio   Bank 8 Stacja 9   https://premium.shoutcastsolutions.com/radio/8050/64AAC+.mp3
+Radio 80s Mix Radio       Bank 8 Stacja 10  https://stream.laut.fm/80s-mix-radio
+Radio 80s80s              Bank 8 Stacja 11  https://regiocast.streamabc.net/regc-80s80smweb2517500-mp3-192-1672667
+Radio 80s80s Italo Disco  Bank 8 Stacja 12  https://streams.80s80s.de/italohits/mp3-192
+Radio 80s80s Love         Bank 8 Stacja 13  https://streams.80s80s.de/love/mp3-192/streams 
+Radio Afera               Bank 8 Stacja 14  http://poznan5-3.radio.pionier.net.pl:8000/afera.mp3
+Radio Atlantic 80s        Bank 8 Stacja 15  https://chasbo1978.radioca.st/stream 
+Radio Biedrzychowice      Bank 8 Stacja 16  http://195.164.158.230:9070  
+Radio Cdis                Bank 8 Stacja 17  https://stream.laut.fm/radiocdis
+Radio Chicago             Bank 8 Stacja 18  https://secure1.reliastream.com/polskieradio  
+Radio Chilli ZET FM       Bank 8 Stacja 19  https://ch01.cdn.eurozet.pl/chi-net.mp3
+Radio Disco 80 i Polo     Bank 8 Stacja 20  http://s1.discoparty.pl:7432
+Radio Divertimento        Bank 8 Stacja 21  http://s7.radiohost.pl:11518/stream
+Radio Doxa                Bank 8 Stacja 22  http://81.210.92.213:8000/;
+Radio E Tronic FM         Bank 8 Stacja 23  https://stream.laut.fm/e-tronic-fm
+Radio Elka                Bank 8 Stacja 24  http://live.elka.pl:8000/elkamp3
+Radio EL-Stacja           Bank 8 Stacja 25  http://radio.el-stacja.pl:8000/elstacja320mp3
+Radio eM                  Bank 8 Stacja 26  http://91.200.187.58/;
+Radio Emaus               Bank 8 Stacja 27  http://stream.radioemaus.pl:8000/mp3stream
+Radio Energy 106 Belfast  Bank 8 Stacja 28  http://192.111.140.6:9633/stream
+Radio Eurodance 1         Bank 8 Stacja 29  https://stream.laut.fm/eurodance1
+Radio Eurodance 90        Bank 8 Stacja 30  http://www.radiart.eu:8394/autodj
+Radio Heart 80s           Bank 8 Stacja 31  https://ice-sov.musicradio.com/Heart80sMP3
+Radio Hit                 Bank 8 Stacja 32  http://46.170.199.85:8000
+Radio Hit Eurodance       Bank 8 Stacja 33  https://streams.ffh.de/ffhchannels/mp3/hqeurodance.mp3
+Radio Italo Disco         Bank 8 Stacja 34  https://broadcast.miami/proxy/italodisco?mp=/stream2
+Radio Love 80's           Bank 8 Stacja 35  https://playoutonestreaming.com/proxy/love80s2?mp=/;
+Radio Mais                Bank 8 Stacja 36  https://ec5.yesstreaming.net:2120/stream
+Radio Mediehuset 3 FM     Bank 8 Stacja 37  http://uk1.internet-radio.com:8150/live
+Radio Mega 80s            Bank 8 Stacja 38  https://stream3.radiodienst.de/proxy/mega80s/80s
+Radio Music Max           Bank 8 Stacja 39  http://91.232.4.33:7040/Stream1
+Radio Musicfactoryoristan Bank 8 Stacja 40  https://stream.laut.fm/musicfactoryoristano
+Radio Nadzieja            Bank 8 Stacja 41  http://streaming01.technologicznie.net:8000/;
+Radio Niepokalanow        Bank 8 Stacja 42  http://88.199.169.10:8000/;
+Radio Nuta                Bank 8 Stacja 43  https://stream.rcs.revma.com/0004tehdxzzuv
+Radio Oldies FM           Bank 8 Stacja 44  https://hit-1.nty.uy/stream
+Radio P8 Pop              Bank 8 Stacja 45  https://p8.p4groupaudio.com/P08_MH
+Radio Panorama 80         Bank 8 Stacja 46  https://stream.laut.fm/panorama80
+Radio Paradise Main Mix   Bank 8 Stacja 47  http://stream.radioparadise.com/flac
+Radio Pasja               Bank 8 Stacja 48  http://91.232.4.33:8049/stream
+Radio Pasja-Klubowa       Bank 8 Stacja 49  http://91.232.4.33:9460/stream
+
+
+ESKA DO PRACY             Bank 8 Stacja 50  http://ic1.smcdn.pl/6140-1.mp3
+Eska 2                    Bank 8 Stacja 51  http://ic1.smcdn.pl:8000/1070-1.mp3
+Eska 2 Super 13           Bank 8 Stacja 52  http://ic1.smcdn.pl:8000/6230-1.mp3
+Eska 2 Sanah              Bank 8 Stacja 53  http://ic1.smcdn.pl:8000/6220-1.mp3
+Eska 2 Trzebnica          Bank 8 Stacja 54  http://ic2.smcdn.pl:8000/1510-1.mp3
+Eska 2 Party              Bank 8 Stacja 55  http://ic2.smcdn.pl:8000/6160-1.mp3
+Eska 2 Milosc             Bank 8 Stacja 56  http://ic2.smcdn.pl:8000/6010-1.mp3
+Eska 2 Hit 22             Bank 8 Stacja 57  http://ic2.smcdn.pl:8000/6020-1.mp3
+Eska 2 Special            Bank 8 Stacja 58  http://ic1.smcdn.pl:8000/6130-1.mp3
+Eska 2 Gwiazdy            Bank 8 Stacja 59  http://ic1.smcdn.pl:8000/6180-1.mp3
+ZET 80                    Bank 8 Stacja 60  https://zt.cdn.eurozet.pl/ZET080.mp3
+ZET 90                    Bank 8 Stacja 61  https://zt.cdn.eurozet.pl/ZET090.mp3
+ZET 2000                  Bank 8 Stacja 62  https://zt.cdn.eurozet.pl/ZET200.mp3
+ZET Dance                 Bank 8 Stacja 63  https://zt.cdn.eurozet.pl/ZETDAN.mp3
+ZET Hits                  Bank 8 Stacja 64  https://zt.cdn.eurozet.pl/ZETHIT.mp3
+ZET Kids                  Bank 8 Stacja 65  https://zt.cdn.eurozet.pl/ZETKID.mp3
+ZET Kolêdy                Bank 8 Stacja 66  https://zt.cdn.eurozet.pl/ZETKOL.mp3
+ZET Latino                Bank 8 Stacja 67  https://zt.cdn.eurozet.pl/ZETLTN.mp3
+ZET Love                  Bank 8 Stacja 68  https://zt.cdn.eurozet.pl/ZETLOV.mp3
+ZET Na Rower              Bank 8 Stacja 69  https://zt.cdn.eurozet.pl/ZETDAN.mp3
+ZET Na swiêta             Bank 8 Stacja 70  https://zt.cdn.eurozet.pl/ZETSWI.mp3
+ZET Party                 Bank 8 Stacja 71  https://zt.cdn.eurozet.pl/ZETPAR.mp3
+ZET PL                    Bank 8 Stacja 72  https://zt.cdn.eurozet.pl/ZETPL1.mp3
+Chillizet                 Bank 8 Stacja 73  https://ch.cdn.eurozet.pl/chi-net.mp3
+Chillizet Katowice        Bank 8 Stacja 74  https://ch.cdn.eurozet.pl/chi-kat.mp3
+Chillizet Biega           Bank 8 Stacja 75  https://ch.cdn.eurozet.pl/CHIRUN.mp3
+Chillizet Christmas       Bank 8 Stacja 76  https://ch.cdn.eurozet.pl/CHISWI.mp3
+Chillizet Covers          Bank 8 Stacja 77  https://ch.cdn.eurozet.pl/CHICOV.mp3
+Chillizet Deep            Bank 8 Stacja 78  https://ch.cdn.eurozet.pl/CHIDEP.mp3
+Chillizet Jazz            Bank 8 Stacja 79  https://ch.cdn.eurozet.pl/CHIJAZ.mp3
+Chillizet Ladies          Bank 8 Stacja 80  https://ch.cdn.eurozet.pl/CHILAD.mp3
+Chillizet Salon Polski    Bank 8 Stacja 81  https://ch.cdn.eurozet.pl/CHIPOL.mp3
+Chillizet Soul            Bank 8 Stacja 82  https://ch.cdn.eurozet.pl/CHISOU.mp3
+Chillizet World Jazz      Bank 8 Stacja 83  https://ch.cdn.eurozet.pl/CHIWJZ.mp3
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,99 @@
+VOX FM                   Bank 14 Stacja 1   http://ic1.smcdn.pl/3990-1.mp3
+VOX FM BEST LISTA        Bank 14 Stacja 2   http://ic1.smcdn.pl/6100-1.mp3
+VOX FM DISCO 90          Bank 14 Stacja 3   http://ic1.smcdn.pl/6170-1.mp3
+VOX FM DISCO PARTY       Bank 14 Stacja 4   http://ic1.smcdn.pl/6180-1.mp3
+VOX FM HIT 22            Bank 14 Stacja 5   http://ic1.smcdn.pl/6020-1.mp3
+Radio Vox Disco 90       Bank 14 Stacja 6   https://waw.ic.smcdn.pl/6170-1.mp3
+Radio Party              Bank 14 Stacja 7   http://s4.radioparty.pl:8000/rp.mp3
+Radio Party-Djmixes      Bank 14 Stacja 8   http://djmixes.radioparty.pl:8035
+Radio Party-Energy 20    Bank 14 Stacja 9   http://energy2000.radioparty.pl:8005
+Radio Party-House        Bank 14 Stacja 10  http://house.radioparty.pl:8010
+Radio Party-Trance       Bank 14 Stacja 11  http://trance.radioparty.pl:8015
+Radio Party-Vocal Tra    Bank 14 Stacja 12  http://vocal.trance.radioparty.pl:8025
+Radio Nedds24 Club       Bank 14 Stacja 13  http://s1.nedds24.pl:8110/radio.mp3
+Radio Nedds24 Disco      Bank 14 Stacja 14  http://s1.nedds24.pl:8120/radio.mp3
+Radio Nedds24.pl         Bank 14 Stacja 15  http://s1.nedds24.pl:8100/radio.mp3
+Radio Freee              Bank 14 Stacja 16  http://www.emsoft.ct8.pl/inne/freee.m3u
+Radio Freee              Bank 14 Stacja 17  https://streaming.radio.lublin.pl:8843/radiofreee  
+Radio MC                 Bank 14 Stacja 18  http://stream4.nadaje.com:8624/mcradio  
+Radio 90 FM              Bank 14 Stacja 19  http://streams.radio90.pl:8000/radio90_128kbps_stereo.mp3  
+Radio BaHaRy             Bank 14 Stacja 20  http://s1.slotex.pl:7838  
+Radio Bercik Silesia     Bank 14 Stacja 21  http://s3.slotex.pl:7770  
+Radio Cyganeczka         Bank 14 Stacja 22  http://s1.slotex.pl:7474  
+Radio Hit Mix            Bank 14 Stacja 23  http://s1.slotex.pl:7294  
+Hi On Line France Radio  Bank 14 Stacja 24  http://mediaserv21.live-streams.nl:8000/stream
+Hi On Line Gold Radio    Bank 14 Stacja 25  http://mediaserv30.live-streams.nl:8000/live
+Hi On Line Jazz Radio    Bank 14 Stacja 26  http://mediaserv38.live-streams.nl:8006/stream
+Hi On line Latin Radio   Bank 14 Stacja 27  http://mediaserv33.live-streams.nl:8034/stream
+Hi On Line Lounge Radio  Bank 14 Stacja 28  http://mediaserv33.live-streams.nl:8036/stream
+Hi On Line Radio         Bank 14 Stacja 29  http://mediaserv30.live-streams.nl:8086/live
+Hi On Line World Radio   Bank 14 Stacja 30  http://mediaserv38.live-streams.nl:8027/live
+Soma Boot Liquor         Bank 14 Stacja 31  http://ice2.somafm.com/bootliquor-320-mp3
+Soma Covers              Bank 14 Stacja 32  http://ice4.somafm.com/covers-128-aac
+Soma Dub Step Beyond     Bank 14 Stacja 33  http://ice1.somafm.com/dubstep-128-aac
+Soma Folk Forward        Bank 14 Stacja 34  http://ice2.somafm.com/folkfwd-128-aac
+Soma Indie Pop Rock      Bank 14 Stacja 35  http://ice4.somafm.com/indiepop-128-aac
+Soma Left Coast 70s      Bank 14 Stacja 36  http://ice4.somafm.com/seventies-320-mp3
+Soma Reggae              Bank 14 Stacja 37  http://ice6.somafm.com/reggae-256-mp3
+Soma Seven Inch Soul     Bank 14 Stacja 38  http://ice4.somafm.com/7soul-128-aac
+Soma Thistle Radio       Bank 14 Stacja 39  http://ice6.somafm.com/thistle-128-aac
+Soma Underground 80s     Bank 14 Stacja 40  http://ice6.somafm.com/u80s-256-mp3
+Linn Radio               Bank 14 Stacja 41  http://radio.linn.co.uk:8003/stream
+Lush                     Bank 14 Stacja 42  http://ice4.somafm.com/lush-128-aac
+Majestic Jukebox Radio   Bank 14 Stacja 43  http://uk3.internet-radio.com:8405/live
+
+NME1                     Bank 14 Stacja 44  http://listen-nme.sharp-stream.com/nme1high.mp3
+NME2                     Bank 14 Stacja 45  http://listen-nme.sharp-stream.com/nme2high.mp3
+Organlive.com            Bank 14 Stacja 46  https://play.organlive.com:7010/320
+Radio Caroline           Bank 14 Stacja 47  http://78.129.202.200:8030/;
+Salland1                 Bank 14 Stacja 48  https://stream.and-stuff.nl:8443/live-airplay_320
+Talksport                Bank 14 Stacja 49  http://radio.talksport.com/stream
+Talksport 2              Bank 14 Stacja 50  http://radio.talksport.com/stream2
+Radio Maxdance90s        Bank 14 Stacja 51  http://maxdance90s.stream.laut.fm/maxdance90s
+CRo Radiozurnal          Bank 14 Stacja 52  http://amp.cesnet.cz:8000/cro1-256.ogg
+KRUI 89.7FM              Bank 14 Stacja 53  http://krui.student-services.uiowa.edu:8000/listen
+LBC UK                   Bank 14 Stacja 54  http://icecast.thisisdax.com/LBCUK
+Radio spioch             Bank 14 Stacja 55  http://s1.slotex.pl:7138
+Radio Trendy             Bank 14 Stacja 56  http://stream.trendyradio.pl:8000/mi
+Radio TWR Impuls         Bank 14 Stacja 57  http://s1.slotex.pl:7504
+Radio Ty i Ja            Bank 14 Stacja 58  http://91.232.4.33:8868/Stream1
+Radio Sygnaly            Bank 14 Stacja 59  http://radiosygnaly2.uni.opole.pl:8000/stream
+Radio Ton                Bank 14 Stacja 60  http://s1.slotex.pl:7310
+Radio UWM FM             Bank 14 Stacja 61  http://213.184.18.156:8000
+Radio Widzew             Bank 14 Stacja 62  https://widzewfm.ovh/radio/8000/live.mp3
+Radio WoM                Bank 14 Stacja 63  http://gra.radiowom.pl:9120
+Radio Z Qltura           Bank 14 Stacja 64  https://radiozqlturapl.radioca.st/stream
+W Nienagannym Stylu      Bank 14 Stacja 65  http://51.255.8.139:8810/stream
+FluxFM                   Bank 14 Stacja 66  http://streams.fluxfm.de/live/mp3-320/audio/
+FluxFM - 60s             Bank 14 Stacja 67  http://streams.fluxfm.de/60er/mp3-320/streams.fluxfm.de/
+FluxFM - 70s             Bank 14 Stacja 68  http://streams.fluxfm.de/70er/mp3-320/audio/
+FluxFM - 80s             Bank 14 Stacja 69  http://streams.fluxfm.de/80er/mp3-320/streams.fluxfm.de/
+FluxFM - 90s             Bank 14 Stacja 70  http://streams.fluxfm.de/90er/mp3-320/audio/
+FluxFM - B-Funk          Bank 14 Stacja 71  http://streams.fluxfm.de/event01/mp3-320/streams.fluxfm.de/
+FluxFM - Berlin Beach HouBank 14 Stacja 72  http://streams.fluxfm.de/bbeachhouse/mp3-320/audio/
+FluxFM - BoomFM          Bank 14 Stacja 73  http://streams.fluxfm.de/boomfm/mp3-320/audio/
+FluxFM - BoomFM Classics Bank 14 Stacja 74  http://streams.fluxfm.de/boomfmclassics/mp3-320/audio/
+FluxFM - ChillHop        Bank 14 Stacja 75  http://streams.fluxfm.de/Chillhop/mp3-320/streams.fluxfm.de/
+FluxFM - Clubsandwich    Bank 14 Stacja 76  http://streams.fluxfm.de/clubsandwich/mp3-320/audio/
+FluxFM - Dub Radio       Bank 14 Stacja 77  http://streams.fluxfm.de/dubradio/mp3-320/streams.fluxfm.de/
+FluxFM - ElectroFlux     Bank 14 Stacja 78  http://streams.fluxfm.de/elektro/mp3-320/audio/
+FluxFM - FluxForward     Bank 14 Stacja 79  http://streams.fluxfm.de/forward/mp3-320/audio/
+FluxFM - FluxKompensator Bank 14 Stacja 80  http://streams.fluxfm.de/fluxkompensator/mp3-320/audio/
+FluxFM - FluxLounge      Bank 14 Stacja 81  http://streams.fluxfm.de/lounge/mp3-320/audio/
+FluxFM - Hard Rock FM    Bank 14 Stacja 82  http://streams.fluxfm.de/hardrock/mp3-320/streams.fluxfm.de/
+FluxFM - Hippie Trippy GaBank 14 Stacja 83  http://streams.fluxfm.de/event02/mp3-320/radiode/
+FluxFM - Hot R&B         Bank 14 Stacja 84  http://streams.fluxfm.de/rnb/mp3-320/streams.fluxfm.de/
+FluxFM - JaegerMusic RadiBank 14 Stacja 85  http://streams.fluxfm.de/studio56/mp3-320/audio/
+FluxFM - Jazzradio SchwarBank 14 Stacja 86  http://streams.fluxfm.de/jazzschwarz/mp3-320/audio/
+FluxFM - John Reed Radio Bank 14 Stacja 87  http://streams.fluxfm.de/john-reed/mp3-320/audio/
+FluxFM - Klubradio       Bank 14 Stacja 88  http://streams.fluxfm.de/klubradio/mp3-320/audio/
+FluxFM - MetalFM         Bank 14 Stacja 89  http://streams.fluxfm.de/metalfm/mp3-320/radiode/
+FluxFM - Mini Flux       Bank 14 Stacja 90  http://streams.fluxfm.de/kinder1/mp3-320/streams.fluxfm.de/
+FluxFM - neoFM           Bank 14 Stacja 91  http://streams.fluxfm.de/neofm/mp3-320/radiode/
+FluxFM - Passport ApproveBank 14 Stacja 92  http://streams.fluxfm.de/passport/mp3-320/audio/
+FluxFM - Pop Radio       Bank 14 Stacja 93  http://streams.fluxfm.de/popradio/mp3-320/streams.fluxfm.de/
+FluxFM - Rasta Radio     Bank 14 Stacja 94  http://streams.fluxfm.de/rastaradio/mp3-320/streams.fluxfm.de/
+FluxFM - Sound Of Berlin Bank 14 Stacja 95  http://streams.fluxfm.de/soundofberlin/mp3-320/audio/
+FluxFM - Techno UndergrouBank 14 Stacja 96  http://streams.fluxfm.de/technoug/mp3-320/audio/
+FluxFM - XJAZZ           Bank 14 Stacja 97  http://streams.fluxfm.de/xjazz/mp3-320/audio/
+FluxFM - Yoga Sounds     Bank 14 Stacja 98  http://streams.fluxfm.de/yogasounds/mp3-320/streams.fluxfm.de/
