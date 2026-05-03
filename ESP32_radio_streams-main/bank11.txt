@@ -1,99 +1,64 @@
-Muzyczna Przystan        Bank 11 Stacja 1   http://s1.slotex.pl:7686
-Muzykomaniacy            Bank 11 Stacja 2   http://4stream.pl:18284
-Nasze... nostalgicznie   Bank 11 Stacja 3   http://online.nasze.fm:9210/stream
-Nasze.fm                 Bank 11 Stacja 4   https://online.nasze.fm:8443/stream
-Nestolatki               Bank 11 Stacja 5   http://s1.slotex.pl:7306
-Niewidzialni FM          Bank 11 Stacja 6   https://ssl-1.radiohost.pl:9620/stream
-Nocne Radio              Bank 11 Stacja 7   http://144.91.112.88:8000/live
-Norda FM                 Bank 11 Stacja 8   http://94.177.253.77:8001/relay_mp3_128
-NOTE.radio               Bank 11 Stacja 9   http://s5.citrus3.com:8028/stream
-Nowinki                  Bank 11 Stacja 10  http://nowinki.pk.edu.pl:8000/nowinki
-Nuta                     Bank 11 Stacja 11  https://stream.rcs.revma.com/0004tehdxzzuv
-ONY                      Bank 11 Stacja 12  https://stream.rcs.revma.com/yxv344rra2zuv
-Orthodoxia               Bank 11 Stacja 13  https://stream.orthodoxia.pl/stream192.mp3
-Parada                   Bank 11 Stacja 14  http://stream4.nadaje.com:15274/live
-Park                     Bank 11 Stacja 15  http://sluchaj2.radiopark.biz.pl:8058
-Pomost                   Bank 11 Stacja 16  http://91.232.4.33:9209
-POPradio                 Bank 11 Stacja 17  http://stream1.popradio.pl:9000
-Pozytywne FM             Bank 11 Stacja 18  http://91.232.4.33:9341/stream
-PRS24                    Bank 11 Stacja 19  https://solid24.streamupsolutions.com/proxy/hgrchhkx?mp=/stream
-Pryzmat                  Bank 11 Stacja 20  http://51.255.8.139:8822/stream
-Puzzle                   Bank 11 Stacja 21  http://s1.slotex.pl:7572
-R.D.N. Malopolska        Bank 11 Stacja 22  https://stream1.dabcom.pl/rdn_mpl
-R.D.N. Nowy Sacz         Bank 11 Stacja 23  https://stream1.dabcom.pl/rdn_ns
-Racja                    Bank 11 Stacja 24  http://air.racyja.com:8000/aacp128
-Radio Muzo.fm            Bank 11 Stacja 25  https://stream.rcs.revma.com/1nnezw8qz7zuv
-Radio Piekielskie        Bank 11 Stacja 26  http://s1.slotex.pl:7146
-Radio Rekord             Bank 11 Stacja 27  http://stream2.nadaje.com:8108
-Radio Romans             Bank 11 Stacja 28  http://51.255.8.139:9048/stream
-Radio Feel The Music     Bank 11 Stacja 29  http://s1.slotex.pl:7792  
-Radio Flirt              Bank 11 Stacja 30  https://s3.slotex.pl/shoutcast/7684/stream  
-Radio Forever            Bank 11 Stacja 31  http://s1.slotex.pl:7134  
-Radio Forte              Bank 11 Stacja 32  http://s1.slotex.pl:7856  
-Radio FortyPlus          Bank 11 Stacja 33  http://s1.slotex.pl:7178  
-Radio Gold Live          Bank 11 Stacja 34  http://s1.slotex.pl:7062  
-Radio Gold Song FM       Bank 11 Stacja 35  http://s3.slotex.pl:7562  
-Radio Gold Star          Bank 11 Stacja 36  http://s1.slotex.pl:7270  
-Radio Guardian           Bank 11 Stacja 37  http://s1.slotex.pl:7508  
-Radio Hit-Radio.pl       Bank 11 Stacja 38  http://51.255.8.139:9090/stream  
-Radio Horyzont           Bank 11 Stacja 39  http://s1.slotex.pl:7328  
-Radio Ibiza              Bank 11 Stacja 40  https://streams.radio.co/sd1bcd1376/listen  
-Radio Index              Bank 11 Stacja 41  https://stream.wzielonej.pl/radio/8000/1  
-Radio Jard               Bank 11 Stacja 42  http://online.jard.pl:8744/jard1  
-Radio Manhattan          Bank 11 Stacja 43  http://s1.slotex.pl:7780  
-Radio MaxPlay-FM         Bank 11 Stacja 44  http://s1.slotex.pl:8880  
-Radio Kuropatwa          Bank 11 Stacja 45  http://stream.radiojar.com/ypspphhxfm8uv  
-Radio Lipsko             Bank 11 Stacja 46  http://s1.slotex.pl:7298  
-Radio Listek FM          Bank 11 Stacja 47  http://stream10.hosterion.pl:8004/stream  
-Radio Lagoon Fm          Bank 11 Stacja 48  http://s1.slotex.pl:7828  
-Radio Magicfm.pl         Bank 11 Stacja 49  http://4stream.pl:18094  
-Radio Kampus             Bank 11 Stacja 50  http://193.0.98.66:8002  
-Radio Kapital            Bank 11 Stacja 51  https://radiokapitalpl.out.airtime.pro/radiokapitalpl_a  
-Radio Milosne Serca      Bank 11 Stacja 52  http://s1.slotex.pl:7350  
-Radio Minimal Mix        Bank 11 Stacja 53  https://minimalmix.radioca.st/media  
-Radio Mittendrin         Bank 11 Stacja 54  http://s1.slotex.pl:7592  
-Radio Mixx.pl            Bank 11 Stacja 55  http://91.232.4.33:10600  
-Radio ModFM              Bank 11 Stacja 56  http://radio.modules.pl:8500  
-Radio Jutrzenka          Bank 11 Stacja 57  http://sluchaj.radiojutrzenka.waw.pl:12854/test  
-Radio Kechnowogard       Bank 11 Stacja 58  http://s3.slotex.pl:7016  
-Radio Extreme            Bank 11 Stacja 59  https://s3.slotex.pl/shoutcast/7452/stream  
-Radio Karolinka          Bank 11 Stacja 60  http://91.232.4.33:8358/stream  
-Radio Duch               Bank 11 Stacja 61  http://s1.slotex.pl:7174  
-Radio Echo Chicago       Bank 11 Stacja 62  http://198.27.127.246:5248  
-Radio Eden Fm            Bank 11 Stacja 63  http://s1.slotex.pl:7402  
-SLAY RADIO               Bank 11 Stacja 64  http://relay1.slayradio.org:8300/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Muzyczna Przystan        Bank 11 Station 1 http://s1.slotex.pl:7686
+Muzykomaniacy            Bank 11 Station 2 http://4stream.pl:18284
+Nasze... nostalgicznie   Bank 11 Station 3 http://online.nasze.fm:9210/stream
+Nasze.fm                 Bank 11 Station 4 https://online.nasze.fm:8443/stream
+Nestolatki               Bank 11 Station 5 http://s1.slotex.pl:7306
+Niewidzialni FM          Bank 11 Station 6 https://ssl-1.radiohost.pl:9620/stream
+Nocne Radio              Bank 11 Station 7 http://144.91.112.88:8000/live
+Norda FM                 Bank 11 Station 8 http://94.177.253.77:8001/relay_mp3_128
+NOTE.radio               Bank 11 Station 9 http://s5.citrus3.com:8028/stream
+Nowinki                  Bank 11 Station 10 http://nowinki.pk.edu.pl:8000/nowinki
+Nuta                     Bank 11 Station 11 https://stream.rcs.revma.com/0004tehdxzzuv
+ONY                      Bank 11 Station 12 https://stream.rcs.revma.com/yxv344rra2zuv
+Orthodoxia               Bank 11 Station 13 https://stream.orthodoxia.pl/stream192.mp3
+Parada                   Bank 11 Station 14 http://stream4.nadaje.com:15274/live
+Park                     Bank 11 Station 15 http://sluchaj2.radiopark.biz.pl:8058
+Pomost                   Bank 11 Station 16 http://91.232.4.33:9209
+POPradio                 Bank 11 Station 17 http://stream1.popradio.pl:9000
+Pozytywne FM             Bank 11 Station 18 http://91.232.4.33:9341/stream
+PRS24                    Bank 11 Station 19 https://solid24.streamupsolutions.com/proxy/hgrchhkx?mp=/stream
+Pryzmat                  Bank 11 Station 20 http://51.255.8.139:8822/stream
+Puzzle                   Bank 11 Station 21 http://s1.slotex.pl:7572
+R.D.N. Malopolska        Bank 11 Station 22 https://stream1.dabcom.pl/rdn_mpl
+R.D.N. Nowy Sacz         Bank 11 Station 23 https://stream1.dabcom.pl/rdn_ns
+Racja                    Bank 11 Station 24 http://air.racyja.com:8000/aacp128
+Radio Muzo.fm            Bank 11 Station 25 https://stream.rcs.revma.com/1nnezw8qz7zuv
+Radio Piekielskie        Bank 11 Station 26 http://s1.slotex.pl:7146
+Radio Rekord             Bank 11 Station 27 http://stream2.nadaje.com:8108
+Radio Romans             Bank 11 Station 28 http://51.255.8.139:9048/stream
+Radio Feel The Music     Bank 11 Station 29 http://s1.slotex.pl:7792
+Radio Flirt              Bank 11 Station 30 https://s3.slotex.pl/shoutcast/7684/stream
+Radio Forever            Bank 11 Station 31 http://s1.slotex.pl:7134
+Radio Forte              Bank 11 Station 32 http://s1.slotex.pl:7856
+Radio FortyPlus          Bank 11 Station 33 http://s1.slotex.pl:7178
+Radio Gold Live          Bank 11 Station 34 http://s1.slotex.pl:7062
+Radio Gold Song FM       Bank 11 Station 35 http://s3.slotex.pl:7562
+Radio Gold Star          Bank 11 Station 36 http://s1.slotex.pl:7270
+Radio Guardian           Bank 11 Station 37 http://s1.slotex.pl:7508
+Radio Hit-Radio.pl       Bank 11 Station 38 http://51.255.8.139:9090/stream
+Radio Horyzont           Bank 11 Station 39 http://s1.slotex.pl:7328
+Radio Ibiza              Bank 11 Station 40 https://streams.radio.co/sd1bcd1376/listen
+Radio Index              Bank 11 Station 41 https://stream.wzielonej.pl/radio/8000/1
+Radio Jard               Bank 11 Station 42 http://online.jard.pl:8744/jard1
+Radio Manhattan          Bank 11 Station 43 http://s1.slotex.pl:7780
+Radio MaxPlay-FM         Bank 11 Station 44 http://s1.slotex.pl:8880
+Radio Kuropatwa          Bank 11 Station 45 http://stream.radiojar.com/ypspphhxfm8uv
+Radio Lipsko             Bank 11 Station 46 http://s1.slotex.pl:7298
+Radio Listek FM          Bank 11 Station 47 http://stream10.hosterion.pl:8004/stream
+Radio Lagoon Fm          Bank 11 Station 48 http://s1.slotex.pl:7828
+Radio Magicfm.pl         Bank 11 Station 49 http://4stream.pl:18094
+Radio Kampus             Bank 11 Station 50 http://193.0.98.66:8002
+Radio Kapital            Bank 11 Station 51 https://radiokapitalpl.out.airtime.pro/radiokapitalpl_a
+Radio Milosne Serca      Bank 11 Station 52 http://s1.slotex.pl:7350
+Radio Minimal Mix        Bank 11 Station 53 https://minimalmix.radioca.st/media
+Radio Mittendrin         Bank 11 Station 54 http://s1.slotex.pl:7592
+Radio Mixx.pl            Bank 11 Station 55 http://91.232.4.33:10600
+Radio ModFM              Bank 11 Station 56 http://radio.modules.pl:8500
+Radio Jutrzenka          Bank 11 Station 57 http://sluchaj.radiojutrzenka.waw.pl:12854/test
+Radio Kechnowogard       Bank 11 Station 58 http://s3.slotex.pl:7016
+Radio Extreme            Bank 11 Station 59 https://s3.slotex.pl/shoutcast/7452/stream
+Radio Karolinka          Bank 11 Station 60 http://91.232.4.33:8358/stream
+Radio Duch               Bank 11 Station 61 http://s1.slotex.pl:7174
+Radio Echo Chicago       Bank 11 Station 62 http://198.27.127.246:5248
+Radio Eden Fm            Bank 11 Station 63 http://s1.slotex.pl:7402
+SLAY RADIO               Bank 11 Station 64 http://relay1.slayradio.org:8300/

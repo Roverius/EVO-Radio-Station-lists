@@ -21,7 +21,7 @@ Christmas Evergreen      Bank 18 Station 8 https://emg.streamguys1.com/evergreen
 181.FM Christmas Kids    Bank 18 Station 21 http://listen.livestreamingservice.com/181-xkids_128k.mp3
 181.FM Christmas         Bank 18 Station 22 http://listen.livestreamingservice.com/181-xblender_128k.mp3
 181.FM Christmas Spirit  Bank 18 Station 23 http://listen.livestreamingservice.com/181-xspirit_128k.mp3
-181.FM Christmas SmoothJaBank 18 Station 24 http://listen.livestreamingservice.com/181-xsmooth_128k.mp3
+181.FM Christmas Smooth  Bank 18 Station 24 http://listen.livestreamingservice.com/181-xsmooth_128k.mp3
 181.FM Christmas Gospel  Bank 18 Station 25 http://listen.livestreamingservice.com/181-xgospel_128k.mp3
 181.FM Christmas Swing   Bank 18 Station 26 http://listen.livestreamingservice.com/181-xswing_128k.mp3
 Christmas 1              Bank 18 Station 27 http://89.39.189.44:8000/;

@@ -2,8 +2,8 @@ AURAL Radio              Bank 17 Station 1 http://radio.auralradiokerala.com:132
 Bailrigg 95.3FM          Bank 17 Station 2 https://bfm-live.lancs.ac.uk/listen/bfm/flac
 Big Bang Radio           Bank 17 Station 3 https://audio-edge-cmc51.fra.h.radiomast.io/2b410ada-8653-40aa-a654-3e8954cf4a4d
 Dance Wave               Bank 17 Station 4 http://dancewave.online/dance.flac.ogg
-ForEver La Radio-ArcachonBank 17 Station 5 http://stream.sweetfm.fr:8000/flac-forever-arc
-ForEver La Radio-BordeauxBank 17 Station 6 http://stream.sweetfm.fr:8000/flac-forever-bdx
+La Radio-Arcachon        Bank 17 Station 5 http://stream.sweetfm.fr:8000/flac-forever-arc
+La Radio-Bordeaux        Bank 17 Station 6 http://stream.sweetfm.fr:8000/flac-forever-bdx
 Greek Hits               Bank 17 Station 7 https://radio.newageradio.gr:8040/autodj.flac
 Haarlem 105              Bank 17 Station 8 http://studio.haarlem105.nl:8000/haarlem105DAB.flac?_res_tag_=audio
 Hi On Line Radio         Bank 17 Station 9 http://mscp2.live-streams.nl:8100/flac.flac

@@ -1,99 +1,42 @@
-Riverside Radio                                   https://stream.and-stuff.nl:8443/riverside
-Radio Bias                                        https://admin.biasradio.com/radio/8000/flac
-Classics Radio                                    http://vriezenet.nl:11051/flac
-BluesWave Radio                                   http://blueswave.radio:8050/FlacBlues
-Free Music Radio                                  http://stream.freemusicradio.nl:8100/stream.oga
-Pure Lounge Radio                                 https://mscp4.live-streams.nl:8142/lounge.ogg
-AIDA Radio                                        https://cdn05.radio.cloud:8128/AIDA-OMNIA-GAI
-MaXXima                                           http://maxxima.mine.nu:8000/maxx.ogg
-Radio Energy                                      https://stream.radioenergy.to/stream
-Radio Haugaland                                   http://radioip.no:443/flac
-Distorsion FM                                     https://radioemisoras.cl/distorsion.flac
-Radio Bergeijk                                    https://stream.radiobergeijk.nl/listen/radio_bergeijk/flac
-Pure Lounge Radio                                 https://mscp4.live-streams.nl:8142/lounge.ogg
-High Fi Dream Radio                               https://cdn06-us-east.radio.cloud/80ba63862a97bd69c593cc7a2ccaab1c_hq
-LapFox Radio                                      https://radio.lapfoxradio.com/radio/8000/stream-flac.flac
-Radio Calico                                      http://radio3.radio-calico.com:8080/calico
-Radio Calico (Roon stream                         http://roon.radio-calico.com:8000/roon
-Radio Radar – House                               https://radioradar.online/listen/r_house/r_house.ogg
-Radio X                                           https://mp3.radiox.ch/standard.ogg
-Rlocale Radio                                     https://rlocale.org/listen/rlocale/rlocale-flac.ogg
-shadowfr69 Radio                                  https://radio.shadowfr69.eu/lossless
-Sveriges Radio                                    https://live1.sr.se/p2-flac
-TNM Radio                                         https://stream.tnm-radio.eu/ultra
-
-
-
-
-
-Bailrigg 95.3FM                                   https://bfm-live.lancs.ac.uk/listen/bfm/flac
-ForEver La Radio – Arcach                         http://stream.sweetfm.fr:8000/flac-forever-arc
-ForEver La Radio – Bordea                         http://stream.sweetfm.fr:8000/flac-forever-bdx
-Haarlem 105                                       http://studio.haarlem105.nl:8000/haarlem105DAB.flac?_res_tag_=audio
-Hi On Line Radio                                  http://mscp2.live-streams.nl:8100/flac.flac
-SEKO Radio                                        https://isekoi-radio.com/listen/isekoi/radio.flac
-SEKO Ambient                                      https://isekoi-radio.com/listen/ambient/ambientradio.flac
-SEKO Chill Zone                                   https://isekoi-radio.com/listen/chill/radio.flac
-Kiss Collector                                    http://live7.avf.ch:8000/kisscollector_main
-Lux Radio                                         https://live7.avf.ch/lux_main
-OpenSky Radio                                     https://audio.opensky.radio:8082/flac?_res_tag_=audio
-PureClassix Radio                                 http://mscp4.live-streams.nl:8140/flac.ogg
-Pure Radio Holland – The                          https://streamserver.pure-isp.eu/radio/8000/flac
-Pure Radio Holland – Tran                         https://streamserver.pure-isp.eu/radio/8020/flac
-Pure Radio Holland – Hard                         https://streamserver.pure-isp.eu/radio/8010/flac
-Pure Radio Holland – Down                         https://streamserver.pure-isp.eu/radio/8040/flac
-Pure Radio Channel – Live                         https://streamserver.pure-isp.eu/radio/8060/flac
-Pure Radio Channel – Danc                         https://streamserver.pure-isp.eu/radio/8030/flac
-Pure Radio Channel – DJ R                         https://streamserver.pure-isp.eu/radio/8050/flac
-Pure Radio Channel – Vari                         https://streamserver.pure-isp.eu/radio/8070/flac
-Pure Radio Channel – Rap                          https://streamserver.pure-isp.eu/radio/8100/flac
-Radio Audiomastering                              https://transliacija.audiomastering.lt/pure
-Radio BluesFlac                                   https://streams.radiomast.io/radioblues-flac
-Radio Campus Gremoble 90.                         https://live.campusgrenoble.org/dab
-Radio Juventus                                    http://s2.audiostream.hu:8090/juventus_FLAC
-Radio Mast                                        https://streams.radiomast.io/ref-lossless-ogg-flac-stereo
-Radio Tornagaleones                               http://tornagaleones.ddns.net:9000/Flac
-RIO Radio Internacional O                         http://c30.radioboss.fm:8510/autodj
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Riverside Radio          Bank 15 Station 1 https://stream.and-stuff.nl:8443/riverside
+Radio Bias               Bank 15 Station 2 https://admin.biasradio.com/radio/8000/flac
+Classics Radio           Bank 15 Station 3 http://vriezenet.nl:11051/flac
+BluesWave Radio          Bank 15 Station 4 http://blueswave.radio:8050/FlacBlues
+Free Music Radio         Bank 15 Station 5 http://stream.freemusicradio.nl:8100/stream.oga
+Pure Lounge Radio        Bank 15 Station 6 https://mscp4.live-streams.nl:8142/lounge.ogg
+AIDA Radio               Bank 15 Station 7 https://cdn05.radio.cloud:8128/AIDA-OMNIA-GAI
+MaXXima                  Bank 15 Station 8 http://maxxima.mine.nu:8000/maxx.ogg
+Radio Energy             Bank 15 Station 9 https://stream.radioenergy.to/stream
+Radio Haugaland          Bank 15 Station 10 http://radioip.no:443/flac
+Distorsion FM            Bank 15 Station 11 https://radioemisoras.cl/distorsion.flac
+Radio Bergeijk           Bank 15 Station 12 https://stream.radiobergeijk.nl/listen/radio_bergeijk/flac
+Pure Lounge Radio        Bank 15 Station 13 https://mscp4.live-streams.nl:8142/lounge.ogg
+High Fi Dream Radio      Bank 15 Station 14 https://cdn06-us-east.radio.cloud/80ba63862a97bd69c593cc7a2ccaab1c_hq
+LapFox Radio             Bank 15 Station 15 https://radio.lapfoxradio.com/radio/8000/stream-flac.flac
+Radio Calico             Bank 15 Station 16 http://radio3.radio-calico.com:8080/calico
+Radio Calico (Roon streamBank 15 Station 17 http://roon.radio-calico.com:8000/roon
+Radio Radar  House       Bank 15 Station 18 https://radioradar.online/listen/r_house/r_house.ogg
+Radio X                  Bank 15 Station 19 https://mp3.radiox.ch/standard.ogg
+Rlocale Radio            Bank 15 Station 20 https://rlocale.org/listen/rlocale/rlocale-flac.ogg
+shadowfr69 Radio         Bank 15 Station 21 https://radio.shadowfr69.eu/lossless
+Sveriges Radio           Bank 15 Station 22 https://live1.sr.se/p2-flac
+TNM Radio                Bank 15 Station 23 https://stream.tnm-radio.eu/ultra
+Bailrigg 95.3FM          Bank 15 Station 24 https://bfm-live.lancs.ac.uk/listen/bfm/flac
+ForEver La Radio Arcach  Bank 15 Station 25 http://stream.sweetfm.fr:8000/flac-forever-arc
+ForEver La Radio Bordea  Bank 15 Station 26 http://stream.sweetfm.fr:8000/flac-forever-bdx
+Haarlem 105              Bank 15 Station 27 http://studio.haarlem105.nl:8000/haarlem105DAB.flac?_res_tag_=audio
+Hi On Line Radio         Bank 15 Station 28 http://mscp2.live-streams.nl:8100/flac.flac
+SEKO Radio               Bank 15 Station 29 https://isekoi-radio.com/listen/isekoi/radio.flac
+SEKO Ambient             Bank 15 Station 30 https://isekoi-radio.com/listen/ambient/ambientradio.flac
+SEKO Chill Zone          Bank 15 Station 31 https://isekoi-radio.com/listen/chill/radio.flac
+Kiss Collector           Bank 15 Station 32 http://live7.avf.ch:8000/kisscollector_main
+Lux Radio                Bank 15 Station 33 https://live7.avf.ch/lux_main
+OpenSky Radio            Bank 15 Station 34 https://audio.opensky.radio:8082/flac?_res_tag_=audio
+PureClassix Radio        Bank 15 Station 35 http://mscp4.live-streams.nl:8140/flac.ogg
+Radio Audiomastering     Bank 15 Station 36 https://transliacija.audiomastering.lt/pure
+Radio BluesFlac          Bank 15 Station 37 https://streams.radiomast.io/radioblues-flac
+Radio Campus Gremoble 90.Bank 15 Station 38 https://live.campusgrenoble.org/dab
+Radio Juventus           Bank 15 Station 39 http://s2.audiostream.hu:8090/juventus_FLAChttp://s2.audiostream.hu:8090/juventus_FLAC
+Radio Mast               Bank 15 Station 40 https://streams.radiomast.io/ref-lossless-ogg-flac-stereo
+Radio Tornagaleones      Bank 15 Station 41 http://tornagaleones.ddns.net:9000/Flac
+RIO Radio Internacional OBank 15 Station 42 http://c30.radioboss.fm:8510/autodj

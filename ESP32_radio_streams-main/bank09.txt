@@ -1,99 +1,63 @@
-Akademickie Radio Luz     Bank 9 Stacja 1   http://radioluz.pwr.edu.pl:8000/luzhifi.mp3  
-Dark Radio                Bank 9 Stacja 2   http://dark.sh/mp3
-EL Stacja                 Bank 9 Stacja 3   http://radio.el-stacja.pl:8000/elstacja320mp3
-Muzyczne Radio            Bank 9 Stacja 4   https://stream.rcs.revma.com/gzwc1xcq042vv
-Radio 1.7                 Bank 9 Stacja 5   http://emisja.radio17.pl:8000/R17  
-Radio 4 Music             Bank 9 Stacja 6   http://s1.slotex.pl:7102  
-Radio 5                   Bank 9 Stacja 7   https://streaming.radio5.com.pl:8888/radio5suwalki  
-Radio 7                   Bank 9 Stacja 8   http://stream.radio7.pl:443  
-Radio 7 Toronto           Bank 9 Stacja 9   https://s4.radio.co/s1b687cf20/low  
-Radio 80                  Bank 9 Stacja 10  http://91.232.4.33:9305/stream  
-Radio Agentka Ewa         Bank 9 Stacja 11  http://4stream.pl:18182  
-Radio Akord               Bank 9 Stacja 12  http://s1.slotex.pl:7122  
-Radio Anime24             Bank 9 Stacja 13  http://91.232.4.33:7028/Stream1  
-Radio Aniol i Diablica    Bank 9 Stacja 14  https://s3.slotex.pl/shoutcast/7418/stream  
-Radio AOi                 Bank 9 Stacja 15  http://54.37.73.148:8000/stream  
-Radio Apogeum             Bank 9 Stacja 16  http://s1.slotex.pl:7512  
-Radio Arkadia             Bank 9 Stacja 17  http://s3.slotex.pl:7450  
-Radio Balkanica           Bank 9 Stacja 18  https://s3.slotex.pl/shoutcast/7068/stream  
-Radio Banita Maxx         Bank 9 Stacja 19  https://ssl-1.radiohost.pl:9454  
-Radio Bayer FM            Bank 9 Stacja 20  https://streaming.radio5.com.pl:8888/bayerfm  
-Radio Beat                Bank 9 Stacja 21  https://s3.slotex.pl/shoutcast/7816/stream  
-Radio Beauty              Bank 9 Stacja 22  https://s3.slotex.pl/shoutcast/7464/stream  
-Radio Bezpieczna Podroz   Bank 9 Stacja 23  https://ssl-1.radiohost.pl:9162/live  
-Radio Bon Ton             Bank 9 Stacja 24  https://streaming.inten.pl:8020/bonton.mp3  
-Radio Brylant             Bank 9 Stacja 25  http://s1.slotex.pl:7212  
-Radio Chwila z Hiacynta   Bank 9 Stacja 26  https://s3.slotex.pl/shoutcast/7232/stream  
-Radio Clubbers            Bank 9 Stacja 27  https://s3.slotex.pl/shoutcast/7300/stream  
-Radio Cmolas              Bank 9 Stacja 28  http://80.211.203.250:8250/master  
-Radio Costarosa           Bank 9 Stacja 29  http://s1.slotex.pl:8058  
-Radio Cyberstacja.fm      Bank 9 Stacja 30  http://sc.cyberstacja.pl:8000/radio.mp3  
-Radio Cztery Pory Rok     Bank 9 Stacja 31  http://4stream.pl:18304  
-Radio Damismania Dj       Bank 9 Stacja 32  http://s1.slotex.pl:7512  
-Radio Danielka            Bank 9 Stacja 33  https://s3.slotex.pl/shoutcast/7088/stream  
-Radio DHT 1               Bank 9 Stacja 34  https://radiodht.com/stream_main/  
-Radio DHT 2               Bank 9 Stacja 35  https://radiodht.com/stream_second/  
-Radio Disco-Mix           Bank 9 Stacja 36  http://radiodd.cloud:8000  
-Radio Glos                Bank 9 Stacja 37  http://87.204.92.180:8000/;
-Radio GRA Torun           Bank 9 Stacja 38  http://217.74.72.12/radio_gra
-Radio Leliwa              Bank 9 Stacja 39  http://stream2.nadaje.com:8054/;
-Radio Pirata TGR          Bank 9 Stacja 40  http://us1.internet-radio.com:8140/live
-Radio Plus                Bank 9 Stacja 41  https://pl02.cdn.eurozet.pl/plu-bdg.mp3
-Radio Przeboje PRL        Bank 9 Stacja 42  http://mp3.polskieradio.pl:8466
-Radio R.SA Italo Disco    Bank 9 Stacja 43  https://rsa.streamabc.net/regc-rsasachsenitalo3107586-mp3-192-8734471
-Radio RDN                 Bank 9 Stacja 44  http://rdn.pl:8002/;
-Radio Rodzina             Bank 9 Stacja 45  http://sluchaj.radiorodzina.pl/RadioRodzinaWroclawLIVE.mp3
-Radio Safira              Bank 9 Stacja 46  https://stream12.hosterion.pl/stream/safira
-Radio Super FM            Bank 9 Stacja 47  http://stream.super.fm:8000/superfm.mp3
-Radio The Zone Dublin     Bank 9 Stacja 48  http://uk1.internet-radio.com:8355/
-Radio Unidisco            Bank 9 Stacja 49  https://broadcast.miami/proxy/unidisco?mp=/stream/;
-Radio Unidisco            Bank 9 Stacja 50  https://broadcast.miami/proxy/unidisco?mp=/stream/;
-Radio Victoria            Bank 9 Stacja 51  https://stream.v4.radiovictoria.pl:8076/;?type=http&nocache=4494
-Radio Vinyl Maxi FM       Bank 9 Stacja 52  https://stream.laut.fm/vinyl-maxi-fm
-
-Radio Weekend FM          Bank 9 Stacja 53  http://stream.weekendfm.pl:8000/weekendfm_256kbs.mp3
-Radiodillo                Bank 9 Stacja 54  https://stream.laut.fm/radiodillo
-Radiofonia                Bank 9 Stacja 55  http://195.150.20.7/radiofonia
-Soma FM Drone Zone        Bank 9 Stacja 56  https://somafm.com/dronezone256.pls
-Soma FM Grove Salad       Bank 9 Stacja 57  https://somafm.com/groovesalad256.pls
-Soma FM Undergroun 80     Bank 9 Stacja 58  https://somafm.com/u80s256.pls
-Sunbeatsradio             Bank 9 Stacja 59  https://stream.laut.fm/sunbeatsradio
-Twoje Radio               Bank 9 Stacja 60  http://65.ip-51-77-59.eu:8100/stream.mp3
-Unsung 80s Radio          Bank 9 Stacja 61  https://unsung80s.out.airtime.pro:8000/unsung80s_a
-Wasze Radio FM            Bank 9 Stacja 62  http://stream1.waszeradiofm.pl:8000/stream
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Akademickie Radio Luz    Bank 9 Station 1  http://radioluz.pwr.edu.pl:8000/luzhifi.mp3
+Dark Radio               Bank 9 Station 2  http://dark.sh/mp3
+EL Stacja                Bank 9 Station 3  http://radio.el-stacja.pl:8000/elstacja320mp3
+Muzyczne Radio           Bank 9 Station 4  https://stream.rcs.revma.com/gzwc1xcq042vv
+Radio 1.7                Bank 9 Station 5  http://emisja.radio17.pl:8000/R17
+Radio 4 Music            Bank 9 Station 6  http://s1.slotex.pl:7102
+Radio 5                  Bank 9 Station 7  https://streaming.radio5.com.pl:8888/radio5suwalki
+Radio 7                  Bank 9 Station 8  http://stream.radio7.pl:443
+Radio 7 Toronto          Bank 9 Station 9  https://s4.radio.co/s1b687cf20/low
+Radio 80                 Bank 9 Station 10  http://91.232.4.33:9305/stream
+Radio Agentka Ewa        Bank 9 Station 11  http://4stream.pl:18182
+Radio Akord              Bank 9 Station 12  http://s1.slotex.pl:7122
+Radio Anime24            Bank 9 Station 13  http://91.232.4.33:7028/Stream1
+Radio Aniol i Diablica   Bank 9 Station 14  https://s3.slotex.pl/shoutcast/7418/stream
+Radio AOi                Bank 9 Station 15  http://54.37.73.148:8000/stream
+Radio Apogeum            Bank 9 Station 16  http://s1.slotex.pl:7512
+Radio Arkadia            Bank 9 Station 17  http://s3.slotex.pl:7450
+Radio Balkanica          Bank 9 Station 18  https://s3.slotex.pl/shoutcast/7068/stream
+Radio Banita Maxx        Bank 9 Station 19  https://ssl-1.radiohost.pl:9454
+Radio Bayer FM           Bank 9 Station 20  https://streaming.radio5.com.pl:8888/bayerfm
+Radio Beat               Bank 9 Station 21  https://s3.slotex.pl/shoutcast/7816/stream
+Radio Beauty             Bank 9 Station 22  https://s3.slotex.pl/shoutcast/7464/stream
+Radio Bezpieczna Podroz  Bank 9 Station 23  https://ssl-1.radiohost.pl:9162/live
+Radio Bon Ton            Bank 9 Station 24  https://streaming.inten.pl:8020/bonton.mp3
+Radio Brylant            Bank 9 Station 25  http://s1.slotex.pl:7212
+Radio Chwila z Hiacynta  Bank 9 Station 26  https://s3.slotex.pl/shoutcast/7232/stream
+Radio Clubbers           Bank 9 Station 27  https://s3.slotex.pl/shoutcast/7300/stream
+Radio Cmolas             Bank 9 Station 28  http://80.211.203.250:8250/master
+Radio Costarosa          Bank 9 Station 29  http://s1.slotex.pl:8058
+Radio Cyberstacja.fm     Bank 9 Station 30  http://sc.cyberstacja.pl:8000/radio.mp3
+Radio Cztery Pory Rok    Bank 9 Station 31  http://4stream.pl:18304
+Radio Damismania Dj      Bank 9 Station 32  http://s1.slotex.pl:7512
+Radio Danielka           Bank 9 Station 33  https://s3.slotex.pl/shoutcast/7088/stream
+Radio DHT 1              Bank 9 Station 34  https://radiodht.com/stream_main/
+Radio DHT 2              Bank 9 Station 35  https://radiodht.com/stream_second/
+Radio Disco-Mix          Bank 9 Station 36  http://radiodd.cloud:8000
+Radio Glos               Bank 9 Station 37  http://87.204.92.180:8000/;
+Radio GRA Torun          Bank 9 Station 38  http://217.74.72.12/radio_gra
+Radio Leliwa             Bank 9 Station 39  http://stream2.nadaje.com:8054/;
+Radio Pirata TGR         Bank 9 Station 40  http://us1.internet-radio.com:8140/live
+Radio Plus               Bank 9 Station 41  https://pl02.cdn.eurozet.pl/plu-bdg.mp3
+Radio Przeboje PRL       Bank 9 Station 42  http://mp3.polskieradio.pl:8466
+Radio R.SA Italo Disco   Bank 9 Station 43  https://rsa.streamabc.net/regc-rsasachsenitalo3107586-mp3-192-8734471
+Radio RDN                Bank 9 Station 44  http://rdn.pl:8002/;
+Radio Rodzina            Bank 9 Station 45  http://sluchaj.radiorodzina.pl/RadioRodzinaWroclawLIVE.mp3
+Radio Safira             Bank 9 Station 46  https://stream12.hosterion.pl/stream/safira
+Radio Super FM           Bank 9 Station 47  http://stream.super.fm:8000/superfm.mp3
+Radio The Zone Dublin    Bank 9 Station 48  http://uk1.internet-radio.com:8355/
+Radio Unidisco           Bank 9 Station 49  https://broadcast.miami/proxy/unidisco?mp=/stream/;
+Radio Unidisco           Bank 9 Station 50  https://broadcast.miami/proxy/unidisco?mp=/stream/;
+Radio Victoria           Bank 9 Station 51  https://stream.v4.radiovictoria.pl:8076/;?type=http&nocache=4494
+Radio Vinyl Maxi FM      Bank 9 Station 52  https://stream.laut.fm/vinyl-maxi-fm
+                           
+Radio Weekend FM         Bank 9 Station 53  http://stream.weekendfm.pl:8000/weekendfm_256kbs.mp3
+Radiodillo               Bank 9 Station 54  https://stream.laut.fm/radiodillo
+Radiofonia               Bank 9 Station 55  http://195.150.20.7/radiofonia
+Soma FM Drone Zone       Bank 9 Station 56  https://somafm.com/dronezone256.pls
+Soma FM Grove Salad      Bank 9 Station 57  https://somafm.com/groovesalad256.pls
+Soma FM Undergroun 80    Bank 9 Station 58  https://somafm.com/u80s256.pls
+Sunbeatsradio            Bank 9 Station 59  https://stream.laut.fm/sunbeatsradio
+Twoje Radio              Bank 9 Station 60  http://65.ip-51-77-59.eu:8100/stream.mp3
+Unsung 80s Radio         Bank 9 Station 61  https://unsung80s.out.airtime.pro:8000/unsung80s_a
+Wasze Radio FM           Bank 9 Station 62  http://stream1.waszeradiofm.pl:8000/stream
