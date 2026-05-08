@@ -2,6 +2,9 @@
 // Evo Internet Radio                                                                                                  //
 // ################################################################################################################### //
 // Author:   Robgold 2026, Made in Poland                                                                              //
+// Translate to English by "Roverius" 2026 Belgium                                                                     //
+// Translate version: https://github.com/Roverius/EVO-Radio/tree/main/ESP32_radio_evo3.20.04.ino                       //
+//                                                                                                                     //
 // Source -> https://github.com/dzikakuna/ESP32_radio_evo3/tree/main/src/ESP32_radio_evo3.20                           //
 // ################################################################################################################### //
 //                                                                                                                     //
@@ -17,6 +20,7 @@
 // Flash Mode:                                  QIO 80Mhz                                                              //
 // PSRAM                                        OPI PSRAM                                                              //
 // Partition Scheme:                            8M with spiffs (3MM APP/1.5MB SPIFFS)                                  //
+// voiceTime language                           Change line 11275 for language voiceTimePL, voiceTimeEN, voiceTimeNL   //
 // ################################################################################################################### //
 
 #include "Arduino.h"           // Standardowy nagłówek Arduino, który dostarcza podstawowe funkcje i definicje
@@ -49,7 +53,7 @@
 // --------------- RADIO VERSION AND HOST NAME DEFINITION ---------------
 #define softwareRev "v3.20.04"  // Radio software version
 #define hostname "evoradio"     // Hostname definition visible on the network
-// --------------------------------------------------------------------
+// -------------------------------------------------------------------- //
 
 
    
@@ -160,41 +164,41 @@ const bool f_logoSlowBrightness = 1; // Enabling slow fade-in of the logo
   #endif 
 #endif
  
-// --------------- OLED Wyswietlacz - definicja pinow ---------------
-#define SPI_MOSI_OLED 39  // Pin MOSI (Master Out Slave In) dla interfejsu SPI OLED
-#define SPI_MISO_OLED 0   // Pin MISO (Master In Slave Out) brak dla wyswietlacza OLED
-#define SPI_SCK_OLED 38   // Pin SCK (Serial Clock) dla interfejsu SPI OLED
-#define CS_OLED 42        // Pin CS (Chip Select) dla interfejsu OLED
-#define DC_OLED 40        // Pin DC (Data/Command) dla interfejsu OLED
-#define RESET_OLED 41//-1 //41     // Pin Reset dla interfejsu OLED
+// --------------- OLED Display - Pin Definition ---------------
+#define SPI_MOSI_OLED 39  // MOSI (Master Out Slave In) pin for SPI OLED interface
+#define SPI_MISO_OLED 0   // MISO (Master In Slave Out) pin missing for OLED display
+#define SPI_SCK_OLED 38   //SCK (Serial Clock) pin for the SPI OLED interface
+#define CS_OLED 42        // CS (Chip Select) pin for OLED interface
+#define DC_OLED 40        // DC (Data/Command) pin for OLED interface
+#define RESET_OLED 41//-1 //41     // Reset Pin for OLED Interface
 
 
-// Rozmiar wysweitlacz OLED (potrzebny do wyświetlania grafiki)
-#define SCREEN_WIDTH 256        // Szerokość ekranu w pikselach
-#define SCREEN_HEIGHT 64        // Wysokość ekranu w pikselach
+// OLED display size (needed to display graphics)
+#define SCREEN_WIDTH 256        // Screen width in pixels
+#define SCREEN_HEIGHT 64        // Screen height in pixels
 
  
 
 // --------------- ENCODER 2 (MAIN) ---------------
-// Jesli jedyny to Volume/Stacje/Banki/PowerOff/PowerOn jesli z Enkoderem1 to Stacje/Banki
-#define CLK_PIN2 10             // Podłączenie z pinu 10 do CLK na enkoderze
-#define DT_PIN2 11              // Podłączenie z pinu 11 do DT na enkoderze lewym
-#define SW_PIN2 1               // Podłączenie z pinu 1 do SW na enkoderze lewym (przycisk)
+// If only then Volume/Stations/Banks/PowerOff/PowerOn, if with Encoder1 then Stations/Banks
+#define CLK_PIN2 10             // Connection from pin 10 to CLK on the encoder
+#define DT_PIN2 11              // Connection from pin 11 to DT on the left encoder
+#define SW_PIN2 1               // Connection from pin 1 to SW on the left encoder (button)
 
-// --------------- ENCODER 1 (dodatkowy) ---------------
-// Jesli zdefinionway to Volume/Mute/PowerOff/PowerOn
+// --------------- ENCODER 1 (additional) ---------------
+// If defined then Volume/Mute/PowerOff/PowerOn
 #ifdef twoEncoders
-  #define CLK_PIN1 6              // Podłączenie z pinu 6 do CLK na enkoderze prawym
-  #define DT_PIN1 5               // Podłączenie z pinu 5 do DT na enkoderze prawym
-  #define SW_PIN1 4               // Podłączenie z pinu 4 do SW na enkoderze prawym (przycisk)
+  #define CLK_PIN1 6              // Connection from pin 6 to CLK on the right encoder
+  #define DT_PIN1 5               // Connection from pin 5 to DT on the right encoder
+  #define SW_PIN1 4               // Connection from pin 4 to SW on the right encoder (button)
   const bool use2encoders = true;
   // Zmienne enkodera 1
   int CLK_state1 = 0;
   int prev_CLK_state1 = 0;
   int buttonLongPressTime1 = 150;
   int buttonSuperLongPressTime1 = 2000;
-  bool action4Taken = false;        // Flaga Akcji 4 - enkoder 1, powerOFF
-  bool action5Taken = false;        // Flaga Akcji 5 - enkoder 1, Menu Bank
+  bool action4Taken = false;        // Action Flag 4 - Encoder 1, PowerOFF
+  bool action5Taken = false;        // Action Flag 5 - Encoder 1, Menu Bank
 #else
   const bool use2encoders = false;
 #endif
@@ -204,144 +208,143 @@ const bool f_logoSlowBrightness = 1; // Enabling slow fade-in of the logo
 #define WAKEUP_INTERVAL_US (60ULL * 1000000ULL) // 1 minuta
 
 // definition of the length of the number of stations in the bank, the length of the station name in PSRAM/EEPROM, the maximum number of audio files (player)
-#define MAX_STATIONS 99          // Maksymalna liczba stacji radiowych, które mogą być przechowywane w jednym banku
-#define STATION_NAME_LENGTH 220  // Nazwa stacji wraz z bankiem i numerem stacji do wyświetlenia w pierwszej linii na ekranie
-#define MAX_FILES 100            // Maksymalna liczba plików lub katalogów w tablicy directoriesz
-#define bank_nr_max 17           // Numer jaki może osiągnac maksymalnie zmienna bank_nr czyli ilość banków
-#define displayModeMax 6         // Ogrniczenie maksymalnej ilosci trybów wyswietlacza OLED
+#define MAX_STATIONS 99          // Maximum number of radio stations that can be stored in one bank
+#define STATION_NAME_LENGTH 220  // Station name with bank and station number to be displayed on the first line of the screen
+#define MAX_FILES 100            // Maximum number of files or directories in the directory table
+#define bank_nr_max 18           // The maximum number that can be reached by the variable bank_nr, i.e. the number of banks
+#define displayModeMax 6         // Limiting the maximum number of OLED display modes
 
 // DEBUG PRINTS - ON/OFF
-#define f_debug_web_on 0         // Flaga właczenia wydruku debug_web
-#define f_debug_on 0             // Flaga właczenia wydruku debug
+#define f_debug_web_on 0         // Debug print enable flag_web
+#define f_debug_on 0             // Debug print enable flag
 
 //String STATIONS_URL1 = "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank01.txt";   // URL to the file with the list of radio stations
-#define STATIONS_URL1  "https://raw.githubusercontent.com/Roverius/EVO-Radio-Station-lists/refs/heads/main/bank01.txt" // URL to the file with the list of radio stations
-//#define STATIONS_URL1  "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank01.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL2  "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank02.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL3  "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank03.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL4  "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank04.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL5  "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank05.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL6  "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank06.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL7  "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank07.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL8  "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank08.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL9  "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank09.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL10 "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank10.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL11 "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank11.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL12 "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank12.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL13 "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank13.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL14 "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank14.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL15 "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank15.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL16 "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank16.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL17 "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank17.txt"  // URL to the file with the list of radio stations
-#define STATIONS_URL18 "https://raw.githubusercontent.com/dzikakuna/ESP32_radio_streams/main/bank18.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL1  "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank01.txt" // URL to the file with the list of radio stations
+#define STATIONS_URL2  "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank02.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL3  "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank03.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL4  "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank04.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL5  "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank05.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL6  "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank06.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL7  "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank07.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL8  "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank08.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL9  "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank09.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL10 "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank10.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL11 "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank11.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL12 "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank12.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL13 "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank13.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL14 "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank14.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL15 "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank15.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL16 "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank16.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL17 "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank17.txt"  // URL to the file with the list of radio stations
+#define STATIONS_URL18 "https://raw.githubusercontent.com/Roverius/EVO-Radio/refs/heads/main/ESP32_radio_streams-main/bank18.txt"  // URL to the file with the list of radio stations
 
 
 
-// --------------- DEFINICJA TEKSTOW ---------------
+// --------------- TEXT DEFINITION ---------------
 #define SLEEP_STRING "SLEEP "
 #define SLEEP_STRING_VAL " MINUTES"
 #define SLEEP_STRING_OFF "OFF"
 
-#ifdef LANG_EN
+#ifdef LANG_NL
 static const char* months[] = {
-    "JANUARY",
-    "FEBRUARY",
-    "MARCH",
+    "JANUARI",
+    "FEBRUARI",
+    "MAART",
     "APRIL",
-    "MAY",
-    "JUNE",
+    "MEI",
+    "JUNi",
     "JULY",
-    "AUGUST",
+    "AUGUSTUS",
     "SEPTEMBER",
-    "OCTOBER",
+    "OKTOBER",
     "NOVEMBER",
     "DECEMBER"
 };
 #endif
 
-// --------------- KOMUNIKACJA MODUŁU RADIA PO RS232 ---------------
+// --------------- RADIO MODULE COMMUNICATION VIA RS232 ---------------
 #ifdef SERIALCOM
-  #include "serialcom.h"   // Integracja jako moduł z komunikacja po RS232
+  #include "serialcom.h"   // Integration as a module with RS232 communication
 #endif
 
 
-// --------------- Zmienne  DLA PILOTa IR w standardzie NEC - przeniesiona do pliku txt ---------------
-uint16_t rcCmdVolumeUp = 0;   // Głosnosc +
-uint16_t rcCmdVolumeDown = 0; // Głośnosc -
-uint16_t rcCmdArrowRight = 0; // strzałka w prawo - nastepna stacja
-uint16_t rcCmdArrowLeft = 0;  // strzałka w lewo - poprzednia stacja  
-uint16_t rcCmdArrowUp = 0;    // strzałka w góre - lista stacji krok do gory
-uint16_t rcCmdArrowDown = 0;  // strzałka w dół - lista stacj krok na dół
-uint16_t rcCmdBack = 0;	      // Przycisk powrotu
-uint16_t rcCmdOk = 0;         // Przycisk Ent - zatwierdzenie stacji
-uint16_t rcCmdSrc = 0;        // Przełączanie źródła radio, odtwarzacz
-uint16_t rcCmdMute = 0;       // Wyciszenie dzwieku
-uint16_t rcCmdAud = 0;        // Equalizer dzwieku
-uint16_t rcCmdDirect = 0;     // Janość ekranu, dwa tryby 1/16 lub pełna janość     
-uint16_t rcCmdBankMinus = 0;  // Wysweitla wybór banku
-uint16_t rcCmdBankPlus = 0;   // Wysweitla wybór banku
-uint16_t rcCmdRed = 0;        // Przełacza ładowanie banku kartaSD - serwer GitHub w menu bank
-uint16_t rcCmdGreen = 0;      // VU wyłaczony, VU tryb 1, VU tryb 2, zegar
-uint16_t rcCmdKey0 = 0;       // Przycisk "0"
-uint16_t rcCmdKey1 = 0;       // Przycisk "1"
-uint16_t rcCmdKey2 = 0;       // Przycisk "2"
-uint16_t rcCmdKey3 = 0;       // Przycisk "3"
-uint16_t rcCmdKey4 = 0;       // Przycisk "4"
-uint16_t rcCmdKey5 = 0;       // Przycisk "5"
-uint16_t rcCmdKey6 = 0;       // Przycisk "6"
-uint16_t rcCmdKey7 = 0;       // Przycisk "7"
-uint16_t rcCmdKey8 = 0;       // Przycisk "8"
-uint16_t rcCmdKey9 = 0;       // Przycisk "9"
-uint16_t rcCmdPower = 0;       // Przycisk Power
-// Koniec definicji pilota IR
+// --------------- Variables FOR IR REMOTE CONTROL in NEC standard - moved to txt file ---------------
+uint16_t rcCmdVolumeUp = 0;   // Loudness +
+uint16_t rcCmdVolumeDown = 0; // Loudness -
+uint16_t rcCmdArrowRight = 0; // right arrow - next station
+uint16_t rcCmdArrowLeft = 0;  // left arrow - previous station
+uint16_t rcCmdArrowUp = 0;    // up arrow - list of stations one step up
+uint16_t rcCmdArrowDown = 0;  // down arrow - list of stations step down
+uint16_t rcCmdBack = 0;	      // Back button
+uint16_t rcCmdOk = 0;         // Enter button - confirm station
+uint16_t rcCmdSrc = 0;        // Switching the radio or player source
+uint16_t rcCmdMute = 0;       // Sound mute
+uint16_t rcCmdAud = 0;        // Sound equalizer
+uint16_t rcCmdDirect = 0;     // Screen brightness, two modes 1/16 or full brightness    
+uint16_t rcCmdBankMinus = 0;  // Display bank selection
+uint16_t rcCmdBankPlus = 0;   // Display bank selection
+uint16_t rcCmdRed = 0;        // Toggles SD card bank loading - GitHub server in the bank menu
+uint16_t rcCmdGreen = 0;      // VU off, VU mode 1, VU mode 2, clock
+uint16_t rcCmdKey0 = 0;       // Button "0"
+uint16_t rcCmdKey1 = 0;       // Button "1"
+uint16_t rcCmdKey2 = 0;       // Button "2"
+uint16_t rcCmdKey3 = 0;       // Button "3"
+uint16_t rcCmdKey4 = 0;       // Button "4"
+uint16_t rcCmdKey5 = 0;       // Button "5"
+uint16_t rcCmdKey6 = 0;       // Button "6"
+uint16_t rcCmdKey7 = 0;       // Button "7"
+uint16_t rcCmdKey8 = 0;       // Button "8"
+uint16_t rcCmdKey9 = 0;       // Button "9"
+uint16_t rcCmdPower = 0;       // Button Power
+// End of IR Remote Definition
 
-bool  f_callInfo = 0;       // Flaga czy wsiwetlamy "INFO" również na OLED
-bool  f_logo = 0;           // Flaga czy wyswietlamy logo
+bool  f_callInfo = 0;       // Flag or "INFO" also on OLED
+bool  f_logo = 0;           // Flag or do we display the logo?
 bool  f_simpleMode3 =0;
 
-int currentSelection = 0;                     // Numer aktualnego wyboru na ekranie OLED
-int firstVisibleLine = 0;                     // Numer pierwszej widocznej linii na ekranie OLED
-uint8_t station_nr = 0;                       // Numer aktualnie wybranej stacji radiowej z listy
-int stationFromBuffer = 0;                    // Numer stacji radiowej przechowywanej w buforze do przywrocenia na ekran po bezczynności
-uint8_t bank_nr;                              // Numer aktualnie wybranego banku stacji z listy
-uint8_t previous_bank_nr = 0;                 // Numer banku przed wejsciem do menu zmiany banku
-//int bankFromBuffer = 0;                       // Numer aktualnie wybranego banku stacji z listy do przywrócenia na ekran po bezczynności
+int currentSelection = 0;                     // Current selection number on OLED screen
+int firstVisibleLine = 0;                     // The number of the first visible line on the OLED screen
+uint8_t station_nr = 0;                       // The number of the currently selected radio station from the list
+int stationFromBuffer = 0;                    // Radio station number stored in the buffer to be restored to the screen after inactivity
+uint8_t bank_nr;                              // The number of the currently selected station bank from the list
+uint8_t previous_bank_nr = 0;                 // Bank number before entering the bank change menu
+//int bankFromBuffer = 0;                       // The number of the currently selected station bank from the list to be restored to the screen after inactivity.
 
 //Enkoder 2 (podstawowy)
-int CLK_state2;                               // Aktualny stan CLK enkodera lewego
-int prev_CLK_state2;                          // Poprzedni stan CLK enkodera lewego
-int stationsCount = 0;                        // Aktualna liczba przechowywanych stacji w tablicy
-int buttonLongPressTime2 = 2000;              // Czas reakcji na długie nacisniecie enkoder 2
-int buttonShortPressTime2 = 500;              // Czas rekacjinna krótkie nacisniecie enkodera 2
-int buttonSuperLongPressTime2 = 3000;         // Czas reakcji na super długie nacisniecie enkoder 2
+int CLK_state2;                               // Current CLK state of the left encoder
+int prev_CLK_state2;                          // Left encoder CLK previous state
+int stationsCount = 0;                        // Current number of stored stations in the table
+int buttonLongPressTime2 = 2000;              // Encoder 2 long press response time
+int buttonShortPressTime2 = 500;              // Response time to short press of encoder 2
+int buttonSuperLongPressTime2 = 3000;         // Encoder 2 super long press response time
 
-uint8_t volumeValue = 10;                     // Wartość głośności, domyślnie ustawiona na 10
+uint8_t volumeValue = 10;                     // Volume value, default set to 10
 uint8_t maxVolume = 21;
 bool maxVolumeExt =  false;                   // 0(false) -  zakres standardowy Volume 1-21 , 1 (true) - zakres rozszerzony 0-42
-uint8_t volumeBufferValue = 0;                // Wartość głośności, domyślnie ustawiona na 10
-int maxVisibleLines = 4;                      // Maksymalna liczba widocznych linii na ekranie OLED
-int bitrateStringInt = 0;                     // Deklaracja zmiennej do konwersji Bitrate string na wartosc Int aby podzelic bitrate przez 1000
+uint8_t volumeBufferValue = 0;                // Volume value, default set to 10
+int maxVisibleLines = 4;                      // Maximum number of visible lines on an OLED screen
+int bitrateStringInt = 0;                     // Declaration of a variable to convert Bitrate string to Int value to divide bitrate by 1000
 int SampleRate = 0;
 int SampleRateRest = 0;
 int audioBufferTime = 0;                      // A variable that holds information about the number of seconds of music in the audio buffer.
 
-uint8_t stationNameLenghtCut = 24;            // 24-> 25 znakow, 25-> 26 znaków, zmienna określająca jak długa nazwę ma nazwa stacji w plikach Bankow liczone od 0- wartosci ustalonej
-const uint8_t yPositionDisplayScrollerMode0 = 33;   // Wysokosc (y) wyswietlania przewijanego/stalego tekstu stacji w danym trybie
-const uint8_t yPositionDisplayScrollerMode1 = 61;   // Wysokosc (y) wyswietlania przewijanego/stalego tekstu stacji w danym trybie
-const uint8_t yPositionDisplayScrollerMode2 = 25;   // Wysokosc (y) wyswietlania przewijanego/stalego tekstu stacji w danym trybie
-const uint8_t yPositionDisplayScrollerMode3 = 49;   // Wysokosc (y) wyswietlania przewijanego/stalego tekstu stacji w danym trybie
-const uint8_t yPositionDisplayScrollerMode5 = 35;   // Wysokosc (y) wyswietlania przewijanego/stalego tekstu stacji w danym trybie
+uint8_t stationNameLenghtCut = 24;            // 24-> 25 characters, 25-> 26 characters, a variable defining the length of the station name in the Bank files, counted from 0 - the set value
+const uint8_t yPositionDisplayScrollerMode0 = 33;   // The height(s) of the scrolling/fixed station text display in a given mode.
+const uint8_t yPositionDisplayScrollerMode1 = 61;   // The height(s) of the scrolling/fixed station text display in a given mode.
+const uint8_t yPositionDisplayScrollerMode2 = 25;   // The height(s) of the scrolling/fixed station text display in a given mode.
+const uint8_t yPositionDisplayScrollerMode3 = 49;   // The height(s) of the scrolling/fixed station text display in a given mode.
+const uint8_t yPositionDisplayScrollerMode5 = 35;   // The height(s) of the scrolling/fixed station text display in a given mode.
 const uint8_t stationNamePositionYmode3 = 31;
 const uint8_t stationNamePositionYmode5 = 26;
 uint16_t stationStringScrollLength = 0;
 uint8_t maxStationVisibleStringScrollLength = 46;
-bool stationNameFromStream = 0;               // Flaga definiujaca czy wyswietlamy nazwe stacji z plikow Banku pamieci czy z informacji nadawanych w streamie
-bool f_powerOff = 0;                          // Flaga aktywnego trybu power off (ESP light sleep)
+bool stationNameFromStream = 0;               // A flag defining whether the station name is displayed from the Memory Bank files or from the information transmitted in the stream.
+bool f_powerOff = 0;                          // Active power off mode flag (ESP light sleep)
 bool f_sleepTimerOn = false;
-uint8_t sleepTimerValueSet = 0;           // Zmiena przechowujaca ustawiony czas - nie uzywana obecnie
-uint8_t sleepTimerValueCounter = 0;         // Licznik funkcji sleep timer dekrementowany przez Timer3 co 1 minute
-uint8_t sleepTimerValueStep = 15;           // Krok funkcji sleep timer o ile zwieksza się timer
-uint8_t sleepTimerValueMax = 90;            // Maksymalna wartosc sleep timera jaka da się ustawić
+uint8_t sleepTimerValueSet = 0;           // Variable storing the set time - currently not used
+uint8_t sleepTimerValueCounter = 0;         // Sleep timer counter decremented by Timer3 every 1 minute
+uint8_t sleepTimerValueStep = 15;           // Sleep timer step by how much the timer increases
+uint8_t sleepTimerValueMax = 90;            // The maximum sleep timer value that can be set
 //uint8_t bank_nr_max = 16;
 
 
@@ -352,43 +355,43 @@ unsigned long voiceTimeMillis = 0;
 uint16_t voiceTimeReturnTime = 4000;
 
 
-// ---- Auto dimmer / auto przyciemnianie wyswietlacza ---- //
-uint8_t displayDimmerTimeCounter = 0;  // Zmienna inkrementowana w przerwaniu timera2 do przycimniania wyswietlacz
-uint8_t dimmerDisplayBrightness = 10;   // Wartość przyciemnienia wyswietlacza po czasie niekatywnosci
-uint8_t dimmerSleepDisplayBrightness = 1; // Wartość przyciemnienia wyswietlacza po czasie niekatywnosci
-uint8_t displayBrightness = 180;        // Domyślna maksymalna janość wyswietlacza
-uint16_t displayAutoDimmerTime = 5;   // Czas po jakim nastąpi przyciemninie wyswietlacza, liczony w sekundach
-bool displayAutoDimmerOn = false;       // Automatyczne przyciemnianie wyswietlacza, domyślnie włączone
-bool displayDimmerActive = false;       // Aktywny tryb przyciemnienia
-uint16_t displayPowerSaveTime = 30;    // Czas po jakim zostanie wyłączony wyswietlacz OLED (tryb power save)
-uint16_t displayPowerSaveTimeCounter = 0;    // Timer trybu Power Save wyswietlacza OLED
-bool displayPowerSaveEnabled = false;   // Flaga okreslajaca czy tryb wyłączania wyswietlacza OLED jest właczony
-uint8_t displayMode = 0;               // Tryb wyswietlacza 0-displayRadio z przewijaniem "scroller" / 1-Zegar / 2- tryb 3 stałych linijek tekstu stacji
+// ---- Auto dimmer / auto display dimming ---- //
+uint8_t displayDimmerTimeCounter = 0;  // Variable incremented in timer2 interrupt to dim the display
+uint8_t dimmerDisplayBrightness = 10;   // Display dimming value after inactivity time
+uint8_t dimmerSleepDisplayBrightness = 1; // Display dimming value after inactivity time
+uint8_t displayBrightness = 180;        // Default maximum display brightness
+uint16_t displayAutoDimmerTime = 5;   // Time after which the display will dim, counted in seconds
+bool displayAutoDimmerOn = false;       // Automatic display dimming, enabled by default
+bool displayDimmerActive = false;       // Dim mode active
+uint16_t displayPowerSaveTime = 30;    // Time after which the OLED display will turn off (power save mode)
+uint16_t displayPowerSaveTimeCounter = 0;    // OLED display Power Save mode timer
+bool displayPowerSaveEnabled = false;   // Flag indicating whether OLED display shutdown mode is enabled
+uint8_t displayMode = 0;               // Display mode 0-displayRadio with scrolling "scroller" / 1-Clock / 2- mode with 3 fixed lines of station text
 
-// ---- Equalzier ---- //
-int8_t toneLowValue = 0;               // Wartosc filtra dla tonow niskich
-int8_t toneMidValue = 0;               // Wartosc flitra dla tonow srednich
-int8_t toneHiValue = 0;                // Wartość filtra dla tonow wysokich
-int8_t balanceValue = 0;                // Wartość balansu
-uint8_t toneSelect = 1;                // Zmienna okreslająca, który filtr equalizera regulujemy, startujemy od pierwszego
+// ---- Equalizer ---- //
+int8_t toneLowValue = 0;               // Bass filter value
+int8_t toneMidValue = 0;               // Mid-tone filter value
+int8_t toneHiValue = 0;                // Treble filter value
+int8_t balanceValue = 0;                // Balance value
+uint8_t toneSelect = 1;                // A variable that determines which equalizer filter we are adjusting, starting from the first one
 
-bool equalizerMenuEnable = false;      // Flaga wyswietlania menu Equalizera
+bool equalizerMenuEnable = false;      // Equalizer menu display flag
 
-// ------ Wprowadzaeni cyfr z pilota / klawiatury ------ //
-uint8_t rcInputDigit1 = 0xFF;      // Pierwsza cyfra w przy wprowadzaniu numeru stacji z pilota
-uint8_t rcInputDigit2 = 0xFF;      // Druga cyfra w przy wprowadzaniu numeru stacji z pilota
-bool f_Presets = false;     // Flaga okreslajaca czy przelaczamy stacje czy wprowadzamy numer stacji czy 1-10 jako ulubione stacje
+// ------ Entering numbers from the remote control/keyboard ------ //
+uint8_t rcInputDigit1 = 0xFF;      // The first digit when entering the station number from the remote control
+uint8_t rcInputDigit2 = 0xFF;      // The second digit when entering the station number from the remote control
+bool f_Presets = false;     // A flag that determines whether we switch stations, enter a station number, or 1-10 as favorite stations.
 bool f_Presets2 = false;
 bool f_Presets3 = false;
 
 
 
-// ---- Zmienne konfiguracji ---- //
+// ---- Configuration variables ---- //
 #define CONFIG_COUNT 26
 uint16_t configArray[CONFIG_COUNT] = {0};
 uint8_t rcPage = 0;
 #define CONFIGREMOTE_COUNT 26
-uint16_t configRemoteArray[CONFIGREMOTE_COUNT] = {0};   // Tablica przechowująca kody pilota podczas odczytu z pliku
+uint16_t configRemoteArray[CONFIGREMOTE_COUNT] = {0};   // Table storing remote control codes when reading from a file
 
 /*
 struct RemoteMap
@@ -427,87 +430,87 @@ RemoteMap remoteMap[CONFIGREMOTE_COUNT] = {
 
 */
 
-uint16_t configAdcArray[24] = {0};      // Tablica przechowująca wartosci ADC dla przyciskow klawiatury
-bool configExist = true;                  // Flaga okreslajaca czy istnieje plik konfiguracji
-bool f_displayPowerOffClock = false;      // Flaga okreslajaca czy w trybie sleep ma się wyswietlac zegar
-bool f_sleepAfterPowerFail = false;       // Flaga czy idziemy do powerOFF po powrocie zasilania
-bool f_saveVolumeStationAlways = false;   // Flaga określająca czy zapisujemy stacje, bank i poziom volume zawsze czy tylko przy power OFF
+uint16_t configAdcArray[24] = {0};      // An array storing ADC values ​​for the keyboard buttons.
+bool configExist = true;                  // Flag indicating whether a configuration file exists.
+bool f_displayPowerOffClock = false;      // A flag that determines whether the clock should be displayed in sleep mode.
+bool f_sleepAfterPowerFail = false;       // Flag whether we go to powerOFF after power is restored
+bool f_saveVolumeStationAlways = false;   // A flag that determines whether stations, banks and volume levels are saved always or only when power is OFF.
 //bool f_statusLED = false;
-bool f_powerOffAnimation = false;             // Animacja przy power OFF
+bool f_powerOffAnimation = false;             // Animation when power OFF
 bool remoteConfig = false;
 
-bool encoderButton2 = false;      // Flaga określająca, czy przycisk enkodera 2 został wciśnięty
-bool encoderFunctionOrder = false; // Flaga okreslająca kolejność funkcji enkodera 2
-bool displayActive = false;       // Flaga określająca, czy wyświetlacz jest aktywny
+bool encoderButton2 = false;      // Flag indicating whether encoder button 2 has been pressed
+bool encoderFunctionOrder = false; // Flag specifying the order of encoder 2 functions
+bool displayActive = false;       // Flag indicating whether the display is active
 
 bool mp3 = false;                 // Flag indicating whether the current audio file is in the format MP3
 bool flac = false;                // Flag indicating whether the current audio file is in the format FLAC
 bool aac = false;                 // Flag indicating whether the current audio file is in the format AAC
 bool vorbis = false;              // Flag indicating whether the current audio file is in the format VORBIS
 bool opus = false;
-bool timeDisplay = true;          // Flaga określająca kiedy pokazać czas na wyświetlaczu, domyślnie od razu po starcie
-bool listedStations = false;      // Flaga określająca czy na ekranie jest pokazana lista stacji do wyboru
-bool bankMenuEnable = false;      // Flaga określająca czy na ekranie jest wyświetlone menu wyboru banku
-bool bitratePresent = false;      // Flaga określająca, czy na serial terminalu pojawiła się informacja o bitrate - jako ostatnia dana spływajaca z info
-bool bankNetworkUpdate = false;   // Flaga wyboru aktualizacji banku z sieci lub karty SD - True aktulizacja z interNETu
-bool volumeMute = false;          // Flaga okreslająca stan funkcji wyciszczenia - Mute
-bool volumeSet = false;           // Flaga wejscia menu regulacji głosnosci na enkoderze 2
+bool timeDisplay = true;          // Flag specifying when to show the time on the display, by default immediately after start
+bool listedStations = false;      // A flag that determines whether a list of stations to choose from is shown on the screen.
+bool bankMenuEnable = false;      // Flag indicating whether the bank selection menu is displayed on the screen
+bool bitratePresent = false;      // A flag indicating whether bitrate information appeared on the terminal serial - as the last data flowing from info
+bool bankNetworkUpdate = false;   // Flag to select bank update from network or SD card - True update from internet
+bool volumeMute = false;          // Flag specifying the state of the mute function - Mute
+bool volumeSet = false;           // Decoder 2 volume control menu input flag
 
-bool action3Taken = false;        // Flaga Akcji 3
+bool action3Taken = false;        // Action Flag 3
 
 bool ActionNeedUpdateTime = false;// A variable that specifies the need for displayRadio to read the time update.
 bool debugAudioBuffor = false;    // Displaying the Audio Buffer
 bool f_audioInfoRefreshStationString = false;    // Flag forcing a required refresh due to a change in the info stream - stationstring, title, 
 bool f_audioInfoRefreshDisplayRadio = false;    // Flag forcing required de-simplification due to stream info change - line kbps, khz, stream format
 bool resumePlay = false;            // Flag to require playback to start after the voice message ends
-bool fwupd = false;               // Flaga blokujaca main loop podczas aktualizacji oprogramowania
-bool configIrExist = false;       // Flaga informująca o istnieniu poprawnej konfiguracji pilota IR
+bool fwupd = false;               // Flag blocking the main loop during software update
+bool configIrExist = false;       // A flag informing about the existence of a correct IR remote control configuration.
 bool wsAudioRefresh = false;      // Flag informing about the need to refresh Station Text via Web Socket
 bool f_voiceTimeBlocked = false;
-bool f_displaySleepTime = false;    // Flaga wysiwetlania menu timera
-bool f_displaySleepTimeSet = false;    // Flaga ustawienia sleep timera
+bool f_displaySleepTime = false;    // Flag for displaying the timer menu
+bool f_displaySleepTimeSet = false;    // Flag for displaying the sleep menu
 
-bool noSDcard = false;              // flaga ustawiana przy braku wykrycia karty SD
-bool noStorage = false;             // flaga ustawiana przy problemie z pamiecia SPIFFS/LittleFS
+bool noSDcard = false;              // flag set when no SD card is detected
+bool noStorage = false;             // flag set when there is a problem with SPIFFS/LittleFS memory
 
-unsigned long debounceDelay = 300;    // Czas trwania debouncingu w milisekundach
-unsigned long displayTimeout = 3000;  // Czas wyświetlania komunikatu na ekranie w milisekundach
-unsigned long displayStartTime = 0;   // Czas rozpoczęcia wyświetlania komunikatu
-unsigned long seconds = 0;            // Licznik sekund timera
-unsigned int PSRAM_lenght = MAX_STATIONS * (STATION_NAME_LENGTH) + MAX_STATIONS; // deklaracjia długości pamięci PSRAM
+unsigned long debounceDelay = 300;    // Debouncing duration in milliseconds
+unsigned long displayTimeout = 3000;  // Time the message is displayed on the screen in milliseconds
+unsigned long displayStartTime = 0;   // Message display start time
+unsigned long seconds = 0;            // Timer seconds counter
+unsigned int PSRAM_lenght = MAX_STATIONS * (STATION_NAME_LENGTH) + MAX_STATIONS; // PSRAM memory length declaration
 unsigned long lastCheckTime = 0;      // No stream audio blink
-//uint8_t stationNameStreamWidth = 0;   // Test pełnej nazwy stacji
+//uint8_t stationNameStreamWidth = 0;   // Full Station Name Test
 uint64_t seconds2nextMinute;
 uint64_t micros2nextMinute;
 
 // ---- VU Meter ---- //
-unsigned long vuMeterTime;                 // Czas opznienia odswiezania wskaznikow VU w milisekundach
-uint8_t vuMeterL;                          // Wartosc VU dla L kanału zakres 0-255
-uint8_t vuMeterR;                          // Wartosc VU dla R kanału zakres 0-255
-uint8_t peakL = 0;                         // Wartosc peakHold dla kanalu lewego
-uint8_t peakR = 0;                         // Wartosc peakHold dla kanalu prawego
-uint8_t peakHoldTimeL = 0;                 // Licznik peakHold dla kanalu lewego
-uint8_t peakHoldTimeR = 0;                 // Licznik peakHold dla kanalu prawego
-const uint8_t peakHoldThreshold = 5;       // Liczba cykli zanim peak opadnie
-const uint8_t vuLy = 41;                   // Koordynata Y wskaznika VU L-lewego (wyzej)
-const uint8_t vuRy = 47;                   // Koordynata Y wskaznika VU R-prawego (nizej)
-const uint8_t vuLyMode3 = 54;              // Koordynata Y wskaznika VU L-lewego (wyzej)
-const uint8_t vuRyMode3 = 60;              // Koordynata Y wskaznika VU R-prawego (nizej
-const uint8_t vuLyMode5 = 43;                   // Koordynata Y wskaznika VU L-lewego (wyzej)
-const uint8_t vuRyMode5 = 49;                   // Koordynata Y wskaznika VU R-prawego (nizej)
-const uint8_t vuThicknessMode3 = 1;        // Grubosc kreseczki wskaznika VU w trybie Mode3
-const int vuCenterXmode3 = 128;            // Pozycja centralna startu VU w trybie Mode 3
-const int vuYmode3 = 62;                   // Polozenie wyokosci (Y) VU w trybie Mode 3
-bool vuPeakHoldOn = 1;                     // Flaga okreslajaca czy funkcja Peak & Hold na wskazniku VUmeter jest wlaczona
-bool vuMeterOn = true;                     // Flaga właczajaca wskazniki VU
-bool vuMeterMode = false;                  // tryb rysowania vuMeter
-uint8_t displayVuL = 0;                    // wartosc VU do wyswietlenia po procesie smooth
-uint8_t displayVuR = 0;                    // wartosc VU do wyswietlenia po procesie smooth
-uint8_t vuRiseSpeed = 24;                  // szybkość narastania VU
-uint8_t vuFallSpeed = 6;                   // szybkość opadania VU
-bool vuSmooth = 1;                         // Flaga zalaczenia funkcji smootht (domyslnie wlaczona=1)
-uint8_t vuRiseNeedleSpeed = 2;                  // szybkość narastania VU
-uint8_t vuFallNeedleSpeed = 6;                   // szybkość opadania VU
+unsigned long vuMeterTime;                 // VU display refresh delay time in milliseconds
+uint8_t vuMeterL;                          // VU value for L channel range 0-255
+uint8_t vuMeterR;                          // VU value for R channel range 0-255
+uint8_t peakL = 0;                         // PeakHold value for the left channel
+uint8_t peakR = 0;                         // PeakHold value for the right channel
+uint8_t peakHoldTimeL = 0;                 // PeakHold counter for the left channel
+uint8_t peakHoldTimeR = 0;                 // PeakHold counter for the right channel
+const uint8_t peakHoldThreshold = 5;       // Number of cycles before the peak drops
+const uint8_t vuLy = 41;                   // Y coordinate of the L-left VU indicator (above)
+const uint8_t vuRy = 47;                   // Y coordinate of the R-right VU indicator (lower)
+const uint8_t vuLyMode3 = 54;              // Y coordinate of the L-left VU indicator (above)
+const uint8_t vuRyMode3 = 60;              // Y coordinate of the R-right VU indicator (below)
+const uint8_t vuLyMode5 = 43;                   // Y coordinate of the L-left VU indicator (above)
+const uint8_t vuRyMode5 = 49;                   // Y coordinate of the R-right VU indicator (lower)
+const uint8_t vuThicknessMode3 = 1;        // VU meter line thickness in Mode3
+const int vuCenterXmode3 = 128;            // Mode 3 VU Start Center Position
+const int vuYmode3 = 62;                   // VU height (Y) position in Mode 3
+bool vuPeakHoldOn = 1;                     // Flag indicating whether the Peak & Hold feature on the VUmeter is enabled
+bool vuMeterOn = true;                     // Flag to enable VU meters
+bool vuMeterMode = false;                  // vuMeter drawing mode
+uint8_t displayVuL = 0;                    // VU value to be displayed after the smooth process
+uint8_t displayVuR = 0;                    // VU value to be displayed after the smooth process
+uint8_t vuRiseSpeed = 24;                  // VU slew rate
+uint8_t vuFallSpeed = 6;                   // VU fall rate
+bool vuSmooth = 1;                         // Smooth enable flag (default enabled=1)
+uint8_t vuRiseNeedleSpeed = 2;                  // VU slew rate
+uint8_t vuFallNeedleSpeed = 6;                   // VU fall rate
 bool reversColorMode4 = true;
 
 // Volume Fade
@@ -520,22 +523,21 @@ bool f_volumeFadeOn = 0;
 uint8_t volumeFadeOutTime = 20; //ms * volumeValue
 uint8_t volumeSleepFadeOutTime = 50;
 
-unsigned long scrollingStationStringTime;  // Czas do odswiezania scorllingu
-uint8_t scrollingRefresh = 50;              // Czas w ms przewijania tekstu funkcji Scroller
+unsigned long scrollingStationStringTime;  // Time to refresh scorling
+uint8_t scrollingRefresh = 50;              // Scroller text scrolling time in ms
 
-uint8_t vuMeterRefreshCounterSet = 0;      // Mnoznik co ile petli loopRefreshTime ma byc odswiezony VU Meter
-uint8_t scrollerRefreshCounterSet = 0;     // Mnoznik co ile petli loopRefreshTime ma byc odswiezony i przewiniety o 1px Scroller
+uint8_t vuMeterRefreshCounterSet = 0;      // Multiplier every loopRefreshTime loop is to be refreshed VU Meter
+uint8_t scrollerRefreshCounterSet = 0;     // Denominator: after how many loops loopRefreshTime should the scroller be refreshed and scrolled by 1px
 
-uint16_t stationStringScrollWidth;         // szerokosc Stringu nazwy stacji w funkcji Scrollera
-uint16_t xPositionStationString = 0;       // Pozycja początkowa dla przewijania tekstu StationString
-uint16_t offset;                           // Zminnna offsetu dla funkcji Scrollera - przewijania streamtitle na ekranie OLED
-unsigned char * psramData;                 // zmienna do trzymania danych stacji w pamieci PSRAM
+uint16_t stationStringScrollWidth;         // width of the station name string in the Scroller function
+uint16_t xPositionStationString = 0;       // Starting position for scrolling StationString text
+uint16_t offset;                           // Changing the offset for the Scroll function - scrolling the stream title on the OLED screen
+unsigned char * psramData;                 // variable to hold station data in PSRAM
 
-unsigned long vuMeterMilisTimeUpdate;           // Zmienna przechowujaca czas dla funkci millis VU Meter refresh
-uint8_t vuMeterRefreshTime = 50;                // Czas w ms odswiezania VUmetera
-
+unsigned long vuMeterMilisTimeUpdate;           // Variable storing the time for the millis VU Meter refresh function
+uint8_t vuMeterRefreshTime = 50;                // VUmeter refresh time in ms
 uint8_t wifiSignalLevel = 0;
-uint8_t wifiSignalLevelLast = 7;          // Pamiecm poprzedniego stanu signalLevel
+uint8_t wifiSignalLevelLast = 7;          // SignalLevel Previous State Memory
 
 // ---- Serwer Web ---- //
 unsigned long currentTime = millis();
@@ -545,32 +547,32 @@ bool urlToPlay = false;
 bool urlPlaying = false;
 
 
-// ---- Sprawdzenie funkcji pilota, zminnne do pomiaru róznicy czasów ---- //
+// ---- Checking the remote control function, variables for measuring the time difference ---- //
 unsigned long runTime = 0;
 unsigned long runTime1 = 0;
 unsigned long runTime2 = 0;
 
 
-String stationStringScroll = "";     // Zmienna przechowująca tekst do przewijania na ekranie
-String stationName;                  // Nazwa aktualnie wybranej stacji radiowej
-String stationString;                // Dodatkowe dane stacji radiowej (jeśli istnieją)
-String stationStringWeb;                // Dodatkowe dane stacji radiowej (jeśli istnieją)
-String bitrateString;                // Zmienna przechowująca informację o bitrate
-String sampleRateString;             // Zmienna przechowująca informację o sample rate
-String bitsPerSampleString;          // Zmienna przechowująca informację o liczbie bitów na próbkę
+String stationStringScroll = "";     // A variable that stores the text to be scrolled on the screen.
+String stationName;                  // Name of the currently selected radio station
+String stationString;                // Additional radio station data (if any)
+String stationStringWeb;                // Additional radio station data (if any)
+String bitrateString;                // A variable that stores information about bitrate
+String sampleRateString;             // A variable that stores information about sample rate
+String bitsPerSampleString;          // A variable that stores information about the number of bits per sample.
 String currentIP;
-String stationNameStream;           // Nazwa stacji wyciągnieta z danych wysylanych przez stream
+String stationNameStream;           // The station name is extracted from the data sent by the stream.
 String streamCodec;
 String stationLogoUrl;
 String timezone;
 
 
-String header;                      // Zmienna dla serwera www
+String header;                      // Variable for the web server
 String sliderValue = "0";
 String url2play = "";
 
 
-File myFile;  // Uchwyt pliku
+File myFile;  // File handle
 
 //U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI u8g2(U8G2_R2, /* cs=*/CS_OLED, /* dc=*/DC_OLED, /* reset=*/RESET_OLED);  // Hardware SPI 3.12inch OLED
 //U8G2_SSD1309_128X64_NONAME0_F_4W_HW_SPI u8g2(U8G2_R2, /* cs=*/CS_OLED, /* dc=*/DC_OLED, /* reset=*/RESET_OLED);  
@@ -586,37 +588,37 @@ File myFile;  // Uchwyt pliku
 #elif defined(SSD1363) 
   U8G2_SSD1363_256X128_F_4W_HW_SPI u8g2(U8G2_R0, CS_OLED, DC_OLED, RESET_OLED);
 #else
-  #error "Nie wybrano typu wyswietlacza!"
+  #error "No display type selected!"
 #endif
 
 
-// Przypisujemy port serwera www
+// We assign the www server port
 AsyncWebServer server(80);
-AsyncWebSocket ws("/ws"); //Start obsługi Websocketów
+AsyncWebSocket ws("/ws"); //Websocket support starts
 
 
-// Inicjalizacja WiFiManagera
+// Initializing WiFiManager
 WiFiManager wifiManager;
 
 
-// Konfiguracja nowego SPI z wybranymi pinami dla czytnika kart SD
-SPIClass customSPI = SPIClass(HSPI);  // Używamy HSPI, ale z własnymi pinami
+// Configuring a new SPI with selected pins for the SD card reader
+SPIClass customSPI = SPIClass(HSPI);  // We use HSPI, but with our own pins
 
 #ifdef twoEncoders
-  ezButton button1(SW_PIN1);  // Utworzenie obiektu przycisku z enkodera 2 ezButton
+  ezButton button1(SW_PIN1);  // Creating a button object from the ezButton encoder 2
 #endif
 
-ezButton button2(SW_PIN2);  // Utworzenie obiektu przycisku z enkodera 2 ezButton
+ezButton button2(SW_PIN2);  // Creating a button object from the ezButton encoder 2
 Audio audio;                // An object for handling sound and audio-related functions
 
-Ticker timer1;             // Timer do aktualizacji Zegara
-Ticker timer2;             // Timer funkcji Dimmer
-Ticker timer3;             // Timer dla funkcji Sleep
-Ticker timer4;             // Timer startu migania LED
-WiFiClient client;         // Obiekt do obsługi połączenia WiFi dla klienta HTTP
+Ticker timer1;             // Timer to update the Clock
+Ticker timer2;             // Dimmer function timer
+Ticker timer3;             // Sleep timer
+Ticker timer4;             // LED flashing start timer
+WiFiClient client;         // Object for handling WiFi connection for HTTP client
 
 
-// ------------------- STRON HTML zaszyte w kodzie -------------------
+// ------------------- HTML pages embedded in the code -------------------
 const char stylehead_html[] PROGMEM = R"rawliteral(
   <!DOCTYPE HTML><html>
   <head>
@@ -762,7 +764,7 @@ const char index_html[] PROGMEM = R"rawliteral(
     } 
     else 
     {
-      console.warn("WebSocket niepołączony");
+      console.warn("WebSocket not connected");
     }
   }
 
@@ -774,7 +776,7 @@ const char index_html[] PROGMEM = R"rawliteral(
     } 
     else 
     {
-      console.log("WebSocket nie jest otwarty");
+      console.log("WebSocket is not open");
     }
   }
 
@@ -786,7 +788,7 @@ const char index_html[] PROGMEM = R"rawliteral(
     } 
     else 
     {
-      console.log("WebSocket nie jest otwarty");
+      console.log("WebSocket is not open");
     }
   }
 
@@ -972,10 +974,10 @@ const char index_html[] PROGMEM = R"rawliteral(
   
   function highlightStation(stationId) 
   {
-    // Usuń poprzednie zaznaczenia
+    // Remove previous selections
     document.querySelectorAll(".stationList").forEach(el => {
     el.classList.remove("stationListSelected");
-    //el.innerHTML = el.dataset.stationName || el.innerText; // przywróć oryginalny numer
+    //el.innerHTML = el.dataset.stationName || el.innerText; // restore the original number
     el.innerText = el.dataset.stationName || el.innerText;
 
 
@@ -983,10 +985,10 @@ const char index_html[] PROGMEM = R"rawliteral(
 
     document.querySelectorAll(".stationNumberList").forEach(el => {
       el.classList.remove("stationNumberListSelected");
-      el.innerHTML = el.dataset.stationNumber || el.innerText; // przywróć oryginalny numer
+      el.innerHTML = el.dataset.stationNumber || el.innerText; // restore the original number
     });
 
-    // Zaznacz nową stację
+    // Select a new station
     const numCells = document.querySelectorAll(".stationNumberList");
     const stationCells = document.querySelectorAll(".stationList");
 
@@ -999,8 +1001,8 @@ const char index_html[] PROGMEM = R"rawliteral(
       stationCell.classList.add("stationListSelected");
       
       // Pogrub nazwę stacji
-      stationCell.dataset.stationName = stationCell.innerText; // zapisz oryginalny tekst
-      stationCell.innerHTML = `<b>${stationCell.innerText}</b>`; // pogrubienie nazwy stacji
+      stationCell.dataset.stationName = stationCell.innerText; // save the original text
+      stationCell.innerHTML = `<b>${stationCell.innerText}</b>`; // bold station name
 
       //const original = stationCell.dataset.originalName || stationCell.innerText;
       //stationCell.dataset.originalName = original;
@@ -1009,7 +1011,7 @@ const char index_html[] PROGMEM = R"rawliteral(
 
         
       // Pogrub numer
-      numCell.dataset.stationNumber = numCell.innerText; // zapisz oryginalny numer
+      numCell.dataset.stationNumber = numCell.innerText; // write down the original number
       numCell.innerHTML = `<b>${numCell.innerText}</b>`; 
       //const originalNum = numCell.dataset.originalNumber || numCell.innerText;
       //numCell.dataset.originalNumber = originalNum;
@@ -2030,19 +2032,19 @@ const char ota_html[] PROGMEM = R"rawliteral(
 )rawliteral";
 
 
-// ------------------- KONIEC STRON HTML zaszytych w kodzie -------------------
+// ------------------- END OF HTML PAGES embedded in the code -------------------
 
-char stations[MAX_STATIONS][STATION_NAME_LENGTH + 1];  // Tablica przechowująca linki do stacji radiowych (jedna na stację) +1 dla terminatora null
+char stations[MAX_STATIONS][STATION_NAME_LENGTH + 1];  // An array storing links to radio stations (one per station) +1 for the null terminator
 
-const char *ntpServer1 = "pool.ntp.org";  // Adres serwera NTP używany do synchronizacji czasu
-const char *ntpServer2 = "time.nist.gov"; // Adres serwera NTP używany do synchronizacji czasu
-//const long gmtOffset_sec = 3600;          // Przesunięcie czasu UTC w sekundach
-//const int daylightOffset_sec = 3600;      // Przesunięcie czasu letniego w sekundach, dla Polski to 1 godzina
+const char *ntpServer1 = "pool.ntp.org";  // NTP server address used for time synchronization
+const char *ntpServer2 = "time.nist.gov"; // NTP server address used for time synchronization
+//const long gmtOffset_sec = 3600;          // UTC time offset in seconds
+//const int daylightOffset_sec = 3600;      // Daylight saving time shift in seconds, for Poland it is 1 hour
 
 const int LOGO_SIZE = (SCREEN_WIDTH * SCREEN_HEIGHT) / 8;
 uint8_t logo_bits[LOGO_SIZE];
 
-//Czcionka SPLEEN z polskimi znakami do obslugi radio stream tittle
+//SPLEEN font with Polish characters for radio stream tittle
 const uint8_t spleen6x12PL[2958] U8G2_FONT_SECTION("spleen6x12PL") =
   "\340\1\3\2\3\4\1\3\4\6\14\0\375\10\376\11\377\1\225\3]\13q \7\346\361\363\237\0!\12"
   "\346\361#i\357`\316\0\42\14\346\361\3I\226dI\316/\0#\21\346\361\303I\64HI\226dI"
@@ -2139,7 +2141,7 @@ const uint8_t spleen6x12PL[2958] U8G2_FONT_SECTION("spleen6x12PL") =
   "d\321\220V\206\10\0\0\0\4\377\377\0"
 ;
 
-//Czcionka przerobiona na momospace do obslugi napisu kodeka i bitrate (np.: MP3/AAC/FLAC)
+//Font converted to momospace to support codec and bitrate strings (e.g.: MP3/AAC/FLAC)
 const uint8_t mono04b03b[912] U8G2_FONT_SECTION("mono04b03b") = 
   "`\1\3\3\3\3\1\1\4\5\6\0\377\5\377\5\0\1$\2c\3s \6s{D\0!\10r"
   "\212HZ\14\0\42\10t\214Hv\64\0#\14v\236\244R$T\212\304!\0$\12u\235I\22)"
@@ -2172,7 +2174,7 @@ const uint8_t mono04b03b[912] U8G2_FONT_SECTION("mono04b03b") =
   "\0\177\7t\14\221\316\0\0\0\0\4\377\377\0"
 ;
 
-// Ikona karty SD wyswietlana przy braku karty podczas startu
+// SD card icon displayed when no card is present during startup
 static unsigned char sdcard[] PROGMEM = {
   0xf0, 0xff, 0xff, 0x0f, 0xf8, 0xff, 0xff, 0x1f, 0xf8, 0xcf, 0xf3, 0x3f,
   0x38, 0x49, 0x92, 0x3c, 0x38, 0x49, 0x92, 0x3c, 0x38, 0x49, 0x92, 0x3c,
@@ -2191,7 +2193,7 @@ static unsigned char sdcard[] PROGMEM = {
 };
 
 
-// Obrazek NUTKI wyswietlany przy starcie
+// NOTE image displayed at startup
 #define notes_width 256
 #define notes_height 46
 static unsigned char notes[] PROGMEM = {
@@ -2321,7 +2323,7 @@ static unsigned char notes[] PROGMEM = {
 };
 
 
-// Funkcja odwracania bitów MSL-LSB <-> LSB-MSB potrzebna dla symulacji komend pilota 
+// MSL-LSB <-> LSB-MSB bit inversion function needed for pilot command simulation 
 uint32_t reverse_bits(uint32_t inval, int bits)
 {
   if ( bits > 0 )
@@ -2333,79 +2335,79 @@ uint32_t reverse_bits(uint32_t inval, int bits)
 }
 
 
-/*---------- Definicja portu i deklaracje zmiennych do obsługi odbiornika IR ----------*/
+/*---------- Port definition and variable declarations for IR receiver support ----------*/
 
-// Zmienne obsługi  pilota IR
-bool pulse_ready = false;                // Flaga sygnału gotowości
-unsigned long pulse_start_high = 0;      // Czas początkowy impulsu
-unsigned long pulse_end_high = 0;        // Czas końcowy impulsu
-unsigned long pulse_duration = 0;        // Czas trwania impulsu
-unsigned long pulse_duration_9ms = 0;    // Tylko do analizy - Czas trwania impulsu
-unsigned long pulse_duration_4_5ms = 0;  // Tylko do analizy - Czas trwania impulsu
-unsigned long pulse_duration_560us = 0;  // Tylko do analizy - Czas trwania impulsu
-unsigned long pulse_duration_1690us = 0; // Tylko do analizy - Czas trwania impulsu
+// IR remote control operation variables
+bool pulse_ready = false;                // Ready Signal Flag
+unsigned long pulse_start_high = 0;      // Pulse start time
+unsigned long pulse_end_high = 0;        // Pulse end time
+unsigned long pulse_duration = 0;        // Pulse duration
+unsigned long pulse_duration_9ms = 0;    // For analysis only - Pulse duration
+unsigned long pulse_duration_4_5ms = 0;  // For analysis only - Pulse duration
+unsigned long pulse_duration_560us = 0;  // For analysis only - Pulse duration
+unsigned long pulse_duration_1690us = 0; // For analysis only - Pulse duration
 
-bool pulse_ready9ms = false;            // Flaga sygnału gotowości puls 9ms
-bool pulse_ready_low = false;           // Flaga sygnału gotowości 
-unsigned long pulse_start_low = 0;      // Czas początkowy impulsu
-unsigned long pulse_end_low = 0;        // Czas końcowy impulsu
-unsigned long pulse_duration_low = 0;   // Czas trwania impulsu
+bool pulse_ready9ms = false;            // Ready Signal Flag puls 9ms
+bool pulse_ready_low = false;           // Ready Signal Flag 
+unsigned long pulse_start_low = 0;      // Pulse start time
+unsigned long pulse_end_low = 0;        // Pulse end time
+unsigned long pulse_duration_low = 0;   // Pulse duration
 
 
-volatile unsigned long ir_code = 0;  // Zmienna do przechowywania kodu IR
-volatile int bit_count = 0;          // Licznik bitów w odebranym kodzie
+volatile unsigned long ir_code = 0;  // Variable to store IR code
+volatile int bit_count = 0;          // Bit counter in the received code
 
-// Progi przełączeń dla sygnałów czasowych pilota IR
-const int LEAD_HIGH = 9050;         // 9 ms sygnał wysoki (początkowy)
-const int LEAD_LOW = 4500;          // 4,5 ms sygnał niski (początkowy)
-const int TOLERANCE = 150;          // Tolerancja (w mikrosekundach)
-const int HIGH_THRESHOLD = 1690;    // Sygnał "1"
-const int LOW_THRESHOLD = 600;      // Sygnał "0"
+// Switching thresholds for IR remote control timing signals
+const int LEAD_HIGH = 9050;         // 9 ms high signal (initial)
+const int LEAD_LOW = 4500;          // 4.5 ms low signal (initial)
+const int TOLERANCE = 150;          // Tolerance (in microseconds)
+const int HIGH_THRESHOLD = 1690;    // Signal "1"
+const int LOW_THRESHOLD = 600;      // Signal "0"
 
-bool data_start_detected = false;  // Flaga dla sygnału wstępnego
+bool data_start_detected = false;  // Flag for preliminary signal
 bool rcInputDigitsMenuEnable = false;
 
-//================ Definicja portów i pinów dla klaiwatury numerycznej ===========================//
-const int keyboardPin = 9;  // wejscie klawiatury (ADC) 
+//================ Definition of ports and pins for the numeric keypad ===========================//
+const int keyboardPin = 9;  // keyboard input (ADC) 
 
 unsigned long keyboardValue = 0;
 unsigned long keyboardLastSampleTime = 0;
 unsigned long keyboardSampleDelay = 50;
 
 
-// ---- Progi przełaczania ADC dla klawiatury matrycowej 5x3 w tunrze Sony ST-120 ---- //
-int keyboardButtonThresholdTolerance = 20; // Tolerancja dla pomiaru ADC
-int keyboardButtonNeutral = 4095;          // Pozycja neutralna
-int keyboardButtonThreshold_0 = 2375;      // Przycisk 0
-int keyboardButtonThreshold_1 = 10;        // Przycisk 1
-int keyboardButtonThreshold_2 = 545;       // Przycisk 2
-int keyboardButtonThreshold_3 = 1390;      // Przycisk 3
-int keyboardButtonThreshold_4 = 1925;      // Przycisk 4
-int keyboardButtonThreshold_5 = 2285;      // Przycisk 5
-int keyboardButtonThreshold_6 = 385;       // Przycisk 6
-int keyboardButtonThreshold_7 = 875;       // Przycisk 7
-int keyboardButtonThreshold_8 = 1585;      // Przycisk 8
-int keyboardButtonThreshold_9 = 2055;      // Przycisk 9
-int keyboardButtonThreshold_Ok = 2455;  // Shift - funkcja Enter/OK
-int keyboardButtonThreshold_BankMenu = 2170; // Memory - funkcja Bank menu
-int keyboardButtonThreshold_Back = 1640;   // Przycisk Band - funkcja Back
-int keyboardButtonThreshold_DisplayMode = 730;    // Przycisk Auto - przelacza Radio/Zegar
-int keyboardButtonThreshold_Dimmer = 1760;   // Przycisk Scan - funkcja Dimmer ekranu OLED
-int keyboardButtonThreshold_Mute = 1130;   // Przycisk Mute - funkcja MUTE
+// ---- ADC switching thresholds for the 5x3 matrix keyboard in the Sony ST-120 tuner ---- //
+int keyboardButtonThresholdTolerance = 20; // ADC measurement tolerance
+int keyboardButtonNeutral = 4095;          // Neutral position
+int keyboardButtonThreshold_0 = 2375;      // Button 0
+int keyboardButtonThreshold_1 = 10;        // Button 1
+int keyboardButtonThreshold_2 = 545;       // Button 2
+int keyboardButtonThreshold_3 = 1390;      // Button 3
+int keyboardButtonThreshold_4 = 1925;      // Button 4
+int keyboardButtonThreshold_5 = 2285;      // Button 5
+int keyboardButtonThreshold_6 = 385;       // Button 6
+int keyboardButtonThreshold_7 = 875;       // Button 7
+int keyboardButtonThreshold_8 = 1585;      // Button 8
+int keyboardButtonThreshold_9 = 2055;      // Button 9
+int keyboardButtonThreshold_Ok = 2455;  // Shift - Enter/OK function
+int keyboardButtonThreshold_BankMenu = 2170; // Memory - Bank menu function
+int keyboardButtonThreshold_Back = 1640;   // Band button - Back function
+int keyboardButtonThreshold_DisplayMode = 730;    // Auto button - switches between Radio/Clock
+int keyboardButtonThreshold_Dimmer = 1760;   // Scan button - OLED screen dimmer function
+int keyboardButtonThreshold_Mute = 1130;   // Mute button - MUTE function
 
-int keyboardButtonThreshold_ArrowLeft = 4100;   // Strzalka w lewo (poprzednia stacja, bank)
-int keyboardButtonThreshold_ArrowRight = 4100;  // Strzalka w prawo (nastepna stacja, bak)
-int keyboardButtonThreshold_ArrowUp = 4100;     // Strzalka w gore (przewijanie listy)
-int keyboardButtonThreshold_ArrowDown = 4100;   // Strzalka w dol (przewijanie listy)
+int keyboardButtonThreshold_ArrowLeft = 4100;   // Left arrow (previous station, bank)
+int keyboardButtonThreshold_ArrowRight = 4100;  // Right arrow (next station, tank)
+int keyboardButtonThreshold_ArrowUp = 4100;     // Up arrow (scroll list)
+int keyboardButtonThreshold_ArrowDown = 4100;   // Down arrow (scroll list)
 
-int keyboardButtonThreshold_PresetsOn = 4100;  // Przełaczenie pomiedzy wpisywanie stacji a presetami
+int keyboardButtonThreshold_PresetsOn = 4100;  // Switching between saving stations and presets
 
-// Flagi do monitorowania stanu klawiatury
-bool keyboardButtonPressed = false; // Wcisnięcie klawisza
-bool debugKeyboard = false;         // Wyłącza wywoływanie funkcji i zostawia tylko wydruk pomiaru ADC
-bool adcKeyboardEnabled = false;    // Flaga właczajaca działanie klawiatury ADC
+// Flags for monitoring keyboard status
+bool keyboardButtonPressed = false; // Pressing a key
+bool debugKeyboard = false;         // Disables function calls and leaves only the ADC measurement printout
+bool adcKeyboardEnabled = false;    // Flag enabling ADC keyboard operation
 
-// ===== PROTOTYPY Funkcji =====
+// ===== Function PROTOTYPES =====
 void displayDimmer(bool dimmerON);
 void displayDimmerTimer();
 void displayPowerSave(bool mode);
@@ -2427,13 +2429,13 @@ void displayInfo();
       useSD = true;
       storageTextName = "SD";
       Serial.println("debug STORAGE -> We use SD cards");
-      //#define SD_LED 17          // LED - sygnalizacja CS, aktywność karty SD, klon pinu uzyteczny w przypadku uzywania tylnego czytnika SD na PCB
+      //#define SD_LED 17          // LED - CS signaling, SD card activity, pin clone useful when using the rear SD reader on the PCB
       noSDcard = false;
       return true;
     }
 
     Serial.println("debug STORAGE -> No SD card, switching to LittleFS");
-    noSDcard = true; // Flag braku karty SD
+    noSDcard = true; // No SD card flag
 
     #ifdef USE_LittleFS
     if (LittleFS.begin(true)) 
@@ -2447,7 +2449,7 @@ void displayInfo();
     #endif
     
     Serial.println("debug STORAGE -> No SD card, switching to SPIFFS");
-    noSDcard = true; // Flag braku karty SD
+    noSDcard = true; // No SD card flag
 
     #ifdef USE_SPIFFS
     if (SPIFFS.begin(true)) 
@@ -2506,15 +2508,15 @@ void removeUtf8Bom(String &text)
       }
 }
 
-// Funkcja przetwarza tekst, zamieniając polskie znaki diakrytyczne
+// The function processes the text, replacing Polish diacritics
 
 void processText(String &text) 
 {
-  removeUtf8Bom(text); // Usuwamy znaki BOM na początku nazwy utworu
+  removeUtf8Bom(text); // We remove the BOM characters at the beginning of the song name
 
   for (int i = 0; i < text.length() - 1; i++) 
   {
-    if (i + 1 >= text.length()) break; // zabezpieczenie przed wyjściem poza bufor
+    if (i + 1 >= text.length()) break; // protection against going beyond the buffer
 
     switch ((uint8_t)text[i]) 
     {
@@ -2575,7 +2577,7 @@ bool sanitizeUtf8(String& s)
       continue;
     }
 
-    // Poprawny UTF-8 (2–4 bajty)
+    // Valid UTF-8 (2–4 bytes)
     uint8_t len = 0;
     if ((c & 0xE0) == 0xC0) len = 2;
     else if ((c & 0xF0) == 0xE0) len = 3;
@@ -2637,7 +2639,7 @@ bool sanitizeUtf8(String& s)
 
 void wsStationChange(uint8_t stationId, uint8_t bankId) 
 {
-  // iteracja po wszystkich podłączonych klientach
+  // iterating over all connected clients
   for (auto& client : ws.getClients()) 
   {
  
@@ -2672,14 +2674,14 @@ void wsStationChange(uint8_t stationId, uint8_t bankId)
   }
 }
 
-void wsRefreshPage() // Funckja odswiezania strony za pomocą WebSocket
+void wsRefreshPage() // Page refresh function using WebSocket
 {
-  ws.textAll("reload");  // wyślij komunikat do wszystkich klientów
+  ws.textAll("reload");  // send a message to all customers
 }
 
 void wsStreamInfoRefresh()
 {
-  // iteracja po wszystkich podłączonych klientach
+  // iterating over all connected clients
   for (auto& client : ws.getClients()) 
   {
  
@@ -2881,22 +2883,22 @@ void readSDStations()
     currentLine++;
 
     stationName = line.substring(0, 42);
-    int urlStart = line.indexOf("http");  // Szukamy miejsca, gdzie zaczyna się URL
+    int urlStart = line.indexOf("http");  // We are looking for the place where the URL begins
     if (urlStart != -1) 
     {
-      stationUrl = line.substring(urlStart);  // Wyciągamy URL od "http"
-      stationUrl.trim();                      // Usuwamy białe znaki na początku i końcu
+      stationUrl = line.substring(urlStart);  // We extract the URL from "http"
+      stationUrl.trim();                      // We remove whitespace at the beginning and end
       //Serial.print(" URL station:");
       //Serial.println(stationUrl);
       //String station = currentLine + "   " + stationName + "  " + stationUrl;
       String station = stationName + "  " + stationUrl;
-      sanitizeAndSaveStation(station.c_str());  // przepisanie stacji do EEPROMu  (RAMU)
+      sanitizeAndSaveStation(station.c_str());  // rewriting the station to EEPROM (RAM)
     }
   }
 
   Serial.print("We close the bankFile file at the currentLine value:");
   Serial.println(currentLine);
-  bankFile.close();  // Zamykamy plik po odczycie
+  bankFile.close();  // We close the file after reading
 }
 
 
@@ -2912,12 +2914,12 @@ void fetchStationsFromServer()
   currentSelection = 0;
   firstVisibleLine = 0;
   station_nr = 1;
-  previous_bank_nr = bank_nr; // jesli ładujemy stacje to ustawiamy zmienna previous_bank
+  previous_bank_nr = bank_nr; // if we load stations, we set the previous_bank variable
 
-  HTTPClient http; // Utwórz obiekt klienta HTTP
-  String url; // URL stacji dla danego banku
+  HTTPClient http; // Create an HTTP client object
+  String url; // Station URL for a given bank
 
-  // ---------------------- WYBÓR URL BANKU ----------------------
+  // ---------------------- BANK URL SELECTION ----------------------
   switch (bank_nr) 
   {
     case 1:  url = STATIONS_URL1; break;
@@ -2982,23 +2984,23 @@ void fetchStationsFromServer()
 
   Serial.println("debug http -> Downloading URL: " + url);
 
-  http.begin(url); // Inicjalizuj żądanie HTTP do podanego adresu URL
-  http.setUserAgent("ESP32-WebRadio");   // ustaweinie userAgent
+  http.begin(url); // Initiate an HTTP request to the given URL
+  http.setUserAgent("ESP32-WebRadio");   // userAgent settings
   
   http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
-  http.useHTTP10(true);                 // <<< NAJWAŻNIEJSZE
+  http.useHTTP10(true);                 // <<< THE MOST IMPORTANT
   http.addHeader("Connection", "close");
   
-  http.setTimeout(5000);                // 5 sekund timeout
+  http.setTimeout(5000);                // 5 second timeout
   
   http.setConnectTimeout(3000);
 
   int httpCode = http.GET();  
   Serial.print("debug http -> Code HTTP: ");
-  Serial.println(httpCode); // Wydrukuj dodatkowe informacje o kodzie http
+  Serial.println(httpCode); // Print additional information about the http code
 
-  // ----------- OBSŁUGA REDIRECTÓW 301 / 302 (GitHub to często robi!) -----------
-  if (httpCode == HTTP_CODE_MOVED_PERMANENTLY || httpCode == HTTP_CODE_FOUND) // jesli GitHub ustawił redirect
+  // ----------- SUPPORT 301 / 302 REDIRECTS (GitHub does this often!) -----------
+  if (httpCode == HTTP_CODE_MOVED_PERMANENTLY || httpCode == HTTP_CODE_FOUND) // if GitHub has set a redirect
   {
     String newUrl = http.getLocation();
     Serial.println("debug http -> Redirect: " + newUrl);
@@ -3008,10 +3010,10 @@ void fetchStationsFromServer()
     http.begin(newUrl);
     http.setUserAgent("ESP32-WebRadio");
   
-    http.useHTTP10(true);                 // <<< NAJWAŻNIEJSZE
+    http.useHTTP10(true);                 // <<< THE MOST IMPORTANT
     http.addHeader("Connection", "close");
     
-    http.setTimeout(5000);                // 5 sekund timeout
+    http.setTimeout(5000);                // 5 second timeout
   
     http.setConnectTimeout(3000);
 
@@ -3019,7 +3021,7 @@ void fetchStationsFromServer()
     Serial.println("debug http -> HTTP code after redirect: " + String(httpCode));
   }
 
-  // ---------------------- NIE UDAŁO SIĘ POBRAĆ ----------------------
+  // ---------------------- DOWNLOAD FAILED ----------------------
   if (httpCode != HTTP_CODE_OK) 
   {
     Serial.printf("debug http -> Download error. HTTP code: %d\n", httpCode);
@@ -3056,7 +3058,7 @@ void fetchStationsFromServer()
 
   http.end();
 
-  // ---------------------- SANITYZACJA STACJI  ----------------------
+  // ---------------------- SANITIZATION OF THE STATION  ----------------------
   int startIndex = 0;
   int endIndex;
   stationsCount = 0;
@@ -4179,7 +4181,7 @@ void saveVolumeOnSD()
 
 void drawSignalPower(uint8_t xpwr, uint8_t ypwr, bool print, bool mode)
 {
-  // Wartosci na podstawie ->  https://www.intuitibits.com/2016/03/23/dbm-to-percent-conversion/
+  // Values ​​based on ->  https://www.intuitibits.com/2016/03/23/dbm-to-percent-conversion/
   int signal_dBM[] = { -100, -99, -98, -97, -96, -95, -94, -93, -92, -91, -90, -89, -88, -87, -86, -85, -84, -83, -82, -81, -80, -79, -78, -77, -76, -75, -74, -73, -72, -71, -70, -69, -68, -67, -66, -65, -64, -63, -62, -61, -60, -59, -58, -57, -56, -55, -54, -53, -52, -51, -50, -49, -48, -47, -46, -45, -44, -43, -42, -41, -40, -39, -38, -37, -36, -35, -34, -33, -32, -31, -30, -29, -28, -27, -26, -25, -24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13, -12, -11, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1};
   int signal_percent[] = {0, 0, 0, 0, 0, 0, 4, 6, 8, 11, 13, 15, 17, 19, 21, 23, 26, 28, 30, 32, 34, 35, 37, 39, 41, 43, 45, 46, 48, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 69, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 90, 91, 92, 93, 93, 94, 95, 95, 96, 96, 97, 97, 98, 98, 99, 99, 99, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100};
 
@@ -4516,26 +4518,26 @@ void changeStation()
   //Serial.print(" ");
   //Serial.println(String(station));
 
-  String line = String(station); // Przypisujemy dane odczytane z PSRAM do zmiennej line
+  String line = String(station); // We assign the data read from PSRAM to the line variable
   
-  // Wyciągnij pierwsze 42 znaki i przypisz do stationName
-  stationName = line.substring(0, 41);  //42 Skopiuj pierwsze 42 znaki z linii
+  // Extract the first 42 characters and assign it to stationName
+  stationName = line.substring(0, 41);  //42 Copy the first 42 characters from the line
   Serial.print("debug changeStation -> Station name: ");
   Serial.println(stationName);
 
-  // Znajdź część URL w linii, np. po numerze stacji
-  int urlStart = line.indexOf("http");  // Szukamy miejsca, gdzie zaczyna się URL
+  // Find part of the URL in a line, e.g. after the station number
+  int urlStart = line.indexOf("http");  // We are looking for the place where the URL begins
   if (urlStart != -1) 
   {
-    stationUrl = line.substring(urlStart);  // Wyciągamy URL od "http"
-    stationUrl.trim();                      // Usuwamy białe znaki na początku i końcu
+    stationUrl = line.substring(urlStart);  // We extract the URL from "http"
+    stationUrl.trim();                      // We remove whitespace at the beginning and end
   }
   else
   {
 	return;
   }
   
-  if (stationUrl.isEmpty()) // jezeli link URL jest pusty
+  if (stationUrl.isEmpty()) // if the URL link is empty
   {
     Serial.println("debug changeStation -> Error: No station found for the given number.");
     return;
@@ -4544,10 +4546,10 @@ void changeStation()
   //Serial.print("URL: ");
   //Serial.println(stationUrl);
 
-  // Weryfikacja, czy w linku znajduje się "http" lub "https"
+  // Verifying if the link contains "http" or "https"
   if (stationUrl.startsWith("http://") || stationUrl.startsWith("https://")) 
   {
-    // Wydrukuj nazwę stacji i link na serialu
+    // Print the station name and link on the show
     Serial.print("debug changeStation -> Currently selected station: ");
     Serial.println(station_nr);
     Serial.print("debug changeStation -> Link to the station: ");
@@ -4590,15 +4592,15 @@ void changeStation()
     Serial.println("debug changeStation -> URL read: " + stationUrl);
   }
   
-  currentSelection = station_nr - 1; // ustawiamy stacje na liscie na obecnie odtwarzaczną po zmianie stacji
-  firstVisibleLine = currentSelection + 1; // pierwsza widoczna lina to grająca stacja przy starcie
+  currentSelection = station_nr - 1; // we set the stations on the list to the currently playing one after changing the station
+  firstVisibleLine = currentSelection + 1; // the first visible line is the playing station at the start
   if (currentSelection + 1 >= stationsCount - 1) 
   {
    firstVisibleLine = currentSelection - 3;
   }
   ActionNeedUpdateTime = true;
    
-  wsStationChange(station_nr, bank_nr); // Od teraz Event Audio odpowiada za info o stacji
+  wsStationChange(station_nr, bank_nr); // From now on, Event Audio is responsible for station info
   wsAudioRefresh = true;
   
   //audio.setVolume(volumeValue); // Przywracamy ustawienie glosności
@@ -4691,18 +4693,18 @@ void updateTime()
       // Struktura przechowująca informacje o czasie
       struct tm timeinfo;
       
-      // Sprawdź, czy udało się pobrać czas z lokalnego zegara czasu rzeczywistego
+      // Check if the time was successfully retrieved from the local real-time clock
       if (!getLocalTime(&timeinfo, 3000)) 
       {
-        // Wyświetl komunikat o niepowodzeniu w pobieraniu czasu
+        // Display time fetch failure message
         Serial.println("debug time -> Couldn't get time");
         return;  // Terminate function when time failed
       }
       
-      showDots = (timeinfo.tm_sec % 2 == 0); // Parzysta sekunda = pokazuj dwukropek
+      showDots = (timeinfo.tm_sec % 2 == 0); // Even second = show colon
 
       // Convert hour, minute and second to string in "HH:MM:SS" format"
-      char timeString[9];  // Bufor przechowujący czas w formie tekstowej
+      char timeString[9];  // A buffer that stores the time in text form
       if ((timeinfo.tm_min == 0) && (timeinfo.tm_sec == 0) && (timeVoiceInfoEveryHour == true) && (f_voiceTimeBlocked == false)) {f_requestVoiceTimePlay = true; f_voiceTimeBlocked = true;} // We check whether the hour has struck, if the voice announcement is turned on every hour, we play it
       if ((displayMode == 0) || (displayMode == 2)) // Tryb podstawowy i 3 linijki tesktu
       { 
@@ -4720,7 +4722,7 @@ void updateTime()
         
         //snprintf(timeString, sizeof(timeString), "%2d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
 
-        //Miganie kropek
+        //Flashing dots
         if (showDots) snprintf(timeString, sizeof(timeString), "%2d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
         else snprintf(timeString, sizeof(timeString), "%2d %02d", timeinfo.tm_hour, timeinfo.tm_min);
         u8g2.drawStr(xtime+7, 45, timeString); 
@@ -4735,12 +4737,12 @@ void updateTime()
         case 1: month = "FEB"; break;     
         case 2: month = "MAR"; break;
         case 3: month = "APR"; break;
-        case 4: month = "MAY"; break;
+        case 4: month = "MEI"; break;
         case 5: month = "JUN"; break;
         case 6: month = "JUL"; break;
         case 7: month = "AUG"; break;
         case 8: month = "SEP"; break;
-        case 9: month = "OCT"; break;
+        case 9: month = "OKT"; break;
         case 10: month = "NOV"; break;
         case 11: month = "DEC"; break;                                
         }
@@ -4749,21 +4751,21 @@ void updateTime()
 
         String dayOfWeek = "";
         switch (timeinfo.tm_wday) {
-        case 0: dayOfWeek = " Sunday  "; break;     
-        case 1: dayOfWeek = " Monday  "; break;     
-        case 2: dayOfWeek = " Tuesday "; break;
-        case 3: dayOfWeek = "Wednesday"; break;
-        case 4: dayOfWeek = "Thursday "; break;
-        case 5: dayOfWeek = " Friday  "; break;
-        case 6: dayOfWeek = "Saturday "; break;
+        case 0: dayOfWeek = " Zondag  "; break;     
+        case 1: dayOfWeek = " Maandag  "; break;     
+        case 2: dayOfWeek = " Dinsdag "; break;
+        case 3: dayOfWeek = "Woensdag"; break;
+        case 4: dayOfWeek = "Donderdag "; break;
+        case 5: dayOfWeek = " Vrijdag  "; break;
+        case 6: dayOfWeek = "Zaterdag "; break;
         }
         
-        u8g2.drawRBox(198,20,58,15,3);  // Box z zaokraglonymi rogami, biały pod dniem tygodnia
-        u8g2.drawLine(198,20,256,20); // Linia separacyjna dzien miesiac / dzien tygodnia
+        u8g2.drawRBox(198,20,58,15,3);  // Box with rounded corners, white under the day of the week
+        u8g2.drawLine(198,20,256,20); // Day of month/day of week separation line
         u8g2.setDrawColor(0);
         u8g2.drawStr(201,31, dayOfWeek.c_str());
         u8g2.setDrawColor(1);
-        u8g2.drawRFrame(198,0,58,35,3); // Ramka na całosci kalendarza
+        u8g2.drawRFrame(198,0,58,35,3); // Frame on the entire calendar
 
         snprintf(timeString, sizeof(timeString), ":%02d", timeinfo.tm_sec);
         u8g2.drawStr(xtime+163, 45, timeString);
@@ -4793,11 +4795,11 @@ void updateTime()
       
       if (!getLocalTime(&timeinfo,3000)) 
       {
-        Serial.println("debug time -> Nie udało się uzyskać czasu");
-        return;  // Zakończ funkcję, gdy nie udało się uzyskać czasu
+        Serial.println("debug time -> Couldn't get time");
+        return;  // Terminate function when time failed
       }
-      showDots = (timeinfo.tm_sec % 2 == 0); // Parzysta sekunda = pokazuj dwukropek
-      char timeString[9];  // Bufor przechowujący czas w formie tekstowej
+      showDots = (timeinfo.tm_sec % 2 == 0); // Even second = show colon
+      char timeString[9];  // A buffer that stores the time in text form
       
       //snprintf(timeString, sizeof(timeString), "%02d:%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
       if (showDots) snprintf(timeString, sizeof(timeString), "%2d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
@@ -4824,12 +4826,12 @@ void updateTime()
 void saveEqualizerOnSD() 
 {
   u8g2.clearBuffer();
-  u8g2.setFont(u8g2_font_fub14_tf); // cziocnka 14x11
-  u8g2.drawStr(1, 33, "Saving equalizer settings"); // 8 znakow  x 11 szer
+  u8g2.setFont(u8g2_font_fub14_tf); // 14x11 cm
+  u8g2.drawStr(1, 33, "Saving equalizer settings"); // 8 characters x 11 wide
   u8g2.sendBuffer();
   
   
-  // Sprawdź, czy plik equalizer.txt istnieje
+  // Check if the equalizer.txt file exists
 
   Serial.print("Filtr High: ");
   Serial.println(toneHiValue);
@@ -4893,14 +4895,14 @@ void readEqualizerFromSD()
   if (!STORAGE_BEGIN()) 
   {
     Serial.println("debug SD -> Cannot find SD card, sets Equalizer filter values ​​to default.");
-    toneHiValue = 0;  // Domyślna wartość filtra gdy brak karty SD
-	  toneMidValue = 0; // Domyślna wartość filtra gdy brak karty SD
-	  toneLowValue = 0; // Domyślna wartość filtra gdy brak karty SD
+    toneHiValue = 0;  // Default filter value when no SD card is present
+	  toneMidValue = 0; // Default filter value when no SD card is present
+	  toneLowValue = 0; // Default filter value when no SD card is present
     balanceValue = 0;
     return;
   }
 
-  // Sprawdź, czy plik equalizer.txt istnieje
+  // Check if the equalizer.txt file exists
   if (STORAGE.exists("/equalizer.txt")) 
   {
     myFile = STORAGE.open("/equalizer.txt");
@@ -4935,12 +4937,12 @@ void readEqualizerFromSD()
   else 
   {
     Serial.println("debug SD -> The equalizer.txt file does not exist.");
-    toneHiValue = 0;  // Domyślna wartość filtra gdy brak karty SD
-	  toneMidValue = 0; // Domyślna wartość filtra gdy brak karty SD
-	  toneLowValue = 0; // Domyślna wartość filtra gdy brak karty SD
+    toneHiValue = 0;  // Default filter value when no SD card is present
+	  toneMidValue = 0; // Default filter value when no SD card is present
+	  toneLowValue = 0; // Default filter value when no SD card is present
     balanceValue = 0;
   }
-  audio.setTone(toneLowValue, toneMidValue, toneHiValue); // Ustawiamy filtry - zakres regulacji -40 + 6dB jako int8_t ze znakiem
+  audio.setTone(toneLowValue, toneMidValue, toneHiValue); // We set the filters - adjustment range -40 + 6dB as int8_t with sign
   audio.setBalance(balanceValue);
 }
 
@@ -4953,8 +4955,8 @@ void readStationFromSD()
   {
     //Serial.println("Cannot find STORAGE card. Setting default values: Station=1, Bank=1.");
     Serial.println("debug SD -> Cannot find SD card, setting values ​​from EEPROM");
-    //station_nr = 1;  // Domyślny numer stacji gdy brak karty SD
-    //bank_nr = 1;     // Domyślny numer banku gdy brak karty SD
+    //station_nr = 1;  // Default station number when no SD card is present
+    //bank_nr = 1;     // Default bank number when no SD card is present
     EEPROM.get(0, station_nr);
     EEPROM.get(1, bank_nr);
     
@@ -4963,13 +4965,13 @@ void readStationFromSD()
     Serial.print("debug EEPROM -> EEPROM Reading Bank: ");
     Serial.println(bank_nr);
 
-    if ((station_nr > 99) || (station_nr == 0)) { station_nr = 1;} // zabezpiecznie na wypadek błędnego odczytu EEPROMu lub wartości
+    if ((station_nr > 99) || (station_nr == 0)) { station_nr = 1;} // protection in case of incorrect reading of EEPROM or value
     if ((bank_nr > bank_nr_max) || (bank_nr == 0)) { bank_nr = 1;}
     
     return;
   }
 
-  // Sprawdź, czy plik station_nr.txt istnieje
+  // Check if the station_nr.txt file exists
   if (STORAGE.exists("/station_nr.txt")) {
     myFile = STORAGE.open("/station_nr.txt");
     if (myFile) {
@@ -4982,10 +4984,10 @@ void readStationFromSD()
     }
   } else {
     Serial.println("debug SD -> The file station_nr.txt does not exist.");
-    station_nr = 9;  // ustawiamy stacje w przypadku braku pliku na karcie
+    station_nr = 9;  // we set stations if there is no file on the card
   }
 
-  // Sprawdź, czy plik bank_nr.txt istnieje
+  // Check if the file bank_nr.txt exists
   if (STORAGE.exists("/bank_nr.txt")) {
     myFile = STORAGE.open("/bank_nr.txt");
     if (myFile) {
@@ -4998,7 +5000,7 @@ void readStationFromSD()
     }
   } else {
     Serial.println("debug SD -> The file bank_nr.txt does not exist.");
-    bank_nr = 1;  // // ustawiamy bank w przypadku braku pliku na karcie
+    bank_nr = 1;  // // we set the bank in case of no file on the card
   }
 }
 
@@ -5011,13 +5013,13 @@ void vuMeterMode0()
   //vuMeterL = constrain(vuMeterL, 0, 240);
   //vuMeterR = constrain(vuMeterR, 0, 240);
 
-  // zapobiega nagłym spadkom przy bardzo silnym sygnale
+  // prevents sudden drops in very strong signal
   //if (vuMeterL < displayVuL - 8) vuMeterL = displayVuL - 8;
   //if (vuMeterR < displayVuR - 8) vuMeterR = displayVuR - 8;
 
   
-  //vuMeterR = audio.getVUlevel() & 0xFF;  // wyciagamy ze zmiennej typu int16 kanał L
-  //vuMeterL = audio.getVUlevel() >> 8;  // z wyzszej polowki wyciagamy kanal P
+  //vuMeterR = audio.getVUlevel() & 0xFF;  // we extract the L channel from the int16 type variable
+  //vuMeterL = audio.getVUlevel() >> 8;  // we pull out the P channel from the higher shelf
 
   //vuMeterL = constrain(vuMeterL, 0, 243);
   //vuMeterR = constrain(vuMeterR, 0, 243);
@@ -5102,7 +5104,7 @@ void vuMeterMode0()
     }
   }
 
-  // Aktualizacja peak&hold dla Lewego kanału
+  // Left channel peak&hold update
   if (vuSmooth)
   {
     if (vuPeakHoldOn)
@@ -5190,7 +5192,7 @@ void vuMeterMode0()
     if (vuSmooth)
     {
       u8g2.setDrawColor(0);
-      u8g2.drawBox(7, vuLy, 249, 3);  //czyszczenie ekranu pod VU meter
+      u8g2.drawBox(7, vuLy, 249, 3);  //cleaning the screen under the VU meter
       u8g2.drawBox(7, vuRy, 249, 3);
       u8g2.setDrawColor(1);
 
@@ -5203,15 +5205,15 @@ void vuMeterMode0()
       u8g2.setFont(u8g2_font_04b_03_tr);
       u8g2.drawStr(2, vuLy + 3, "L");
       u8g2.drawStr(2, vuRy + 3, "R");
-      u8g2.setDrawColor(1);  // Przywracamy białe rysowanie
+      u8g2.setDrawColor(1);  // We are bringing back white drawing
 
-      if (vuMeterMode == 1)  // tryb 1 ciagle paski
+      if (vuMeterMode == 1)  // mode 1 continuous stripes
       {
         u8g2.setDrawColor(1);
-        //u8g2.drawBox(10, vuLy, vuMeterL, 2);  // rysujemy kreseczki o dlugosci odpowiadajacej wartosci VU
+        //u8g2.drawBox(10, vuLy, vuMeterL, 2);  // we draw lines of a length corresponding to the VU value
         //u8g2.drawBox(10, vuRy, vuMeterR, 2);
 
-        u8g2.drawBox(10, vuLy, displayVuL, 2);  // rysujemy kreseczki o dlugosci odpowiadajacej wartosci VU
+        u8g2.drawBox(10, vuLy, displayVuL, 2);  // we draw lines of a length corresponding to the VU value
         u8g2.drawBox(10, vuRy, displayVuR, 2);
 
 
@@ -5219,20 +5221,20 @@ void vuMeterMode0()
         u8g2.drawBox(9 + peakL, vuLy, 1, 2);
         u8g2.drawBox(9 + peakR, vuRy, 1, 2);
       } 
-      else  // vuMeterMode == 0  tryb podstawowy, kreseczki z przerwami
+      else  // vuMeterMode == 0  basic mode, dashes with gaps
       {      
         for (uint8_t vusize = 0; vusize < displayVuL; vusize++)
         {
-          if ((vusize % 9) < 8) u8g2.drawBox(9 + vusize, vuLy, 1, 2);//u8g2.drawBox(9 + vusize, vuLy, 1, 2); // rysuj tylko 8 pikseli, potem 1px przerwy, 9 w osi x to odstep na literke
+          if ((vusize % 9) < 8) u8g2.drawBox(9 + vusize, vuLy, 1, 2);//u8g2.drawBox(9 + vusize, vuLy, 1, 2); // draw only 8 pixels, then 1px gap, 9 in the x axis is the space for the letter
         }  
         for (uint8_t vusize = 0; vusize < displayVuR; vusize++)
         {
-          if ((vusize % 9) < 8) u8g2.drawBox(9 + vusize, vuRy, 1, 2); // rysuj tylko 8 pikseli, potem 1px przerwy, 9 w osi x to odstep na literke
+          if ((vusize % 9) < 8) u8g2.drawBox(9 + vusize, vuRy, 1, 2); // draw only 8 pixels, then 1px gap, 9 in the x axis is the space for the letter
         }    
         
         if (vuPeakHoldOn)
         {
-          // Peak - kreski w trybie przerywanym
+          // Peak - dashes in dashed mode
           u8g2.drawBox(9 + peakL, vuLy, 1, 2);
           u8g2.drawBox(9 + peakR, vuRy, 1, 2);
         }
@@ -5242,7 +5244,7 @@ void vuMeterMode0()
     else
     {
       u8g2.setDrawColor(0);
-      u8g2.drawBox(7, vuLy, 255, 3);  //czyszczenie ekranu pod VU meter
+      u8g2.drawBox(7, vuLy, 255, 3);  //cleaning the screen under the VU meter
       u8g2.drawBox(7, vuRy, 255, 3);
       u8g2.setDrawColor(1);
 
@@ -5255,32 +5257,32 @@ void vuMeterMode0()
       u8g2.setFont(u8g2_font_04b_03_tr);
       u8g2.drawStr(2, vuLy + 3, "L");
       u8g2.drawStr(2, vuRy + 3, "R");
-      u8g2.setDrawColor(1);  // Przywracamy białe rysowanie
+      u8g2.setDrawColor(1);  // We are bringing back white drawing
 
-      if (vuMeterMode == 1)  // tryb 1 ciagle paski
+      if (vuMeterMode == 1)  // mode 1 continuous stripes
       {
         u8g2.setDrawColor(1);
-        u8g2.drawBox(10, vuLy, vuMeterL, 2);  // rysujemy kreseczki o dlugosci odpowiadajacej wartosci VU
+        u8g2.drawBox(10, vuLy, vuMeterL, 2);  // we draw lines of a length corresponding to the VU value
         u8g2.drawBox(10, vuRy, vuMeterR, 2);
 
-        // Rysowanie peaków jako cienka kreska
+        // Drawing peaks as a thin line
         u8g2.drawBox(9 + peakL, vuLy, 1, 2);
         u8g2.drawBox(9 + peakR, vuRy, 1, 2);
       } 
-      else  // vuMeterMode == 0  tryb podstawowy, kreseczki z przerwami
+      else  // vuMeterMode == 0 basic mode, dashes with gaps
       {      
         for (uint8_t vusize = 0; vusize < vuMeterL; vusize++) 
         {
-          if ((vusize % 9) < 8) u8g2.drawBox(9 + vusize, vuLy, 1, 2);//u8g2.drawBox(9 + vusize, vuLy, 1, 2); // rysuj tylko 8 pikseli, potem 1px przerwy, 9 w osi x to odstep na literke
+          if ((vusize % 9) < 8) u8g2.drawBox(9 + vusize, vuLy, 1, 2);//u8g2.drawBox(9 + vusize, vuLy, 1, 2); // draw only 8 pixels, then 1px gap, 9 in the x axis is the space for the letter
         }  
         for (uint8_t vusize = 0; vusize < vuMeterR; vusize++) 
         {
-          if ((vusize % 9) < 8) u8g2.drawBox(9 + vusize, vuRy, 1, 2); // rysuj tylko 8 pikseli, potem 1px przerwy, 9 w osi x to odstep na literke
+          if ((vusize % 9) < 8) u8g2.drawBox(9 + vusize, vuRy, 1, 2); // draw only 8 pixels, then 1px gap, 9 in the x axis is the space for the letter
         } 
        
         if (vuPeakHoldOn)
         {
-          // Peak - kreski w trybie przerywanym
+          // Peak - dashes in dashed mode
           u8g2.drawBox(9 + peakL, vuLy, 1, 2);
           u8g2.drawBox(9 + peakR, vuRy, 1, 2);
         }
@@ -5381,16 +5383,16 @@ void vuMeterMode3()
 
   if (!volumeMute)
   {
-    // Czyszczenie linii VU
+    // VU Line Cleaning
     u8g2.setDrawColor(0);
     u8g2.drawBox(0, vuYmode3, 240, vuThicknessMode3);
     u8g2.setDrawColor(1);
 
-    // Wybór wartości do rysowania: wygładzone lub surowe
+    // Selecting values ​​for drawing: smooth or rough
     int leftLevel = vuSmooth ? displayVuL : vuMeterL;
     int rightLevel = vuSmooth ? displayVuR : vuMeterR;
 
-    // Rysowanie LEWEGO kanału - od środka w lewo
+    // Drawing the LEFT channel - from the center to the left
     for (int i = 0; i < leftLevel; i++) {
       if ((i % 9) < 8) {  // 8px kreska + 1px przerwa
         int x = vuCenterXmode3 - 2 - i;  // -1 żeby nie nakładać się na środek
@@ -5398,7 +5400,7 @@ void vuMeterMode3()
       }
     }
 
-    // Rysowanie PRAWEGO kanału - od środka w prawo
+    // Drawing the RIGHT channel - from the center to the right
     for (int i = 0; i < rightLevel; i++) {
       if ((i % 9) < 8) {
         int x = vuCenterXmode3 + 2 + i;
@@ -5406,7 +5408,7 @@ void vuMeterMode3()
       }
     }
 
-    // Rysowanie PEAKÓW
+    // Drawing PEAKS
     if (vuPeakHoldOn) {
       int peakLeftX = vuCenterXmode3 - 1 - peakL;
       int peakRightX = vuCenterXmode3 + peakR;
@@ -5417,26 +5419,26 @@ void vuMeterMode3()
 }
 
 /*
-void vuMeterMode4() // Mode4 duze wskaznikami VU, połokragle
+void vuMeterMode4() // Mode4 large semi-circular VU meters
 {
-  // Pobranie poziomów VU (0–255)
+  // Download VU levels (0–255)
   uint8_t rawL = audio.getVUlevel() >> 8;
   uint8_t rawR = audio.getVUlevel() & 0xFF;
 
-  // Skalowanie do 0–100
+  // Scaling to 0–100
   int vuL = map(rawL, 0, 255, 0, 100);
   int vuR = map(rawR, 0, 255, 0, 100);
 
-  // Bezwładność analogowa
+  // Analog inertia
   if (vuSmooth) {
-    // Lewy
+    // Left
     if (vuL > displayVuL) {
       displayVuL += max(1, (vuL - displayVuL) / vuRiseNeedleSpeed);  // szybciej w górę
     } else if (vuL < displayVuL) {
       displayVuL -= max(1, (displayVuL - vuL) / vuFallNeedleSpeed); // wolniej w dół
     }
 
-    // Prawy
+    // Right
     if (vuR > displayVuR) {
       displayVuR += max(1, (vuR - displayVuR) / vuRiseNeedleSpeed);
     } else if (vuR < displayVuR) {
@@ -5450,7 +5452,7 @@ void vuMeterMode4() // Mode4 duze wskaznikami VU, połokragle
     displayVuR = vuR;
   }
 
-  // Parametry wskaźników
+  // Indicator parameters
   const int radius = 45;
   const int frameWidth = 120;
   const int frameHeight = 60;
@@ -5464,13 +5466,13 @@ void vuMeterMode4() // Mode4 duze wskaznikami VU, połokragle
   const int arcStartDeg = -60;
   const int arcEndDeg = 60;
 
-  // Czyszczenie ekranu
+  // Cleaning the screen
   u8g2.setDrawColor(0);
   u8g2.drawBox(0, 0, 256, 64);
   u8g2.setDrawColor(1);
   u8g2.setFont(u8g2_font_6x10_tr);
 
-  // Struktura opisów dB
+  // Structure of dB descriptions
   struct Mark {
     int angle;
     const char* label;
@@ -5486,13 +5488,13 @@ void vuMeterMode4() // Mode4 duze wskaznikami VU, połokragle
     {  60, "+9"  },
   };
 
-  // Funkcja rysująca łuk wskaźnika
+  // A function that draws a pointer arc
   auto drawVUArc = [&](int cx, int cy, const char* label) 
   {
-    // Ramka
+    // Frame
     u8g2.drawFrame((cx - frameWidth / 2), cy - radius - 18, frameWidth, frameHeight);
 
-    // Skala łuku
+    // Arc scale
     for (int a = arcStartDeg; a <= arcEndDeg; a += 6) 
     {
       float angle = radians(a);
@@ -5503,7 +5505,7 @@ void vuMeterMode4() // Mode4 duze wskaznikami VU, połokragle
       u8g2.drawLine(x1, y1, x2, y2);
     }
 
-    // Opisy dB
+    // dB Descriptions
     for (const Mark& m : scaleMarks) 
     {
       float angle = radians(m.angle);
@@ -5513,22 +5515,22 @@ void vuMeterMode4() // Mode4 duze wskaznikami VU, połokragle
       u8g2.print(m.label);
     }
 
-    // Opis kanału (L/R)
+    // Channel Description (L/R)
     u8g2.setCursor(cx - 2, cy - 18);
     u8g2.print(label);
   };
 
-  // Rysowanie wskaźników L i R
+  // Drawing the L and R indicators
   drawVUArc(centerXL, centerYL,"L"); //x,y,label (L)
   drawVUArc(centerXR, centerYR,"R"); //x,y,label (R)
 
-  // Igła lewa
+  // Left needle
   float angleL = radians(arcStartDeg + (arcEndDeg - arcStartDeg) * displayVuL / 100.0);
   int xNeedleL = centerXL + sin(angleL) * (radius - 6);
   int yNeedleL = centerYL - cos(angleL) * (radius - 6);
   u8g2.drawLine(centerXL, centerYL - 8, xNeedleL, yNeedleL);
 
-  // Igła prawa
+  // Right needle
   float angleR = radians(arcStartDeg + (arcEndDeg - arcStartDeg) * displayVuR / 100.0);
   int xNeedleR = centerXR + sin(angleR) * (radius - 6);
   int yNeedleR = centerYR - cos(angleR) * (radius - 6);
@@ -5536,9 +5538,9 @@ void vuMeterMode4() // Mode4 duze wskaznikami VU, połokragle
 }
 */
 
-void vuMeterMode4() // Mode4 – VU analogowe z prostokatna skala
+void vuMeterMode4() // Mode4 – Analog VU with rectangular scale
 {
-  // ===== Odczyt VU =====
+  // ===== VU reading =====
   uint8_t rawL = audio.getVUlevel() >> 8;
   uint8_t rawR = audio.getVUlevel() & 0xFF;
 
@@ -5548,7 +5550,7 @@ void vuMeterMode4() // Mode4 – VU analogowe z prostokatna skala
   if (vuL < 1) vuL = 1;
   if (vuR < 1) vuR = 1;
   
-  // ===== Bezwładność =====
+  // ===== Inertia =====
   if (vuSmooth) {
     if (vuL > displayVuL)
       displayVuL += max(1, (vuL - displayVuL) / vuRiseNeedleSpeed);
@@ -5567,7 +5569,7 @@ void vuMeterMode4() // Mode4 – VU analogowe z prostokatna skala
     displayVuR = vuR;
   }
 
-  // ===== Parametry wskaźników =====
+  // ===== Indicator parameters =====
   const int frameWidth = 120;
   const int frameHeight = 60;
   const int scaleWidth = 100;
@@ -5580,14 +5582,14 @@ void vuMeterMode4() // Mode4 – VU analogowe z prostokatna skala
   int centerXR = 195;
   int centerY  = 30;
 
-  // ===== Czyszczenie =====
+  // ===== Cleaning =====
   u8g2.setDrawColor(0);
   u8g2.drawBox(0, 0, 256, 64);
   u8g2.setDrawColor(1);
   //u8g2.setFont(u8g2_font_6x10_tr);
   u8g2.setFont(mono04b03b); 
   
-  // ===== Ramki wskaźników z wypełnieniem =====
+  // ===== Filled indicator frames =====
   if (reversColorMode4) 
   {
     u8g2.drawRBox(centerXL - frameWidth / 2, centerY - frameHeight / 2, frameWidth, frameHeight,3); // Boxy z zaokragleniami
@@ -5606,7 +5608,7 @@ void vuMeterMode4() // Mode4 – VU analogowe z prostokatna skala
   };
   
   
-  // ===== Pozycje DUŻYCH kresek skali (0–100) =====
+  // ===== LARGE scale bar positions (0–100) =====
   const uint8_t majorPos[] = {
     0,   // -20
     18,  // -10
@@ -5687,7 +5689,7 @@ void vuMeterMode4() // Mode4 – VU analogowe z prostokatna skala
   };
 
 
-  // ===== Ramki wskaźników =====
+  // ===== Indicator frames =====
   
   //u8g2.drawRBox(centerXL - frameWidth / 2, centerY - frameHeight / 2, frameWidth, frameHeight,3);
   //u8g2.drawRBox(centerXR - frameWidth / 2, centerY - frameHeight / 2, frameWidth, frameHeight,3);
@@ -5695,11 +5697,11 @@ void vuMeterMode4() // Mode4 – VU analogowe z prostokatna skala
   //u8g2.drawRFrame(centerXL - frameWidth / 2, centerY - frameHeight / 2, frameWidth, frameHeight,3);
   //u8g2.drawRFrame(centerXR - frameWidth / 2, centerY - frameHeight / 2, frameWidth, frameHeight,3);
 
-  // ===== Rysowanie skal =====
+  // ===== Drawing scales =====
   drawLinearScale(centerXL);
   drawLinearScale(centerXR);
 
-  // ===== Opis kanałów =====
+  // ===== Channel description =====
   //u8g2.setCursor(centerXL - 3, centerY + 12); u8g2.print("dB");
   //u8g2.setCursor(centerXR - 3, centerY + 12); u8g2.print("dB");
 
@@ -5713,7 +5715,7 @@ void vuMeterMode4() // Mode4 – VU analogowe z prostokatna skala
   //u8g2.setCursor(centerXR - 2, centerY + 17); u8g2.print("R");
   u8g2.setCursor(centerXR - 5, centerY + 18); u8g2.print("VU");
 
-  // ===== Igły =====
+  // ===== Needles =====
   const int radius = 45;
   //float angleL = radians(-60 + 120.0 * displayVuL / 100.0);
   //float angleR = radians(-60 + 120.0 * displayVuR / 100.0);
@@ -5736,7 +5738,7 @@ void vuMeterMode4() // Mode4 – VU analogowe z prostokatna skala
 }
 
 
-void vuMeterMode5() // Duze paski VU na cały ekran
+void vuMeterMode5() // Large VU bars covering the entire screen
 {
   uint16_t raw = audio.getVUlevel();
   vuMeterL = (raw >> 8) & 0xFF;
@@ -7994,18 +7996,18 @@ void readAdcConfig()
     Serial.println("Error: Unable to open ADC keyboard configuration file");
     return;
   }
-  // Przechodzimy do odpowiedniego wiersza pliku
+  // We go to the appropriate line of the file
   int currentLine = 0;
   String configValue = "";
   while (configFile.available()) 
   {
     String line = configFile.readStringUntil(';'); //('\n');
     
-    int lineStart = line.indexOf("=") + 1;  // Szukamy miejsca, gdzie zaczyna wartość zmiennej
-    if ((lineStart != -1)) //&& (currentLine != 0)) // Pomijamy pierwszą linijkę gdzie jest opis pliku
+    int lineStart = line.indexOf("=") + 1;  // We are looking for the place where the value of the variable begins
+    if ((lineStart != -1)) //&& (currentLine != 0)) // We skip the first line where the file description is
 	  {
-      configValue = line.substring(lineStart);  // Wyciągamy URL od "http"
-      configValue.trim();                      // Usuwamy białe znaki na początku i końcu
+      configValue = line.substring(lineStart);  // We extract the URL from "http"
+      configValue.trim();                      // We remove whitespace at the beginning and end
       Serial.print(" Read ADC setting no.:" + String(currentLine) + " value:");
       Serial.println(configValue);
       configAdcArray[currentLine] = configValue.toInt();
@@ -8144,14 +8146,14 @@ void webUrlStationPlay()
     return;
   }
     
-  // Weryfikacja, czy w linku znajduje się "http" lub "https"
+  // Verifying if the link contains "http" or "https"
   if (url2play.startsWith("http://") || url2play.startsWith("https://")) 
   {
-    // Wydrukuj nazwę stacji i link na serialu
+    // Print the station name and link on the show
     Serial.print("Link to station: ");
     Serial.println(url2play);
     
-    u8g2.setFont(spleen6x12PL);  // wypisujemy jaki stream jakie stacji jest ładowany
+    u8g2.setFont(spleen6x12PL);  // we print out what stream and what station is being loaded
     u8g2.drawStr(34, 55, String(url2play).c_str());
     u8g2.sendBuffer();
     
@@ -8408,19 +8410,18 @@ void voiceTime()
   char timeString[9];  // A buffer that stores the time in text form
   if (!getLocalTime(&timeinfo, 1000))
   {
-    Serial.println("debug voice time EN -> Failed to get voice time");
+    Serial.println("debug voice time PL -> Nie udało się uzyskać czasu funkcji voice time");
     return;  // Terminate function when time failed
   }
 
   snprintf(timeString, sizeof(timeString), "%02d:%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
   time_s = String(timeString);
   int h = time_s.substring(0,2).toInt();
-  snprintf(chbuf, sizeof (chbuf), "it is %i:%02i", h, time_s.substring(3,5).toInt()); //removed the :00
-  //  snprintf(chbuf, sizeof (chbuf), "it is %i:%02i:00", h, time_s.substring(3,5).toInt());  //original line
-  Serial.print("debug voice time EN -> ");
+  snprintf(chbuf, sizeof (chbuf), "Jest godzina %i:%02i:00", h, time_s.substring(3,5).toInt());
+  Serial.print("debug voice time PL -> ");
   Serial.println(chbuf);
   
-  audio.connecttospeech(chbuf, "en");
+    audio.connecttospeech(chbuf, "pl");
 }
 
 void voiceTimeEn()
@@ -8447,6 +8448,31 @@ void voiceTimeEn()
   Serial.print("debug voice time EN -> ");
   Serial.println(chbuf);
   audio.connecttospeech(chbuf, "en");
+}
+
+void voiceTimeNL()
+{
+  resumePlay = true;
+  char chbuf[30];      //Voice-reading clock text message buffer
+  String time_s;
+  char am_pm[5] = "am.";
+  struct tm timeinfo;
+  char timeString[9];  // A buffer that stores the time in text form
+
+  if (!getLocalTime(&timeinfo, 1000)) 
+  {
+    Serial.println("debug voice time NL -> Kan stem tijd niet laden");
+    return;  // Terminate function when time failed
+  }
+
+  snprintf(timeString, sizeof(timeString), "%02d:%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
+  time_s = String(timeString);
+  int h = time_s.substring(0,2).toInt();
+  if(h > 12){h -= 12; strcpy(am_pm,"pm.");}
+   snprintf(chbuf, sizeof (chbuf), "het is %i:%02i", h, time_s.substring(3,5).toInt());
+   Serial.print("debug voice time NL -> ");
+  Serial.println(chbuf);
+  audio.connecttospeech(chbuf, "nl");
 }
 
 /*
@@ -8643,7 +8669,7 @@ void assignRemoteCodes()
   rcCmdDirect = configRemoteArray[11];     // Janość ekranu, dwa tryby 1/16 lub pełna janość     
   rcCmdBankMinus = configRemoteArray[12];  // Wysweitla wybór banku
   rcCmdBankPlus = configRemoteArray[13];   // Wysweitla wybór banku
-  rcCmdRed = configRemoteArray[14];        // Przełacza ładowanie banku kartaSD - serwer GitHub w menu bank
+  rcCmdRed = configRemoteArray[14];        // Toggles SD card bank loading - GitHub server in the bank menu
   rcCmdPower = configRemoteArray[14];      // PRZYCISK POWER Z KODEM Czerwonej Słuchawki
   rcCmdGreen = configRemoteArray[15];      // VU wyłaczony, VU tryb 1, VU tryb 2, zegar
   rcCmdKey0 = configRemoteArray[16];       // Przycisk "0"
@@ -9096,21 +9122,21 @@ void powerOff()
   audio.stopSong();
   delay(500);
   
-  // ---- ZAPIS OSTATNIEGO NR.STACJI, NR.BANKU, POZIOMU VOLUME jesli funkcja saveAlwasy wylaczona ----
+  // ---- SAVE LAST STATION NUMBER, BANK NUMBER, VOLUME LEVEL if the saveAlways function is disabled ----
   if (!f_saveVolumeStationAlways) {saveVolumeOnSD(); saveStationOnSD();}
   
   
-  // ---- ANIMACJA POWER OFF, jesli wlaczona ----
+  // ---- POWER OFF ANIMATION, if enabled ----
   if (f_powerOffAnimation) {Serial.println("debug Power -> PowerOff Animation"); powerOffAnimation(); u8g2.clearBuffer();}
 
-  // ---- ZEGAR W TRYBIE POWER OFF pierwsze wywloane celem synch. ntp----
+  // ---- CLOCK IN POWER OFF MODE first triggered ntp sync target----
   if (f_displayPowerOffClock)
   {
-    u8g2.setPowerSave(0);  // Jesli zegar wlaczony to nie przelaczamy OLEDa w tryb power save
+    u8g2.setPowerSave(0);  // If the clock is on, we do not switch the OLED to power save mode
     Serial.println("debug Power -> Clock ON");
     powerOffClock();
   } 
-  // Wyłącz ekran jesli zegar ma byc wyłaczony
+  // Turn off the screen if the clock should be turned off
   else 
   {
     u8g2.setPowerSave(1);
@@ -9118,7 +9144,7 @@ void powerOff()
   
   delay(25);
   
-  // ----- ZERUJEMY SLEEP TIMER -----
+  // ----- WE RESET THE SLEEP TIMER -----
   sleepTimerValueSet = 0;
   sleepTimerValueCounter = 0;
   f_displaySleepTimeSet = false;
@@ -9130,10 +9156,10 @@ void powerOff()
   f_powerOff = true; 
   Serial.println("debug Power -> I put ESP to sleep, power off");
 
-  // -------------- WYŁACZAMY PERYFERIA ------------------
+  // -------------- WE TURN OFF THE PERIPHERALS ------------------
   WiFi.mode(WIFI_OFF);
   btStop();
-  // -------------- WYŁACZAMY LED na module ESP32 ------------------
+  // -------------- Turn off the LED on the ESP32 module ------------------
   pinMode(TX, OUTPUT);
   pinMode(RX, OUTPUT);
   digitalWrite(TX, HIGH);
@@ -9141,9 +9167,9 @@ void powerOff()
   
   Serial.end();
     
-  // ---- USTAWIAMY PRZYCISKI NA ENKODERACH do POWER ON -----
+  // ---- WE SET THE BUTTONS ON THE ENCODERS TO POWER ON -----
   
-  pinMode(SW_PIN2, INPUT_PULLUP); // Enkoder 2 SW pin
+  pinMode(SW_PIN2, INPUT_PULLUP); // Encoder 2 SW pin
   
   #ifdef SW_POWER
     pinMode(SW_POWER, INPUT_PULLUP);
@@ -9173,13 +9199,13 @@ void powerOff()
   
   while (f_powerOff)
   {
-    // ---------------- RESET STANÓW IR ----------------
+    // ---------------- IR STATE RESET ----------------
     bit_count = 0;
     ir_code = 0;
-    detachInterrupt(digitalPinToInterrupt(recv_pin)); // WYLACZAMY PRZERWANIE
+    detachInterrupt(digitalPinToInterrupt(recv_pin)); // WE TURN OFF THE INTERRUPTION
     delay(10);
 
-    // ---------------- DEZAKTYWACJA PERYFERIOW i AKTYWACJA ZEGARA (jesli właczony) ----------------
+    // ---------------- DEACTIVATE PERIPHERALS and ACTIVATE CLOCK (if enabled) ----------------
     if (f_displayPowerOffClock) 
     {
       powerOffClock();
@@ -9190,15 +9216,15 @@ void powerOff()
       u8g2.setPowerSave(1);
     }
       
-    // ---------------- USTAWIAMY WAKEUP ----------------    
+    // ---------------- WE SET A WAKEUP ----------------    
     gpio_wakeup_enable((gpio_num_t)recv_pin, GPIO_INTR_LOW_LEVEL);
 
-    // ---------------- USTAWIAMY LED Standby ----------------
+    // ---------------- WE SET THE LED STANDBY ----------------
     #ifdef TAS5805
-      digitalWrite(STANDBY_LED, LOW); // Dla TAS jest to pin #PWDN sterowany stanem niskim
+      digitalWrite(STANDBY_LED, LOW); // For TAS this is the #PWDN pin driven low
     #else
-    digitalWrite(STANDBY_LED, HIGH); // Dla LED wyłączonego w trybie Power ON a właczonego w trybie Standby
-    //digitalWrite(STANDBY_LED, LOW); // Dla LED właczonego w trybie Power ON
+    digitalWrite(STANDBY_LED, HIGH); // For LED off in Power ON mode and on in Standby mode
+    //digitalWrite(STANDBY_LED, LOW); // For LED on in Power ON mode
     #endif
 
     
@@ -9206,29 +9232,29 @@ void powerOff()
     delay(10);
     esp_light_sleep_start();
 
-    // ------------- TU SIĘ OBUDZIMY ----------------
+    // ------------- WE WILL WAKE UP HERE ----------------
 
-    // Jesli obudził nas timer to robimy aktulizacje zegera i wracamy na początek petli while
+    // If the timer woke us up, we update the seger and go back to the beginning of the while loop
     esp_sleep_wakeup_cause_t cause = esp_sleep_get_wakeup_cause();
     if (cause == ESP_SLEEP_WAKEUP_TIMER)
     {
       if (f_displayPowerOffClock) {powerOffClock();}
       delay(5);
-      continue;   // wraca do while – ESP idzie znowu spać
+      continue;   // goes back to while – ESP goes back to sleep
     }
 
-    // Konfiguracja przerwania IR
+    // IR interrupt configuration
     attachInterrupt(digitalPinToInterrupt(recv_pin), pulseISR, CHANGE);
     delay(100); // stabilizacja
                 
-    // Analiza IR
+    // IR analysis
     ir_code = reverse_bits(ir_code, 32);
     uint8_t CMD  = (ir_code >> 16) & 0xFF;
     uint8_t ADDR = ir_code & 0xFF;
     ir_code = (ADDR << 8) | CMD;
   
   
-    // Warunek POWER UP
+    // POWER UP condition
     #ifdef twoEncoders
     bool POWER_UP =
         (bit_count == 32 && ir_code == rcCmdPower && f_powerOff) ||
@@ -9246,7 +9272,7 @@ void powerOff()
         (digitalRead(SW_PIN2) == LOW);
     #endif    
 
-    // ------------------ WSTAEMY po poprawny rozpoznaiu kodu (lub nie, else) -----------------
+    // ------------------ WE WILL RISE after the code has been correctly recognized (or not, else) -----------------
     if (POWER_UP)
     {
       detachInterrupt(digitalPinToInterrupt(recv_pin));
@@ -9260,22 +9286,22 @@ void powerOff()
       
       // ------------ LED STANDBY -----------
       //pinMode(STANDBY_LED, OUTPUT);
-      //digitalWrite(STANDBY_LED, HIGH); // Dla LED właczonego w trybie Power ON
-      digitalWrite(STANDBY_LED, LOW); // Dla LED wyłączonego w trybie PowerON a właczonego w trybie Standby
+      //digitalWrite(STANDBY_LED, HIGH); // For LED on in Power ON mode
+      digitalWrite(STANDBY_LED, LOW); // For LED off in Power ON mode and on in Standby mode
       
       delay(800);
 
-      // Twardy restart
+      // Hard restart
       REG_WRITE(RTC_CNTL_OPTIONS0_REG, RTC_CNTL_SW_SYS_RST);
       break;
     }
 
-    // Nie to nie POWER_UP -> rozpinamy przerwanie IR
+    // No, it's not POWER_UP -> we disconnect the IR interrupt
     detachInterrupt(digitalPinToInterrupt(recv_pin));
   }
 }
 
-// ---- ŁADOWANIE LOGO STARTOWEGO jesli plik istnieje ----
+// ---- LOADING THE STARTUP LOGO if the file exists ----
 bool loadXBM(const char* filename) 
 {
     File logo = STORAGE.open(filename, FILE_READ);
@@ -9355,12 +9381,12 @@ void setPreset(uint8_t preset)
   #endif
 
   changeStation();
-  clearFlags();  // Czyscimy wszystkie flagi przebywania w różnych menu
+  clearFlags();  // We clear all the presence flags in the various menus
   displayRadio();
   u8g2.sendBuffer();
 }
 
-//Miganie LED w momencie odebraknia poprawnego kodu IR
+//LED flashes when a valid IR code is received
 void irLedBlink()
 {
   digitalWrite(IR_LED, IR_LED_ON);
@@ -9368,35 +9394,35 @@ void irLedBlink()
   digitalWrite(IR_LED, IR_LED_OFF);
 } 
 
-/*---------------------  FUNKCJA PILOT IR  / Obsluga pilota IR w kodzie NEC ---------------------*/ 
+/*---------------------  IR REMOTE FUNCTION / IR remote control support in NEC code ---------------------*/ 
 void handleRemote()
 {
-  if (bit_count == 32) // sprawdzamy czy odczytalismy w przerwaniu pełne 32 bity kodu IR NEC
+  if (bit_count == 32) // we check whether we have read the full 32 bits of the NEC IR code in the interrupt
   {
-    if (ir_code != 0) // sprawdzamy czy zmienna ir_code nie jest równa 0
+    if (ir_code != 0) // we check whether the ir_code variable is not equal to 0
     {
       
-      detachInterrupt(recv_pin);            // Rozpinamy przerwanie
+      detachInterrupt(recv_pin);            // We unbind the interrupt
       
-      // ---- Symulacja aktywnosci LED IR ----
+      // ---- IR LED activity simulation ----
       #ifdef IR_LED
         irLedBlink(); 
       #endif
       
       Serial.print("debug IR -> Code NEC OK:");
       Serial.print(ir_code, HEX);
-      ir_code = reverse_bits(ir_code,32);   // Rotacja bitów - zmiana porządku z LSB-MSB na MSB-LSB
+      ir_code = reverse_bits(ir_code,32);   // Bit rotation - changing the order from LSB-MSB to MSB-LSB
       Serial.print("  MSB-LSB: ");
       Serial.print(ir_code, HEX);
     
-      uint8_t CMD = (ir_code >> 16) & 0xFF; // Drugi bajt (inwersja adresu)
-      uint8_t ADDR = ir_code & 0xFF;        // Czwarty bajt (inwersja komendy)
+      uint8_t CMD = (ir_code >> 16) & 0xFF; // Second byte (address inversion)
+      uint8_t ADDR = ir_code & 0xFF;        // Fourth byte (command inversion)
       
       Serial.print("  ADR:");
       Serial.print(ADDR, HEX);
       Serial.print(" CMD:");
       Serial.println(CMD, HEX);
-      ir_code = ADDR << 8 | CMD;      // Łączymy ADDR i CMD w jedną zmienną 0x ADR CMD
+      ir_code = ADDR << 8 | CMD;      // We combine ADDR and CMD into one variable 0x ADR CMD
 
       // Info o przebiegach czasowytch kodu pilota IR
       Serial.print("debug IR -> puls 9ms:"); 
@@ -9409,12 +9435,12 @@ void handleRemote()
       Serial.println(pulse_duration_560us);
 
 
-      fwupd = false;        // Kasujemy flagę aktulizacji OTA gdyby była ustawiona
-      //displayActive = true; // jesli odbierzemy kod z pilota to uatywnij wyswietlacz i wyłacz przyciemnienie OLEDa
-      //displayDimmer(0); // jesli odbierzemy kod z pilota to wyłaczamy przyciemnienie wyswietlacza OLED
+      fwupd = false;        // We clear the OTA update flag if it was set
+      //displayActive = true; // If we receive the code from the remote control, activate the display and turn off the OLED dimming
+      //displayDimmer(0); // If we receive the code from the remote control, we turn off the dimming of the OLED display
       displayPowerSave(0);
       
-      // Nauka pilota - wywolanie WebSocket
+      // Learning the remote control - invoking a WebSocket
       if (remoteConfig) 
       {
         wsIrCode(ir_code, ADDR, CMD);
@@ -9422,9 +9448,9 @@ void handleRemote()
         bit_count = 0;
       }
 
-      if (ir_code == rcCmdVolumeUp)  { volumeUp(); }         // Przycisk głośniej
-      else if (ir_code == rcCmdVolumeDown) { volumeDown(); } // Przycisk ciszej
-      else if (ir_code == rcCmdArrowRight) // strzałka w prawo - nastepna stacja, bank lub nastawy equalizera
+      if (ir_code == rcCmdVolumeUp)  { volumeUp(); }         // Volume up button
+      else if (ir_code == rcCmdVolumeDown) { volumeDown(); } // Volume down button
+      else if (ir_code == rcCmdArrowRight) // right arrow - next station, bank or equalizer settings
       {  
         if (bankMenuEnable == true)
         {
@@ -9448,7 +9474,7 @@ void handleRemote()
           if (balanceValue > 16) {balanceValue = 16;}
           displayEqualizer();
         }     
-        else if (listedStations == true) // Szybkie przewijanie o 5 stacji
+        else if (listedStations == true) // Fast forward 5 stations
         {
           timeDisplay = false;
           displayActive = true;
@@ -9458,7 +9484,7 @@ void handleRemote()
           station_nr = station_nr + 5;
           for (int i = 0; i < 5; i++) {scrollDown();}
     
-          if (station_nr > stationsCount) {station_nr = station_nr - stationsCount; } //Zbaezpiecznie aby przewijac sie tylko po stacjach w liczbie jaka jest w stationCount
+          if (station_nr > stationsCount) {station_nr = station_nr - stationsCount; } //Protection to scroll only through the number of stations in stationCount
           
           displayStations();
         }
@@ -9466,13 +9492,13 @@ void handleRemote()
         {
           station_nr++;
           //if (station_nr > stationsCount) { station_nr = stationsCount; }
-          if (station_nr > stationsCount) { station_nr = 1; } // Przwijanie listy stacji w pętli po osiągnieciu ostatniej stacji banku przewijamy do pierwszej.
+          if (station_nr > stationsCount) { station_nr = 1; } // Scrolling the list of stations in a loop, after reaching the last station of the bank, scroll to the first one.
           changeStation();
           displayRadio();
           u8g2.sendBuffer();
         }
       }
-      else if (ir_code == rcCmdArrowLeft) // strzałka w lewo - poprzednia stacja, bank lub nastawy equalizera
+      else if (ir_code == rcCmdArrowLeft) // left arrow - previous station, bank or equalizer settings
       {  
         if (bankMenuEnable == true)
         {
@@ -9508,10 +9534,10 @@ void handleRemote()
           
           for (int i = 0; i < 5; i++) {scrollUp();}
       
-          //Zbaezpiecznie aby przewijac sie tylko po stacjach w liczbie jaka jest w stationCount
+          //Protection to scroll only through the number of stations in stationCount
           if (station_nr > stationsCount) { station_nr = (stationsCount - (255 - station_nr)) - 1 ;} 
           
-          // Jesli jestesmy na stacji nr 5 to aby uniknąc station_nr = 0 przewijamy do ostatniej
+          // If we are at station no. 5, to avoid station_nr = 0 we scroll to the last one
           if (station_nr == 0) {station_nr = stationsCount;} 
 
           displayStations();
@@ -9520,7 +9546,7 @@ void handleRemote()
         {        
           station_nr--;
           //if (station_nr < 1) { station_nr = 1; }
-          if (station_nr < 1) { station_nr = stationsCount; } // Przwijanie listy stacji w pętli po osiągnieciu ostatniej stacji banku przewijamy do pierwszej.
+          if (station_nr < 1) { station_nr = stationsCount; } // Scrolling the list of stations in a loop, after reaching the last station of the bank, scroll to the first one.
           changeStation();
           displayRadio();
           u8g2.sendBuffer();
@@ -9545,28 +9571,28 @@ void handleRemote()
         displayStartTime = millis();    
         station_nr = currentSelection + 1;
 
-        if (listedStations == true) {station_nr--; scrollUp();} //station_nr-- tylko jesli już wyswietlany liste stacji;
+        if (listedStations == true) {station_nr--; scrollUp();} //station_nr-- only if already displaying station list;
         else
         {        
-          currentSelection = station_nr - 1; // Przywracamy zaznaczenie obecnie grajacej stacji
+          currentSelection = station_nr - 1; // We restore the highlighting of the currently playing station
           
           if (currentSelection >= 0)
           {
-            if (currentSelection < firstVisibleLine) // jezeli obecne zaznaczenie ma wartosc mniejsza niz pierwsza wyswietlana linia
+            if (currentSelection < firstVisibleLine) // if the current meaning is less than the first displayed line
             {
               firstVisibleLine = currentSelection;
             }
           } 
           else 
-          {  // Jeśli osiągnięto wartość 0, przejdź do najwyższej wartości
+          {  // If value 0 is reached, go to the highest value
             if (currentSelection = maxSelection())
             {
-            firstVisibleLine = currentSelection - maxVisibleLines + 1;  // Ustaw pierwszą widoczną linię na najwyższą
+            firstVisibleLine = currentSelection - maxVisibleLines + 1;  // Set the first visible line to the highest
             }
           }   
         }
         
-        if (station_nr < 1) { station_nr = stationsCount; } // jesli dojdziemy do początku listy stacji to przewijamy na koniec
+        if (station_nr < 1) { station_nr = stationsCount; } // if we reach the beginning of the station list, we scroll to the end
         
         
        
@@ -9579,7 +9605,7 @@ void handleRemote()
         if (toneSelect > 4){toneSelect = 4;}
         displayEqualizer();
       }
-      else if ((ir_code == rcCmdArrowDown) && (equalizerMenuEnable == false)) // Przycisk w dół
+      else if ((ir_code == rcCmdArrowDown) && (equalizerMenuEnable == false)) // Down button
       {  
         if ((volumeSet == true) && (volumeBufferValue != volumeValue))
         {
@@ -9593,23 +9619,23 @@ void handleRemote()
         station_nr = currentSelection + 1;
         
         //station_nr++;
-        if (listedStations == true) {station_nr++; scrollDown(); } //station_nr++ tylko jesli już wyswietlany liste stacji;
+        if (listedStations == true) {station_nr++; scrollDown(); } //station_nr++ only if already displaying station list;
         else
         {        
-          currentSelection = station_nr - 1; // Przywracamy zaznaczenie obecnie grajacej stacji
+          currentSelection = station_nr - 1; // We restore the highlighting of the currently playing station
 
           if (currentSelection >= 0)
           {
-            if (currentSelection < firstVisibleLine) // jezeli obecne zaznaczenie ma wartosc mniejsza niz pierwsza wyswietlana linia
+            if (currentSelection < firstVisibleLine) // if the current meaning is less than the first displayed line
             {
               firstVisibleLine = currentSelection;
             }
           } 
           else 
-          {  // Jeśli osiągnięto wartość 0, przejdź do najwyższej wartości
+          {  // If value 0 is reached, go to the highest value
             if (currentSelection = maxSelection())
             {
-            firstVisibleLine = currentSelection - maxVisibleLines + 1;  // Ustaw pierwszą widoczną linię na najwyższą
+            firstVisibleLine = currentSelection - maxVisibleLines + 1;  // Set the first visible line to the highest
             }
           }
              
@@ -9630,24 +9656,24 @@ void handleRemote()
         if (bankMenuEnable == true)
         {
           station_nr = 1;
-          fetchStationsFromServer(); // Ładujemy stacje z karty lub serwera 
+          fetchStationsFromServer(); // We load stations from a card or server
           bankMenuEnable = false;
         }  
-        if (equalizerMenuEnable == true) { saveEqualizerOnSD();}    // zapis ustawien equalizera
-        //if (volumeSet == true) { saveVolumeOnSD();}                 // zapis ustawien głośnosci po nacisnięciu OK, wyłaczony aby można było przełączyć stacje na www bez czekania
-        //if ((equalizerMenuEnable == false) && (volumeSet == false)) // jesli nie zapisywaliśmy equlizer i glonosci to wywolujemy ponizsze funkcje
-        if ((equalizerMenuEnable == false)) // jesli nie zapisywaliśmy equlizer 
+        if (equalizerMenuEnable == true) { saveEqualizerOnSD();}    // saving equalizer settings
+        //if (volumeSet == true) { saveVolumeOnSD();}                 // saving volume settings after pressing OK, disabled so that you can switch to www stations without waiting
+        //if ((equalizerMenuEnable == false) && (volumeSet == false)) // If we did not save the equalizer and volume, we call the following functions
+        if ((equalizerMenuEnable == false)) // if we didn't save the equalizer 
         {
           if ((!urlPlaying) || (listedStations)) {changeStation();}
           if (rcInputDigitsMenuEnable) {changeStation();}
           else if (urlPlaying) {webUrlStationPlay();}
 
-          clearFlags();                                             // Czyscimy wszystkie flagi przebywania w różnych menu
+          clearFlags();                                             // We clear all the presence flags in the various menus
           displayRadio();
           u8g2.sendBuffer();
         }
-        equalizerMenuEnable = false; // Kasujemy flage ustawiania equalizera
-        volumeSet = false; // Kasujemy flage ustawiania głośnosci
+        equalizerMenuEnable = false; // We clear the equalizer setting flag
+        volumeSet = false; // We clear the volume setting flag
       } 
       else if (ir_code == rcCmdKey0) {if (f_Presets && !bankMenuEnable) {setPreset(0);} else {rcInputKey(0);}}
       else if (ir_code == rcCmdKey1) {if (f_Presets && !bankMenuEnable) {setPreset(1) ;} else {rcInputKey(1);}}     
@@ -9663,10 +9689,10 @@ void handleRemote()
       {   
         //f_simpleMode3 = !f_simpleMode3;
         displayDimmer(0);
-        clearFlags();   // Zerujemy wszystkie flagi
-        displayRadio(); // Ładujemy erkran radia
-        u8g2.sendBuffer(); // Wysyłamy bufor na wyswietlacz
-        currentSelection = station_nr - 1; // Przywracamy zaznaczenie obecnie grajacej stacji
+        clearFlags();   // We reset all flags
+        displayRadio(); // We load the radio screen
+        u8g2.sendBuffer(); // We send the buffer to the display
+        currentSelection = station_nr - 1; // We restore the highlighting of the currently playing station
       }
       else if (ir_code == rcCmdMute) 
       {
@@ -9683,11 +9709,11 @@ void handleRemote()
         //wsVolumeChange(volumeValue);
         wsVolumeChange();
       }
-      else if (ir_code == rcCmdDirect) // Przycisk Direct -> Menu Bank - udpate GitHub, Menu Equalizer - reset wartosci, Radio Display - fnkcja przyciemniania ekranu
+      else if (ir_code == rcCmdDirect) // Direct button -> Menu Bank - GitHub update, Menu Equalizer - reset values, Radio Display - screen dimming function
       {
-        if ((bankMenuEnable == true) && (equalizerMenuEnable == false))// flage można zmienic tylko bedąc w menu wyboru banku
+        if ((bankMenuEnable == true) && (equalizerMenuEnable == false))// the flag can only be changed while in the bank selection menu
         { 
-          bankNetworkUpdate = !bankNetworkUpdate; // zmiana flagi czy aktualizujemy bank z sieci czy karty SD
+          bankNetworkUpdate = !bankNetworkUpdate; // changing the flag whether we update the bank from the network or SD card
           bankMenuDisplay(); 
         }
         if ((bankMenuEnable == false) && (equalizerMenuEnable == true))
@@ -9700,7 +9726,7 @@ void handleRemote()
         }
         if ((bankMenuEnable == false) && (equalizerMenuEnable == false) && (volumeSet == false))
         { 
-          if (displayMode == 4) // Jesli jestesmy w display Mode 4 czyli duzy VU wsazowkowy to mozna właczyc buffor audio print.
+          if (displayMode == 4) // If we are in Display Mode 4, i.e. large VU display, we can enable the audio print buffer.
           {
             debugAudioBuffor=!debugAudioBuffor;
           }
@@ -9716,7 +9742,7 @@ void handleRemote()
         displayMode++;
         if (displayMode > displayModeMax) {displayMode = 0;}
 
-        // Opcja zamiany kolorow w mode4 bez dodawania nowego trybu               
+        // Option to change colors in mode4 without adding a new mode              
         //if ((displayMode > displayModeMax) & (reversColorMode4)) {displayMode = displayModeMax; reversColorMode4=!reversColorMode4;}
         //else if ((displayMode > displayModeMax) & (!reversColorMode4)) {displayMode = 0; reversColorMode4=!reversColorMode4;}
         
@@ -9767,10 +9793,10 @@ void handleRemote()
       Serial.println(pulse_duration_560us);    
     }
     
-    // ---- Symulacja aktywnosci LED IR ----
+    // ---- IR LED activity simulation ----
     //#ifdef IR_LED
     //  irLedBlink();  
-      //delay(30); digitalWrite(IR_LED, LOW);  // Wyjatek aby nie załaczac diody LED Standby w momencie odbioru komendy PowerOFF
+      //delay(30); digitalWrite(IR_LED, LOW);  // Exception not to turn on the Standby LED when receiving the PowerOFF command
     //#endif
         
     ir_code = 0;
@@ -9844,7 +9870,7 @@ void handleRemote()
 
       tasWrite(0x00, 0x00);      // Book 0
       tasWrite(0x7F, 0x00);      // Page 0
-      tasWrite(0x03, 0x02);     // switch to High-Z (powienien byc po resecie równiez)
+      tasWrite(0x03, 0x02);     // switch to High-Z (should be after reset as well)
 
       tasWrite(0x30, 0x01);      // SDOUT - pre-proccessing, DSP input
       delay(10);
@@ -9871,13 +9897,13 @@ void handleRemote()
 
 //####################################################################################### SETUP ####################################################################################### //
 
-void setup() 
-{
-  // --------LED STANDBY dla stanu HIGH w trybie Power ON ----------------
+void setup()
+  {
+  // --------STANDBY LED for HIGH status in Power ON mode ----------------
   pinMode(STANDBY_LED, OUTPUT);
-  timer4.attach(0.5, updateStandbyLED);  // Ustaw timer4, aby wywoływał miganie LED informujaca o starcie, inicjalizacji radia
+  timer4.attach(0.5, updateStandbyLED);  // Set timer4 to trigger LED flashing to inform about start and initialization of the radio
 
-  // Inicjalizuj komunikację szeregową (Serial)
+  // Initialize serial communication (Serial)
   Serial.begin(115200);
   delay(600);
   
@@ -9986,9 +10012,9 @@ void setup()
   audio.setVolume(0);
   
 
-  // Inicjalizuj interfejs SPI wyświetlacza
+  // Initialize display SPI interface
   SPI.begin(SPI_SCK_OLED, SPI_MISO_OLED, SPI_MOSI_OLED);
-  #ifdef LOWNOISESPI // Kontrola driverow wyjsciowych GPIO w celu onizenia EMI
+  #ifdef LOWNOISESPI // Controlling GPIO output drivers to reduce EMI
     gpio_set_drive_capability((gpio_num_t)SPI_MOSI_OLED, GPIO_DRIVE_CAP_2);
     gpio_set_drive_capability((gpio_num_t)SPI_SCK_OLED, GPIO_DRIVE_CAP_2);
     gpio_set_drive_capability((gpio_num_t)CS_OLED, GPIO_DRIVE_CAP_1);
@@ -9997,12 +10023,12 @@ void setup()
   SPI.setFrequency(2000000);
 
 
-  // Inicjalizuj wyświetlacz i odczekaj 250 milisekund na włączenie
+  // Initialize display and wait 250 milliseconds to turn on
   u8g2.begin();
   delay(250);
 
-  // ----------------- KARTA SD / PAMIEC SPIFFS/LittleFS - Inicjalizacja -----------------
-  // Inicjalizacja STORAGE
+  // ----------------- SD CARD / SPIFFS/LittleFS MEMORY - Initialization -----------------
+  // Initializing STORAGE
   #ifdef AUTOSTORAGE
     if (!initStorage()) 
     {
@@ -10049,7 +10075,7 @@ void setup()
       f_logo = 1;
     }   
 
-    // ---- POWOLNE ROZJASNIANIE LOGO NUTKI / WGRANE LOGO ----
+    // ---- SLOWLY FADE IN THE NOTE LOGO / LOGO UPLOADED ----
     if (f_logoSlowBrightness)
     {
       for (int i = 0; i <= displayBrightness; i++)
@@ -10059,7 +10085,7 @@ void setup()
           //u8g2.setContrast(corrected);
           delay(10); 
         }
-      u8g2.setContrast(displayBrightness); // Dodatkowe przeładowanie jasnosci          
+      u8g2.setContrast(displayBrightness); // Additional brightness overload         
     }
      
     u8g2.setFont(spleen6x12PL);
@@ -10068,15 +10094,15 @@ void setup()
   }
   
   #ifndef AUTOSTORAGE
-  // Informacja na wyswietlaczu o problemach lub braku karty SD
-  if (noSDcard) // flaga noSDcard ustawia sie jesli nie wykryto karty
+  // Information on the display about problems or missing SD card
+  if (noSDcard) // the noSDcard flag is set if no card is detected
   {
     u8g2.setFont(spleen6x12PL);
     u8g2.drawStr(5, 62, "Error - Please check SD card");
     u8g2.setDrawColor(0);
     u8g2.drawBox(212, 0, 44, 45);
     u8g2.setDrawColor(1);
-    u8g2.drawXBMP(220, 3, 30, 40, sdcard);  // ikona SD karty
+    u8g2.drawXBMP(220, 3, 30, 40, sdcard);  // SD card icon
     u8g2.sendBuffer();
   }
   #endif
@@ -10085,32 +10111,32 @@ void setup()
   if ((esp_reset_reason() == ESP_RST_POWERON) && (f_sleepAfterPowerFail)) {u8g2.drawStr(5, 50, "Wakeup after power loss, syncing NTP");}
   if (f_logo) {u8g2.drawStr(5, 62, "Evo Web Radio, connecting...");} else {u8g2.drawStr(5, 62, "Connecting to network...    ");}
   u8g2.sendBuffer();
-  //delay(1000); // Popatrzmy dłuzej na nutki lub logo :)
+  //delay(1000); // Let's look at the notes or logo for a longer time :)
   
   #ifdef twoEncoders
-    button1.setDebounceTime(50);  // Ustawienie czasu debouncingu dla przycisku enkodera 2
+    button1.setDebounceTime(50);  // Set the debouncing time for encoder button 2
   #endif
 
-  button2.setDebounceTime(50);  // Ustawienie czasu debouncingu dla przycisku enkodera 2
+  button2.setDebounceTime(50);  // Set the debouncing time for encoder button 2
   
 
     
-  // Inicjalizacja WiFiManagera
+  // Initializing WiFiManager
   wifiManager.setConfigPortalBlocking(false);
 
-  // ---- ODCZYTY RÓZNYCH USTAWIEN Z KARTY SD / PAMIECI SPIFFS ----
-  readStationFromSD();       // Odczytujemy zapisaną ostanią stację i bank z karty SD /EEPROMu
-  readEqualizerFromSD();     // Odczytujemy ustawienia filtrów equalizera z karty SD 
-  readVolumeFromSD();        // Odczytujemy nastawę ostatniego poziomu głośnosci z karty SD /EEPROMu
-  readAdcConfig();           // Odczyt konfiguracji klawitury ADC
-  readRemoteControlConfig(); // Odczyt konfiguracji pilota IR
-  assignRemoteCodes();       // Przypisanie kodów pilota IR
+  // ---- READING VARIOUS SETTINGS FROM SD CARD/SPIFFS MEMORY ----
+  readStationFromSD();       // We read the last saved station and bank from the SD card/EEPROM
+  readEqualizerFromSD();     // We read the equalizer filter settings from the SD card
+  readVolumeFromSD();        // We read the last volume setting from the SD card/EEPROM
+  readAdcConfig();           // Reading ADC keyboard configuration
+  readRemoteControlConfig(); // Reading the IR remote configuration
+  assignRemoteCodes();       // Assigning IR remote control codes
   readTimezone();
 
   audio.setVolumeSteps(maxVolume);
-  //audio.setVolume(0);                  // Ustaw głośność na podstawie wartości zmiennej volumeValue w zakresie 0...21
+  //audio.setVolume(0);                  // Set the volume based on the value of the volumeValue variable in the range 0...21
   
-  // ----------------- EKRAN - JASNOŚĆ -----------------
+  // ----------------- SCREEN - BRIGHTNESS -----------------
   u8g2.setContrast(displayBrightness); 
 
   // -------------------- RECOVERY MODE --------------------
@@ -10152,12 +10178,12 @@ void setup()
     }
 
 
-    timer1.attach(0.5, updateTimerFlag);  // Ustaw timer, aby wywoływał funkcję updateTimer
-    //timer1.attach(0.7, updateTimerFlag);  // Ustaw timer, aby wywoływał funkcję updateTimer
+    timer1.attach(0.5, updateTimerFlag);  // Set the timer to call the updateTimer function
+    //timer1.attach(0.7, updateTimerFlag);  // Set the timer to call the updateTimer function
     timer2.attach(1, displayDimmerTimer);
-    //timer3.attach(60, sleepTimer);   // Ustaw timer3,
+    //timer3.attach(60, sleepTimer);   // Set timer3,
 
-    if ((esp_reset_reason() == ESP_RST_POWERON) && (f_sleepAfterPowerFail)) // sprawdzamy czy radio wlaczylo sie po braku zasilania jesli tak to idziemy do spania gdy zasilanie powroci
+    if ((esp_reset_reason() == ESP_RST_POWERON) && (f_sleepAfterPowerFail)) // We check if the radio turned on after the power cut, if so, we go to sleep when the power returns
     {
       Serial.println("debug PWR -> power OFF after power is restored");
       Serial.print("debug PWR -> Clock function f_displayPowerOffClock: ");
@@ -10167,10 +10193,10 @@ void setup()
     }
 
 
-    uint8_t temp_station_nr = station_nr; // Chowamy na chwile odczytaną stacje z karty SD aby podczas ładowania banku nie zmienic ostatniej odtwarzanej stacji
-    fetchStationsFromServer();            // Ładujemy liste stacji z karty SD  lub serwera GitHub
-    station_nr = temp_station_nr ;        // Przywracamy numer po odczycie stacji
-    changeStation();                      // Ustawiamy stację
+    uint8_t temp_station_nr = station_nr; // We hide the station read from the SD card for a moment so that the last played station is not changed when loading the bank
+    fetchStationsFromServer();            // We load the list of stations from the SD card or GitHub server
+    station_nr = temp_station_nr ;        // We restore the number after reading the station
+    changeStation();                      // We are setting up the station
     
     // ########################################### WEB Server ######################################################
     DefaultHeaders::Instance().addHeader("Access-Control-Allow-Origin", "*");
@@ -10179,18 +10205,18 @@ void setup()
     {
       String userAgent = request->header("User-Agent");
       String html =""; 
-      //html.reserve(48000);  // rezerwuje bufor (np. 24KB)
+      //html.reserve(48000);  // reserves a buffer (e.g. 24KB)
 
       if (userAgent.indexOf("Mobile") != -1 || userAgent.indexOf("Android") != -1 || userAgent.indexOf("iPhone") != -1) 
       {
         html = stationBankListHtmlMobile();
       } 
-      else //Jestemy na komputerze 
+      else //We are on the computer
       {
         html = stationBankListHtmlPC();
       }
       
-      String finalhtml = String(index_html) + html;  // Składamy cześć stałą html z częscią generowaną dynamicznie
+      String finalhtml = String(index_html) + html;  // We combine the html constant part with the dynamically generated part
       //request->send_P(200, "text/html", finalhtml.c_str());
       //request->send(200, "text/html", finalhtml.c_str());
       request->send(200, "text/html", finalhtml);
@@ -10230,7 +10256,7 @@ void setup()
 
       if (index == 0) 
       {
-        // Tylko przy pierwszym pakiecie
+        // Only with the first package
         Serial.printf("OTA Start: %s\n", filename.c_str());
         total = 0;
         contentLength = request->contentLength();  // pełna długość pliku
@@ -10259,7 +10285,7 @@ void setup()
       {
         total += len;
           
-        // Wyświetlaj pasek postępu co 300 ms
+        // Display progress bar every 300 ms
         unsigned long now = millis();
         if (now - lastPrint >= 200 || final) 
         {     
@@ -10337,14 +10363,14 @@ void setup()
     });
 
     server.on("/page1", HTTP_GET, [](AsyncWebServerRequest *request)
-    { // Strona do celow testowych ladowana ze STORAGE (karty Sd lub pamieci FS)
+    { // Page for testing purposes loaded from STORAGE (SD card or FS memory)
       request->send(STORAGE, "/page1.html", "text/html"); //"application/octet-stream");
     });
 
     server.on("/playurl", HTTP_GET, [](AsyncWebServerRequest *request)
     { 
       //String html =""; 
-      //String finalhtml = String(urlplay_html);  // Składamy cześć stałą html z częscią generowaną dynamicznie
+      //String finalhtml = String(urlplay_html);  // We combine the html constant part with the dynamically generated part
       //request->send(200, "text/html", finalhtml);
       request->send(200, "text/html", String(urlplay_html));
       //request->send(STORAGE, "/playurl.html", "text/html");
@@ -10354,7 +10380,7 @@ void setup()
     {
       if (!request->hasParam("filename")) 
       {
-          request->send(400, "text/plain", "Brak parametru filename");
+          request->send(400, "text/plain", "Missing filename parameter");
           return;
       }
 
@@ -10362,7 +10388,7 @@ void setup()
       if (!filename.startsWith("/")) { filename = "/" + filename;}
       File file = STORAGE.open(filename, FILE_READ);
       if (!file) {
-          request->send(404, "text/plain", "Nie można otworzyć pliku");
+          request->send(404, "text/plain", "Cannot open file");
           return;
       }
 
@@ -10690,10 +10716,10 @@ void setup()
       
       saveAdcConfig(); 
        
-      //ODswiezenie ekranu OLED po zmianach konfiguracji
-      ir_code = rcCmdBack; // Udajemy kod pilota Back
+      //Refreshing the OLED screen after configuration changes
+      ir_code = rcCmdBack; // We pretend to be the remote control code Back
       bit_count = 32;
-      calcNec();          // Przeliczamy kod pilota na pełny oryginalny kod NEC
+      calcNec();          // We convert the remote control code into the full original NEC code
     });
 
     server.on("/configupdate", HTTP_POST, [](AsyncWebServerRequest *request) 
@@ -10703,7 +10729,7 @@ void setup()
       if (request->hasParam("dimmerSleepDisplayBrightness", true)) {dimmerSleepDisplayBrightness = request->getParam("dimmerSleepDisplayBrightness", true)->value().toInt();}
       if (request->hasParam("displayAutoDimmerTime", true)) {displayAutoDimmerTime = request->getParam("displayAutoDimmerTime", true)->value().toInt();}
 
-      //  CHECKBOXY – ZAWSZE 0 lub 1
+      //  CHECKBOXES – ALWAYS 0 or 1
       //displayAutoDimmerOn = request->hasParam("displayAutoDimmerOn", true) ? true : false;
       displayAutoDimmerOn        = request->hasParam("displayAutoDimmerOn", true);
       timeVoiceInfoEveryHour     = request->hasParam("timeVoiceInfoEveryHour", true);
@@ -10720,8 +10746,8 @@ void setup()
       f_powerOffAnimation        = request->hasParam("f_powerOffAnimation", true);
       f_Presets                  = request->hasParam("f_Presets", true);
 
-      // Jeśli parametr istnieje checkbox był zaznaczony to TRUE
-      // Jeśli go nie ma checkbox nie był zaznaczony to FALSE
+      // If the parameter exists and the checkbox was checked, then TRUE
+      // If it is not there and the checkbox was not checked, then FALSE
 
       if (request->hasParam("vuMeterMode", true)) {vuMeterMode = request->getParam("vuMeterMode", true)->value().toInt();}
       if (request->hasParam("encoderFunctionOrder", true)) {encoderFunctionOrder = request->getParam("encoderFunctionOrder", true)->value().toInt();}
@@ -10737,9 +10763,9 @@ void setup()
       //clearFlags();
       
       //Refresh
-      ir_code = rcCmdBack; // Udajemy kod pilota Back
+      ir_code = rcCmdBack; // We pretend to be the remote control code Back
       bit_count = 32;
-      calcNec();          // Przeliczamy kod pilota na pełny oryginalny kod NEC
+      calcNec();          // We convert the remote control code into the full original NEC code
 
       //request->send(200, "text/html","<h1>Config Updated!</h1><a href='/menu'>Go Back</a>");
       request->send(200, "text/html","<!DOCTYPE html><html><head><meta http-equiv='refresh' content='2;url=/'></head><body><h1>Config Updated!</h1></body></html>");
@@ -10747,7 +10773,7 @@ void setup()
     
     server.on("/toggleAdcDebug", HTTP_POST, [](AsyncWebServerRequest *request) 
     {
-      // Przełączanie wartości
+      // Switching values
       u8g2.clearBuffer();
       displayActive = true;
       displayStartTime = millis();
@@ -10755,14 +10781,14 @@ void setup()
       //adcKeyboardEnabled = !adcKeyboardEnabled;
       Serial.print("ADC ON/OFF value measurement:");
       Serial.println(debugKeyboard);
-      request->send(200, "text/plain", debugKeyboard ? "1" : "0"); // Wysyłanie aktualnej wartości
+      request->send(200, "text/plain", debugKeyboard ? "1" : "0"); // Sending current value
       //debugKeyboard = !debugKeyboard;
       
       if (debugKeyboard == 0)
       {
-        ir_code = rcCmdBack; // Przypisujemy kod polecenia z pilota
-        bit_count = 32; // ustawiamy informacje, ze mamy pelen kod NEC do analizy 
-        calcNec();  // przeliczamy kod pilota na kod oryginalny pełen kod NEC  
+        ir_code = rcCmdBack; // We assign the command code from the remote control
+        bit_count = 32; // we set the information that we have the full NEC code for analysis 
+        calcNec();  // we convert the remote control code to the original full NEC code 
       }
         
     });
@@ -10783,10 +10809,10 @@ void setup()
     
     server.on("/mute", HTTP_POST, [](AsyncWebServerRequest *request) 
     {
-      ir_code = rcCmdMute; // Przypisujemy kod polecenia z pilota
-      bit_count = 32; // ustawiamy informacje, ze mamy pelen kod NEC do analizy 
-      calcNec();  // przeliczamy kod pilota na kod oryginalny pełen kod NEC 
-      request->send(204);       // brak odpowiedzi (204)    
+      ir_code = rcCmdMute; // We assign the command code from the remote control
+      bit_count = 32; // we set the information that we have the full NEC code for analysis
+      calcNec();  // we convert the remote control code to the original full NEC code 
+      request->send(204);       // no response (204)    
     });
     
 
@@ -10819,7 +10845,7 @@ void setup()
         request->send(400, "text/plain", "No file name");
       }
     });
-    // Format viewweb ver2 na potrzeby zewnetrznego Edytora Bankow HTML
+    // Format view web ver2 for external HTML Bank Editor
     server.on("/viewweb2", HTTP_GET, [](AsyncWebServerRequest *request)  
     {
       String filename = "/";
@@ -10866,7 +10892,7 @@ void setup()
           return;
       }
 
-      // Tworzymy odpowiedź strumieniową tekstową
+      // We create a text streaming response
       AsyncWebServerResponse *response = request->beginResponseStream("text/plain");
       AsyncWebServerResponseStream *stream = static_cast<AsyncWebServerResponseStream*>(response);
 
@@ -10956,8 +10982,8 @@ void setup()
       Serial.print("Upload File Name: ");
       Serial.println(filename);
 
-      // Otwórz plik na karcie SD
-      static File file; // Użyj statycznej zmiennej do otwierania pliku tylko raz
+      // Open file on SD card
+      static File file; // Use a static variable to open a file only once
       if (index == 0) {
           file = STORAGE.open(filename, FILE_WRITE);
           if (!file) {
@@ -10967,7 +10993,7 @@ void setup()
           }
       }
 
-      // Zapisz dane do pliku
+      // Save data to file
       size_t written = file.write(data, len);
       if (written != len) {
           Serial.println("Error writing data to file");
@@ -10976,7 +11002,7 @@ void setup()
           return;
       }
 
-      // Jeśli to ostatni fragment, zamknij plik i wyślij odpowiedź do klienta
+      // If this is the last fragment, close the file and send the response to the client
       if (final) {
           file.close();
           Serial.println("File upload completed successfully.");
@@ -11055,8 +11081,8 @@ void setup()
     ws.onEvent(onWsEvent);
     server.addHandler(&ws);
     server.begin();
-    currentSelection = station_nr - 1; // ustawiamy stacje na liscie na obecnie odtwarzaczną przy starcie radia
-    firstVisibleLine = currentSelection + 1; // pierwsza widoczna lina to grająca stacja przy starcie
+    currentSelection = station_nr - 1; // we set the stations on the list to the one currently playing when the radio starts
+    firstVisibleLine = currentSelection + 1; // the first visible line is the playing station at the start
     if (currentSelection + 1 >= stationsCount - 1) 
     {
       firstVisibleLine = currentSelection - 3;
@@ -11067,7 +11093,7 @@ void setup()
     timer4.detach();
     switchOffstartupLED();
     //fadeInVolume
-    // Ograniczenie mocy WiFI, wyłaczenie sleep
+    // Limiting Wi-Fi power, disabling sleep
     //WiFi.setTxPower(WIFI_POWER_8_5dBm);
     //esp_wifi_set_bandwidth(WIFI_IF_AP, WIFI_BW_HT20);
     //WiFi.bandwidth(WIFI_BW_HT20);
@@ -11075,10 +11101,10 @@ void setup()
   else 
   {
     timer4.attach(0.2, updateStandbyLED);
-    Serial.println("No WiFi connection");  // W przypadku braku polaczenia wifi - wyslij komunikat na serial
+    Serial.println("No WiFi connection");  // If there is no Wi-Fi connection - send a message to the serial
     u8g2.clearBuffer();
     u8g2.setFont(spleen6x12PL);
-    u8g2.drawStr(5, 13, "No network connection");  // W przypadku braku polaczenia wifi - wyswietl komunikat na wyswietlaczu OLED
+    u8g2.drawStr(5, 13, "No network connection");  // If there is no Wi-Fi connection - display a message on the OLED display
     u8g2.drawStr(5, 26, "Connect to WiFi: ESP Internet Radio");
     u8g2.drawStr(5, 39, "Open web page http://192.168.4.1");
     u8g2.sendBuffer();
@@ -11087,29 +11113,29 @@ void setup()
       wifiManager.process(); 
     
 
-      /*---------------------  FUNKCJA PILOT IR w trybie BRAK WiFI ---------------------*/ 
-      if (bit_count == 32) // sprawdzamy czy odczytalismy w przerwaniu pełne 32 bity kodu IR NEC
+      /*---------------------  IR REMOTE FUNCTION in NO Wi-Fi mode ---------------------*/ 
+      if (bit_count == 32) // swe check whether we have read the full 32 bits of the NEC IR code in the interrupt
       {
-        if (ir_code != 0) // sprawdzamy czy zmienna ir_code nie jest równa 0
+        if (ir_code != 0) // we check whether the ir_code variable is not equal to 0
         {
           
-          detachInterrupt(recv_pin);            // Rozpinamy przerwanie
+          detachInterrupt(recv_pin);            // We unbind the interrupt
           Serial.print("debug IR -> Code NEC OK:");
           Serial.print(ir_code, HEX);
-          ir_code = reverse_bits(ir_code,32);   // Rotacja bitów - zmiana porządku z LSB-MSB na MSB-LSB
+          ir_code = reverse_bits(ir_code,32);   // Bit rotation - changing the order from LSB-MSB to MSB-LSB
           Serial.print("  MSB-LSB: ");
           Serial.print(ir_code, HEX);
         
-          uint8_t CMD = (ir_code >> 16) & 0xFF; // Drugi bajt (inwersja adresu)
-          uint8_t ADDR = ir_code & 0xFF;        // Czwarty bajt (inwersja komendy)
+          uint8_t CMD = (ir_code >> 16) & 0xFF; // Second byte (address inversion)
+          uint8_t ADDR = ir_code & 0xFF;        // Fourth byte (command inversion)
           
           Serial.print("  ADR:");
           Serial.print(ADDR, HEX);
           Serial.print(" CMD:");
           Serial.println(CMD, HEX);
-          ir_code = ADDR << 8 | CMD;      // Łączymy ADDR i CMD w jedną zmienną 0x ADR CMD
+          ir_code = ADDR << 8 | CMD;      // We combine ADDR and CMD into one variable 0x ADR CMD
 
-          // Info o przebiegach czasowytch kodu pilota IR
+          // Info about the timing of the IR remote control code
           Serial.print("debug IR -> puls 9ms:"); 
           Serial.print(pulse_duration_9ms);
           Serial.print("  4.5ms:");
@@ -11119,7 +11145,7 @@ void setup()
           Serial.print("  560us:");
           Serial.println(pulse_duration_560us);
 
-          fwupd = false;        // Kasujemy flagę aktulizacji OTA gdyby była ustawiona
+          fwupd = false;        // We clear the OTA update flag if it was set
           displayPowerSave(0);
           
           if (ir_code == rcCmdPower) 
@@ -11131,7 +11157,7 @@ void setup()
           {
             displayCenterBigText("RESTART",36);
             delay(2000);
-            REG_WRITE(RTC_CNTL_OPTIONS0_REG, RTC_CNTL_SW_SYS_RST); // Restart pełen sprzętowy jak z przycisku reset
+            REG_WRITE(RTC_CNTL_OPTIONS0_REG, RTC_CNTL_SW_SYS_RST); // Full hardware restart as with the reset button
           }
                     
           else { Serial.println("Another button"); }
@@ -11153,7 +11179,7 @@ void setup()
         attachInterrupt(digitalPinToInterrupt(recv_pin), pulseISR, CHANGE);  
       } 
 
-      /*---------------------  FUNKCJA INFORMACJA O PODLACZENI i RESET ---------------------*/ 
+      /*---------------------  CONNECTION INFORMATION and RESET FUNCTION ---------------------*/ 
       if (WiFi.status() == WL_CONNECTED)
       {
         timer4.attach(0.5, updateStandbyLED);
@@ -11164,44 +11190,45 @@ void setup()
         u8g2.drawStr(1, 62, "Wait, reseting...");
         u8g2.sendBuffer();
         delay(2000);
-        REG_WRITE(RTC_CNTL_OPTIONS0_REG, RTC_CNTL_SW_SYS_RST); // Restart pełen sprzętowy jak z przycisku reset
+        REG_WRITE(RTC_CNTL_OPTIONS0_REG, RTC_CNTL_SW_SYS_RST); // Full hardware restart as with the reset button
       }
     
-    } // Nieskonczona petla z procesowaniem Wifi aby nie przejsc do ekranu radia gdy nie ma Wifi
+    } // Infinite loop with Wifi processing to avoid going to radio screen when Wifi is not available
   }
 }
 // #######################################################################################  LOOP  ####################################################################################### //
 void loop() 
+
 {
   runTime1 = esp_timer_get_time();
-  audio.loop();           // Wykonuje główną pętlę dla obiektu audio
-  button2.loop();         // Wykonuje pętlę dla obiektu button2 (sprawdza stan przycisku z enkodera 2)
-  handleButtons();        // Wywołuje dodatkowe funkcję obsługującą przyciski enkoderow
-  handleFadeIn();         // Obsługa sciszania stacji przy przełaczaniu
+  audio.loop();           // Performs the main loop for an audio object
+  button2.loop();         // Loops for button2 object (checks button state from encoder 2)
+  handleButtons();        // Calls an additional function that handles encoder buttons.
+  handleFadeIn();         // Support for muting stations when switching
   
   #ifdef SERIALCOM
     handleSerialRX();
   #endif
   
-  vTaskDelay(2);          // Krótkie opóźnienie, oddaje czas procesora innym zadaniom
+  vTaskDelay(2);          // Short latency, frees up CPU time for other tasks
   
-  /*---------------------  FUNKCJA PILOT IR  / Obsluga pilota IR w kodzie NEC ---------------------*/ 
+  /*---------------------  IR REMOTE FUNCTION / IR remote control support in NEC code ---------------------*/ 
   handleRemote();         
 
-  /*-- FUNKCJA KLAWIATURA / Odczyt stanu klawiatura ADC pod GPIO 9 ---------------------*/
-  if ((millis() - keyboardLastSampleTime >= keyboardSampleDelay) && (adcKeyboardEnabled)) // Sprawdzenie ADC - klawiatury 
+  /*-- KEYBOARD FUNCTION / Reading the ADC keyboard status under GPIO 9 ---------------------*/
+  if ((millis() - keyboardLastSampleTime >= keyboardSampleDelay) && (adcKeyboardEnabled)) // ADC - keyboard check 
   {
     keyboardLastSampleTime = millis();
     handleKeyboard();
   }
     
-  /*-- ENKODER 1 - obsluga opcjonlanego enkodera 1 ---------------------*/
+  /*-- ENCODER 1 - support for optional encoder 1 ---------------------*/
   #ifdef twoEncoders
     button1.loop();
     handleEncoder1();
   #endif
 
-  /*-- ENKODER 2 - Podstaowy, obsluga enkodera 2 ---------------------*/
+  /*-- ENCODER 2 - Basic, encoder 2 support ---------------------*/
   if (encoderFunctionOrder) { handleEncoder2StationsVolumeClick();} else {handleEncoder2VolumeStationsClick();}
 
 
@@ -11213,32 +11240,32 @@ void loop()
     if (digitalRead(SW_POWER) == LOW) {powerOff();}
   #endif
 
-  /*---------------------  FUNKCJA DIMMER ---------------------*/
+  /*---------------------  DIMMER FUNCTION ---------------------*/
   if ((displayActive == true) && (displayDimmerActive == true) && (fwupd == false)) {displayDimmer(0);}  
 
-  /*---------------------  FUNKCJA BACK / POWROTU ze wszystkich opcji Menu, Ustawien, itd ---------------------*/
-  if ((fwupd == false) && (displayActive) && (millis() - displayStartTime >= displayTimeout))  // Przywracanie poprzedniej zawartości ekranu po 6 sekundach
+  /*---------------------  BACK FUNCTION from all Menu options, Settings, etc. ---------------------*/
+  if ((fwupd == false) && (displayActive) && (millis() - displayStartTime >= displayTimeout))  // Restore previous screen content after 6 seconds
   {
     if (volumeBufferValue != volumeValue && f_saveVolumeStationAlways) { saveVolumeOnSD(); }    
-    if ((rcInputDigitsMenuEnable == true) && (station_nr != stationFromBuffer)) { changeStation(); }  // Jezeli nastapiła zmiana numeru stacji to wczytujemy nową stacje
+    if ((rcInputDigitsMenuEnable == true) && (station_nr != stationFromBuffer)) { changeStation(); }  // If the station number has changed, we load the new station
     
     displayDimmer(0); 
     clearFlags();
     displayRadio();
     u8g2.sendBuffer();
     
-    // Przywracamy zaznaczenie obecnie grajacej stacji
+    // We restore the highlighting of the currently playing station
     currentSelection = station_nr - 1; 
     //if (maxSelection() - currentSelection < maxVisibleLines) {firstVisibleLine = maxSelection() - 3;} else {firstVisibleLine = currentSelection;}
   }
 
 
-  /*---------------------  FUNKCJA PETLI MILLIS SCROLLER / Odswiezanie VU Meter, Time, Scroller, OLED, WiFi ver. 1 ---------------------*/ 
+  /*---------------------  MILLIS SCROLLER LOOP FUNCTION / Refresh VU Meter, Time, Scroller, OLED, WiFi ver. 1 ---------------------*/ 
   if ((millis() - scrollingStationStringTime > scrollingRefresh) && (displayActive == false)) 
   {
     scrollingStationStringTime = millis();
     
-    if (ActionNeedUpdateTime == true) // Aktualizacja zegara, zegar głosowy, debug Audio, sygnał wifi 
+    if (ActionNeedUpdateTime == true) // Clock Update, Voice Clock, Audio Debug, Wi-Fi Signal
     {
       ActionNeedUpdateTime = false;
       updateTime();
@@ -11246,7 +11273,7 @@ void loop()
       if (f_requestVoiceTimePlay == true) // Voice clock, we check if the clock flag is set at the full hour
       {
         f_requestVoiceTimePlay = false;
-        voiceTime();
+        voiceTimeNL();  //change this line to voiceTimeEN() for english clock speach or voiceTime for Polisch
       }
 
       if (debugAudioBuffor == true) {bufforAudioInfo();}
@@ -11259,10 +11286,10 @@ void loop()
       if (wifiSignalLevel != wifiSignalLevelLast) {wifiSignalLevelLast = wifiSignalLevel; wsSignalLevel();}
 
 
-      if ((f_audioInfoRefreshStationString == true) && (displayActive == false)) // Zmiana streamtitle - wymaga odswiezenia na wyswietlaczu
+      if ((f_audioInfoRefreshStationString == true) && (displayActive == false)) // Changing the stream title - requires refreshing the display
       { 
         f_audioInfoRefreshStationString = false; //NewAudioInfoSSF
-        stationStringFormatting(); // Formatujemy StationString do wyswietlenia przez Scroller
+        stationStringFormatting(); // We format the StationString to be displayed by the Scroller
       } 
 
       if ((f_audioInfoRefreshDisplayRadio == true) && (displayActive == false)) //&& (f_requestVoiceTimePlay == false) Changing the bitrate - requires refreshing the display
@@ -11272,7 +11299,7 @@ void loop()
         displayRadio();
       } 
       
-      if (wsAudioRefresh == true) // Web Socket StremInfo wymaga odswiezenia
+      if (wsAudioRefresh == true) // StremInfo websocket needs a refresh
       {
         wsAudioRefresh = false;
         wsStreamInfoRefresh();
@@ -11280,7 +11307,7 @@ void loop()
       
     }
 
-    if (volumeMute == false) // Jezeli mute OFF to rysujemy VU
+    if (volumeMute == false) // If mute OFF we draw VU
     {
       if (vuMeterOn)
       { 
@@ -11289,7 +11316,7 @@ void loop()
         if (displayMode == 4) 
         {
           vuMeterMode4(); 
-          if (debugAudioBuffor) // Wskaznik bufora audio w trybie wskaznikow analogowych
+          if (debugAudioBuffor) // Audio buffer indicator in analog indicator mode
           {
             for (int i = 0; i < 10; i++) 
             {
@@ -11303,7 +11330,7 @@ void loop()
       }
       else if (displayMode == 0) {showIP(1,47);} //y = vuRy
     }
-    else // Jesli MUTE to zamiast VU wprowadzamy napis MUTE na ekran
+    else // If MUTE, instead of VU we enter the MUTE inscription on the screen
     {
       u8g2.setDrawColor(0);
       if (displayMode == 0) {u8g2.drawStr(0,48, "> MUTED <");}
@@ -11315,15 +11342,15 @@ void loop()
     }  
 
        
-    if (urlToPlay == true) // Jesli web serwer ustawił flagę "odtwarzaj URL" to uruchamiamy funkcje odtwarzania z adresu URL wysłanego przez strone WWW
+    if (urlToPlay == true) // If the web server has set the "play URL" flag, we run the playback function from the URL sent by the website.
     {
       urlToPlay = false;
       webUrlStationPlay();
       displayRadio();
     }
     
-    displayRadioScroller();  // wykonujemy przewijanie tekstu station stringi przygotowujemy bufor ekranu
-    u8g2.sendBuffer();  // rysujemy całą zawartosc ekranu.
+    displayRadioScroller();  // we perform text scrolling station strings we prepare screen buffer
+    u8g2.sendBuffer();  // we draw the entire contents of the screen.
     
     //if (f_callInfo) {f_callInfo = false; displayInfo();}  
     
