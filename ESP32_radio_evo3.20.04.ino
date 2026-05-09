@@ -43,7 +43,7 @@
 #include "soc/rtc_cntl_struct.h"// ESP libraries to be able to do a full reset 
 #include <esp_sleep.h>
 #include "esp_system.h"
-
+// #include <IRremoteESP8266.h>
 #include "esp_heap_caps.h"
 
 //#include "rom/gpio.h"     // CS_SD pin mapping library
@@ -251,8 +251,8 @@ static const char* months[] = {
     "MAART",
     "APRIL",
     "MEI",
-    "JUNi",
-    "JULY",
+    "JUNI",
+    "JULI",
     "AUGUSTUS",
     "SEPTEMBER",
     "OKTOBER",
@@ -999,7 +999,7 @@ const char index_html[] PROGMEM = R"rawliteral(
       numCell.classList.add("stationNumberListSelected");
       stationCell.classList.add("stationListSelected");
       
-      // Pogrub nazwę stacji
+      // Bold the station name
       stationCell.dataset.stationName = stationCell.innerText; // save the original text
       stationCell.innerHTML = `<b>${stationCell.innerText}</b>`; // bold station name
 
@@ -1009,7 +1009,7 @@ const char index_html[] PROGMEM = R"rawliteral(
       //stationCell.style.fontWeight = "bold";
 
         
-      // Pogrub numer
+      // Bold the numberr
       numCell.dataset.stationNumber = numCell.innerText; // write down the original number
       numCell.innerHTML = `<b>${numCell.innerText}</b>`; 
       //const originalNum = numCell.dataset.originalNumber || numCell.innerText;
@@ -2474,7 +2474,7 @@ void mDnsRestart()
   if (!MDNS.isRunning()) 
   {
     Serial.println("debug net -> Error: mDNS not working");
-    MDNS.end();                // zatrzymuje stare mDNS
+    MDNS.end();                // keeps old mDNS
     delay(50);
     if (MDNS.begin(hostname)) {Serial.println("debug net -> mDNS restarted!");} 
     else {Serial.println("debug net -> mDNS restart error");}
@@ -2632,9 +2632,9 @@ bool sanitizeUtf8(String& s)
 
   if (out != s) {
     s = out;
-    return true;   // coś poprawiono
+    return true;   // something has been improved
   }
-  return false;    // było OK
+  return false;    // it was OK
 }
 
 void wsStationChange(uint8_t stationId, uint8_t bankId) 
@@ -2728,8 +2728,8 @@ void wsStreamInfoRefresh()
 
 void wsVolumeChange()  
 {
-  ws.textAll("volume:" + String(volumeValue)); // wysyła wartosc volume do wszystkich połączonych klientów
-  ws.textAll("mute:" + String(volumeMute)); // wysyła wartosc mute do wszystkich połączonych klientów
+  ws.textAll("volume:" + String(volumeValue)); // sends the volume value to all connected clients
+  ws.textAll("mute:" + String(volumeMute)); // sends the mute value to all connected clients
 }
 
 void wsIrCodeClear()
@@ -2741,7 +2741,7 @@ void wsIrCodeClear()
   }
 }
 
-// WebSockets do nauki pilota
+// WebSockets for learning remote control
 void wsIrCode(uint16_t code, uint8_t add, uint8_t cm)
 {
   char buf1[7];                    
@@ -2772,22 +2772,22 @@ void wsIrCode(uint16_t code, uint8_t add, uint8_t cm)
 
 void wsSignalLevel()
 {
-  ws.textAll("wifi:" + String(wifiSignalLevel)); // wysyła wartosc sygnalu wifi do wszystkich połączonych klientów
+  ws.textAll("wifi:" + String(wifiSignalLevel)); // sends the Wi-Fi signal value to all connected clients
 }
 
-//Funkcja odpowiedzialna za zapisywanie informacji o stacji do pamięci PSRAM
+//The function responsible for saving station information to the PSRAM memory
 void saveStationToPSRAM(const char *station) 
 {
   
-  // Sprawdź, czy istnieje jeszcze miejsce na kolejną stację w pamięci PSRAM
+  // Check if there is still room for another station in the PSRAM memory
   if (stationsCount < MAX_STATIONS) {
     int length = strlen(station);
 
-    // Sprawdź, czy długość linku nie przekracza ustalonego maksimum.
+    // Check that the link length does not exceed the established maximum.
     if (length <= STATION_NAME_LENGTH) {
       // Zapisz długość linku jako pierwszy bajt.
       psramData[stationsCount * (STATION_NAME_LENGTH + 1)] = length;
-      // Zapisz link jako kolejne bajty w pamięci PSRAM
+      // Save the link as consecutive bytes in PSRAM
       for (int i = 0; i < length; i++) 
       {
         psramData[stationsCount * (STATION_NAME_LENGTH + 1) + 1 + i] = station[i];
@@ -2796,56 +2796,56 @@ void saveStationToPSRAM(const char *station)
       // Print information about the saved station on Serial.
       Serial.println(String(stationsCount + 1) + "   " + String(station));  // Printing on the serial from number 1 like in a bank on the server
 
-      // Zwiększ licznik zapisanych stacji.
+      // Increase the saved stations counter.
       stationsCount++;
 
-      // progress bar pobieranych stacji
+      // progress bar of downloaded stations
       u8g2.setFont(spleen6x12PL);  
       u8g2.drawStr(21, 36, "Progress:");
       //u8g2.drawStr(21, 36, "Loading: ");
-      u8g2.drawStr(75, 36, String(stationsCount).c_str());  // Napisz licznik pobranych stacji
+      u8g2.drawStr(75, 36, String(stationsCount).c_str());  // Write the counter of downloaded stations
 
-      u8g2.drawRFrame(21, 42, 212, 12, 3);  // Ramka paska postępu ladowania stacji stacji w>8 h>8
+      u8g2.drawRFrame(21, 42, 212, 12, 3);  // Station loading progress bar frame w>8 h>8
       
-      int x = (stationsCount * 2) + 8;          // Dodajemy gdy stationCount=1 + 8 aby utrzymac warunek dla zaokrąglonego drawRBox - szerokość W>6 h>6 ma byc W>=2*(r+1), h >= 2*(r+1)
-      u8g2.drawRBox(23, 44, x, 8, 2);       // Pasek postepu ladowania stacji z serwera lub karty SD / SPIFFS       
+      int x = (stationsCount * 2) + 8;          // We add when stationCount=1 + 8 to maintain the condition for rounded drawRBox - width W>6 h>6 has to be W>=2*(r+1), h >= 2*(r+1)
+      u8g2.drawRBox(23, 44, x, 8, 2);       // Progress bar for loading the station from the server or SD card / SPIFFS       
       
       u8g2.sendBuffer();  
     } else {
-      // Informacja o błędzie w przypadku zbyt długiego linku do stacji.
+      // Error message if the link to the station is too long.
       Serial.println("Error: Station link is too long");
     }
   } else {
-    // Informacja o błędzie w przypadku osiągnięcia maksymalnej liczby stacji.
+    // Error message when the maximum number of stations is reached.
     Serial.println("Error: Maximum number of saved stations reached");
   }
 }
 
-// Funkcja przetwarza i zapisuje stację do pamięci PSRAM
+// The function processes and saves the station to the PSRAM memory
 void sanitizeAndSaveStation(const char *station) {
-  // Bufor na przetworzoną stację - o jeden znak dłuższy niż maksymalna długość linku
+  // Buffer for processed station - one character longer than the maximum link length
   char sanitizedStation[STATION_NAME_LENGTH + 1];
 
-  // Indeks pomocniczy dla przetwarzania
+  // Auxiliary index for processing
   int j = 0;
 
-  // Przeglądaj każdy znak stacji i sprawdź czy jest to drukowalny znak ASCII
+  // Browse through each station character and check if it is a printable ASCII character
   for (int i = 0; i < STATION_NAME_LENGTH && station[i] != '\0'; i++) {
-    // Sprawdź, czy znak jest drukowalnym znakiem ASCII
+    // Check if the character is a printable ASCII character
     if (isprint(station[i])) {
-      // Jeśli tak, dodaj do przetworzonej stacji
+      // If so, add to processed station
       sanitizedStation[j++] = station[i];
     }
   }
 
-  // Dodaj znak końca ciągu do przetworzonej stacji
+  // Add a terminating character to the processed station
   sanitizedStation[j] = '\0';
 
   // Zapisz przetworzoną stację do pamięci PSRAM
   saveStationToPSRAM(sanitizedStation);
 }
 
-// Odczyt banku z PIFFS lub karty SD (jesli dany bank istnieje juz na tej karcie)
+// Reading a bank from PIFFS or SD card (if the bank already exists on that card)
 void readSDStations() 
 {
   stationsCount = 0;
@@ -2853,25 +2853,25 @@ void readSDStations()
   mp3 = flac = aac = vorbis = opus = false;
   stationString.remove(0);  // Remove all characters from the stationString object
 
-  // Tworzymy nazwę pliku banku
+  // We create a bank file name
   String fileName = String("/bank") + (bank_nr < 10 ? "0" : "") + String(bank_nr) + ".txt";
 
-  // Sprawdzamy, czy plik istnieje
+  // We check if the file exists
   if (!STORAGE.exists(fileName)) 
   {
     Serial.println("Error: Bank file does not exist.");
     return;
   }
 
-  // Otwieramy plik w trybie do odczytu
+  // We open the file in read mode
   File bankFile = STORAGE.open(fileName, FILE_READ);
-  if (!bankFile)  // jesli brak pliku to...
+  if (!bankFile)  // if the file is missing then...
   {
     Serial.println("Error: Unable to open bank file.");
     return;
   }
 
-  // Przechodzimy do odpowiedniego wiersza pliku
+  // We go to the appropriate line of the file
   int currentLine = 0;
   String stationUrl = "";
 
@@ -2945,10 +2945,10 @@ void fetchStationsFromServer()
       return;
   }
 
-  // Tworzenie nazwy pliku dla danego banku
+  // Creating a file name for a given bank
   String fileName = String("/bank") + (bank_nr < 10 ? "0" : "") + String(bank_nr) + ".txt";
 
-  // ---------------------- JEŚLI PLIK ISTNIEJE ----------------------
+  // ---------------------- IF FILE EXISTS ----------------------
   if (STORAGE.exists(fileName) && bankNetworkUpdate == false) 
   {
     Serial.println("debug SD -> Bank file " + fileName + " already exists.");
@@ -2956,7 +2956,7 @@ void fetchStationsFromServer()
     u8g2.print(storageTextName); 
     u8g2.sendBuffer();
 
-    readSDStations(); // Jesli dany plik banku istnieje to odczytujemy go TYLKO z karty
+    readSDStations(); // If a given bank file exists, we read it ONLY from the card
     wsRefreshPage();
     return;
   }
@@ -2966,13 +2966,13 @@ void fetchStationsFromServer()
   u8g2.print("GitHub");
   u8g2.sendBuffer();
 
-  // ---------------------- TWORZENIE PUSTEGO PLIKU ----------------------
+  // ---------------------- CREATING AN EMPTY FILE ----------------------
   {
     File bankFile = STORAGE.open(fileName, FILE_WRITE);
     if (bankFile) 
     {
       Serial.println("debug SD -> Bank file created: " + fileName);
-      bankFile.close(); // Zamykanie pliku po utworzeniu
+      bankFile.close(); // Closing the file after creation
     } 
     else 
     {
@@ -2980,7 +2980,7 @@ void fetchStationsFromServer()
     }
   }
 
-  // ---------------------- POBIERANIE DANYCH HTTP ----------------------
+  // ---------------------- HTTP DATA DOWNLOAD ----------------------
 
   Serial.println("debug http -> Downloading URL: " + url);
 
@@ -3029,12 +3029,12 @@ void fetchStationsFromServer()
     return;
   }
 
-  // ---------------------- POBRANIE GETSTRING ----------------------
+  // ---------------------- GETSTRING DOWNLOAD ----------------------
   String payload = http.getString();
 
   Serial.println("debug http -> Length of downloaded data: " + String(payload.length()));
 
-  // Zabezpieczenie przed pustym stringiem
+  // Protection against empty string
   if (payload.length() == 0) 
   {
     Serial.println("debug http -> ERROR! Download returned empty payload. Deleting file.");
@@ -3043,7 +3043,7 @@ void fetchStationsFromServer()
     return;
   }
 
-  // ---------------------- ZAPIS DO PLIKU ----------------------
+  // ---------------------- WRITING TO FILE ----------------------
   File bankFile = STORAGE.open(fileName, FILE_WRITE);
   if (bankFile) 
   {
@@ -3076,7 +3076,7 @@ void fetchStationsFromServer()
 }
 
 
-void readEEPROM() // Funkcja kontrolna DEBUG odczytu EEPROMu, nie uzywan przez inne funkcje
+void readEEPROM() // DEBUG control function for reading EEPROM, not used by other functions
 {
   EEPROM.get(0, station_nr);
   EEPROM.get(1, bank_nr);
@@ -3084,60 +3084,60 @@ void readEEPROM() // Funkcja kontrolna DEBUG odczytu EEPROMu, nie uzywan przez i
 }
 
 
-void calcNec() // Funkcja umozliwajaca przeliczanie odwrotne aby "udawac" przyciski pilota IR w standardzie NEC
+void calcNec() // A function that allows reverse conversion to "imitate" NEC IR remote control buttons.
 {
-  //składamy kod pilota do postaci ADDR/CMD/CMD/ADDR aby miec 4 bajty
+  // we compose the remote control code in the form ADDR/CMD/CMD/ADDR to have 4 bytes
   uint8_t CMD = (ir_code >> 8) & 0xFF; 
   uint8_t ADDR = ir_code & 0xFF;        
   ir_code =  ADDR;
   ir_code = (ir_code << 8) | CMD;
   ir_code = (ir_code << 8) | CMD;
   ir_code = (ir_code << 8) | ADDR;
-  ADDR = (ir_code >> 24) & 0xFF;           // Pierwszy bajt
-  uint8_t IADDR = (ir_code >> 16) & 0xFF; // Drugi bajt (inwersja adresu)
-  CMD = (ir_code >> 8) & 0xFF;            // Trzeci bajt (komenda)
-  uint8_t ICMD = ir_code & 0xFF;          // Czwarty bajt (inwersja komendy)
+  ADDR = (ir_code >> 24) & 0xFF;           // First byte
+  uint8_t IADDR = (ir_code >> 16) & 0xFF; // Second byte (address inversion)
+  CMD = (ir_code >> 8) & 0xFF;            // Third byte (command)
+  uint8_t ICMD = ir_code & 0xFF;          // Fourth byte (command inversion)
   
-  // Dorabiamy brakujące odwórcone bajty 
+  // We are making up the missing reversed bytes
   IADDR = IADDR ^ 0xFF;
   ICMD = ICMD ^ 0xFF;
 
-  // Składamy bajty w jeden ciąg          
+  // We put the bytes together into one string         
   ir_code =  ICMD;
   ir_code = (ir_code << 8) | ADDR;
   ir_code = (ir_code << 8) | IADDR;
   ir_code = (ir_code << 8) | CMD;
-  ir_code = reverse_bits(ir_code,32);     // rotacja bitów do porządku LSB-MSB jak w NEC        
+  ir_code = reverse_bits(ir_code,32);     // bit rotation to LSB-MSB order as in NEC       
 }
 
 
-// Funkcja formatowania dla scorllera stationString/stationName  **** stationStringScroll ****
+// Formatting function for scorler stationString/stationName **** stationStringScroll ****
 void stationStringFormatting() 
 {
-  // ----------- MODE 0 - > STACJA, Stream, dwa wskazniki VU, linijka status na dole -----------
+  // ----------- MODE 0 -> STATION, Stream, two VU meters, status bar at the bottom -----------
   if (displayMode == 0) 
   {   
-    if (stationString == "") // Jeżeli stationString jest pusty i stacja go nie nadaje to podmieniamy pusty stationString na nazwę staji - stationNameStream
+    if (stationString == "") // If stationString is empty and the station does not transmit it, replace the empty stationString with the station name - stationNameStream
     {    
-      if (stationNameStream == "") // jezeli nie ma równiez stationName to wstawiamy 3 kreseczki
+      if (stationNameStream == "") // if there is no Station Name, we put 3 lines
       { 
         stationStringScroll = "---" ;
         stationStringWeb = "---" ;
       } 
-      else // jezeli jest station name to prawiamy w "-- NAZWA --" i wysylamy do scrollera
+      else // if there is a station name, we type "-- NAME --" and send it to the scroller
       { 
         stationStringScroll = ("-- " + stationNameStream + " --");
         stationStringWeb = ("-- " + stationNameStream + " --");
-      }  // Zmienna stationStringScroller przyjmuje wartość stationNameStream
+      }  // The stationStringScroller variable takes the value of stationNameStream
     }
-    else // Jezeli stationString zawiera dane to przypisujemy go do stationStringScroll do funkcji scrollera
+    else // If stationString contains data, we assign it to stationStringScroll to the scroller function
     {
       stationStringWeb = stationString;
-      processText(stationString);  // przetwarzamy polsie znaki
-      stationStringScroll = stationString + "    "; // dodajemy separator do przewijanego tekstu jesli się nie miesci na ekranie
+      processText(stationString);  // we process Polish characters
+      stationStringScroll = stationString + "    "; // we add a separator to the scrolling text if it does not fit on the screen
     }             
     
-    //Liczymy długość napisu stationStringScroll 
+    // We count the length of the stationStringScroll string
     stationStringScrollWidth = stationStringScroll.length() * 6;    
     if (f_debug_on) 
     {
@@ -3149,11 +3149,11 @@ void stationStringFormatting()
       Serial.println("@");
     }
   }
-  // ------ MODE1 - DUZY ZEGAR -------
-  else if (displayMode == 1) // Tryb wświetlania zegara z 1 linijką radia na dole
+  // ------ MODE1 - LARGE CLOCK -------
+  else if (displayMode == 1) // Clock display mode with 1 radio line at the bottom
   {
     char StationNrStr[4];
-    snprintf(StationNrStr, sizeof(StationNrStr), "%02d", station_nr);  //Formatowanie informacji o stacji i banku do postaci 00
+    snprintf(StationNrStr, sizeof(StationNrStr), "%02d", station_nr);  // Formatting station and bank information to 00
     
     if (urlPlaying) 
     {
@@ -3161,90 +3161,90 @@ void stationStringFormatting()
       StationNrStr[sizeof(StationNrStr) - 1] = '\0';  
     }
 
-    int StationNameEnd = stationName.indexOf("  "); // Wycinamy nazwe stacji tylko do miejsca podwojnej spacji 
+    int StationNameEnd = stationName.indexOf("  "); // We cut out the station name only up to the double space
     stationName = stationName.substring(0, StationNameEnd);
  
-    if (stationString == "")                // Jeżeli stationString jest pusty i stacja go nie nadaje
+    if (stationString == "")                // If stationString is empty and the station does not transmit it
     {   
-      if (stationNameStream == "")          // i jezeli nie ma równiez stationName
+      if (stationNameStream == "")          // and if there is no station name also
       {
         stationStringScroll = String(StationNrStr) + "." + stationName + ", ---" ;
         stationStringWeb = "---" ;
-      }      // wstawiamy trzy kreseczki do wyswietlenia
-      else  // jezeli jest brak "stationString" ale jest "stationName" to składamy NR.Nazwa stacji z pliku, nadawany stationNameStream + separator przerwy
+      }      // we insert three lines to display
+      else  // if there is no "stationString" but there is a "stationName" then we put together the NR. Station name from the file, transmitted stationNameStream + gap separator
       {       
         stationStringScroll = String(StationNrStr) + "." + stationName + ", " + stationNameStream + "     ";
         //stationStringScroll = String(StationNrStr) + "." + stationName;
 
-        // Obcinnanie scrollera do 43 znakow - ABY BYŁ STAŁY TEKST mode 1
+        // Truncating the scroller to 43 characters - TO MAKE IT FIXED TEXT mode 1
         //if (stationStringScroll.length() > 43) {stationStringScroll = stationStringScroll.substring(0,40) + "..."; }  
         stationStringWeb = stationNameStream;
       }
     }
-    else //stationString != "" -> ma wartość
+    else //stationString != "" -> has value
     {
       stationStringWeb = stationString;
-      processText(stationString);  // przetwarzamy polsie znaki
+      processText(stationString);  // we process Polish characters
       
       stationStringScroll = String(StationNrStr) + "." + stationName + ", " + stationString + "     "; 
       //stationStringScroll = String(StationNrStr) + "." + stationName; 
       
-      // Obcinnanie scrollera do 43 znakow - ABY BYŁ STAŁY TEKST mode 1
+      // Truncating the scroller to 43 characters - TO MAKE IT FIXED TEXT mode 1
       //stationStringScroll = String(StationNrStr) + "." + stationName + ", " + stationString; 
       //if (stationStringScroll.length() > 43) {stationStringScroll = stationStringScroll.substring(0,40) + "..."; }
       
       //Serial.println(stationStringScroll);
     }
-    //Serial.print("debug -> Display1 (zegar) stationStringScroll: ");
+    //Serial.print("debug -> Display1 (clock) stationStringScroll: ");
     //Serial.println(stationStringScroll);
 
-    //Liczymy długość napisu stationStringScrollWidth 
+    // We count the length of the stationStringScrollWidth string 
     stationStringScrollWidth = stationStringScroll.length() * 6;
   }
-  // ----------- MODE 2 ekran bez scrollera 3 linijki tekstu ----------- //
+  // ----------- MODE 2 screen without scroller 3 lines of text ----------- //
   else if (displayMode == 2)
   {             
-    // Jesli stacja nie nadaje stationString to podmieniamy pusty stationString na nazwę staji - stationNameStream
-    if (stationString == "") // Jeżeli stationString jest pusty i stacja go nie nadaje
+    // If the station does not transmit the station String, replace the empty station String with the station name - stationNameStream
+    if (stationString == "") // If stationString is empty and the station does not transmit it
     {    
-      if (stationNameStream == "") // jezeli nie ma równiez stationName
+      if (stationNameStream == "") // if there is no station name also
       { 
         stationStringScroll = "---" ;
         stationStringWeb = "---" ;
-      } // wstawiamy trzy kreseczki do wyswietlenia
-      else // jezeli jest station name to oprawiamy w "-- NAZWA --" i wysylamy do scrollera
+      } // we insert three lines to display
+      else // if there is a station name, we frame it in "-- NAME --" and send it to the scroller
       { 
         stationStringScroll = ("-- " + stationNameStream + " --");
         stationStringWeb = stationNameStream;
-      }  // Zmienna stationStringScroller przyjmuje wartość stationNameStream
+      }  // The stationStringScroller variable takes the value of stationNameStream
     }
-    else // Jezeli stationString zawiera dane to przypisujemy go do stationStringScroll do funkcji scrollera
+    else // If stationString contains data, we assign it to stationStringScroll to the scroller function
     {
       stationStringWeb = stationString;
-      processText(stationString);  // przetwarzamy polsie znaki
+      processText(stationString);  // we process Polish characters
       stationStringScroll = stationString;
     }  
   }
-  else if (displayMode == 3) // Tryb wświetlania mode 3 i mode 5 (małe spectrum)
+  else if (displayMode == 3) // Display mode mode 3 and mode 5 (small spectrum)
   {
-    if (stationString == "") // Jeżeli stationString jest pusty i stacja go nie nadaje to podmieniamy pusty stationString na nazwę staji - stationNameStream
+    if (stationString == "") // If stationString is empty and the station does not transmit it, replace the empty stationString with the station name - stationNameStream
     {    
-      if (stationNameStream == "") // jezeli nie ma równiez stationName to wstawiamy 3 kreseczki
+      if (stationNameStream == "") // if there is no Station Name, we put 3 lines
       { 
         stationStringScroll = "---" ;
         stationStringWeb = "---" ;
       } 
-      else // jezeli jest station name to oprawiamy w "-- NAZWA --" i wysylamy do scrollera
+      else // if there is a station name, we frame it in "-- NAME --" and send it to the scroller
       { 
         stationStringScroll = ("-- " + stationNameStream + " --");
         stationStringWeb = ("-- " + stationNameStream + " --");
-      }  // Zmienna stationStringScroller przyjmuje wartość stationNameStream
+      }  // The stationStringScroller variable takes the value of stationNameStream
     }
-    else // Jezeli stationString zawiera dane to przypisujemy go do stationStringScroll do funkcji scrollera
+    else // If stationString contains data, we assign it to stationStringScroll to the scroller function
     {
       stationStringWeb = stationString;
-      processText(stationString);  // przetwarzamy polsie znaki
-      stationStringScroll = "  " + stationString + "  " ; // Nie dodajemy separator do tekstu aby wyswietlał się rowno na srodku
+      processText(stationString);  // we process Polish characters
+      stationStringScroll = "  " + stationString + "  " ; // We do not add a separator to the text so that it displays evenly in the center
     }             
     //Liczymy długość napisu stationStringScroll 
     stationStringScrollWidth = stationStringScroll.length() * 6;
@@ -3252,26 +3252,26 @@ void stationStringFormatting()
     //Serial.print(stationStringScroll);
     //Serial.println("@");
   }
-  else if (displayMode == 4) // Tryb wświetlania mode 4 formater dla potrzeb Web
+  else if (displayMode == 4) // Display mode 4 formatter for web needs
   {
-    if (stationString == "") // Jeżeli stationString jest pusty i stacja go nie nadaje to podmieniamy pusty stationString na nazwę staji - stationNameStream
+    if (stationString == "") // If stationString is empty and the station does not transmit it, replace the empty stationString with the station name - stationNameStream
     {    
-      if (stationNameStream == "") // jezeli nie ma równiez stationName to wstawiamy 3 kreseczki
+      if (stationNameStream == "") // if there is no Station Name, we put 3 lines
       { 
         stationStringScroll = "---" ;
         stationStringWeb = "---" ;
       } 
-      else // jezeli jest station name to oprawiamy w "-- NAZWA --" i wysylamy do scrollera
+      else // if there is a station name, we frame it in "-- NAME --" and send it to the scroller
       { 
         stationStringScroll = ("-- " + stationNameStream + " --");
         stationStringWeb = ("-- " + stationNameStream + " --");
-      }  // Zmienna stationStringScroller przyjmuje wartość stationNameStream
+      }  // The stationStringScroller variable takes the value of stationNameStream
     }
-    else // Jezeli stationString zawiera dane to przypisujemy go do stationStringScroll do funkcji scrollera
+    else // If stationString contains data, we assign it to stationStringScroll to the scroller function
     {
       stationStringWeb = stationString;
       processText(stationString);  // przetwarzamy polsie znaki
-      stationStringScroll = "  " + stationString + "  " ; // Nie dodajemy separator do tekstu aby wyswietlał się rowno na srodku
+      stationStringScroll = "  " + stationString + "  " ; // We do not add a separator to the text so that it displays evenly in the center
     }             
     //Liczymy długość napisu stationStringScroll 
     stationStringScrollWidth = stationStringScroll.length() * 6;
@@ -3281,27 +3281,27 @@ void stationStringFormatting()
   }
   else if (displayMode == 7)
   {   
-    if (stationString == "") // Jeżeli stationString jest pusty i stacja go nie nadaje to podmieniamy pusty stationString na nazwę staji - stationNameStream
+    if (stationString == "") // If stationString is empty and the station does not transmit it, replace the empty stationString with the station name - stationNameStream
     {    
-      if (stationNameStream == "") // jezeli nie ma równiez stationName to wstawiamy 3 kreseczki
+      if (stationNameStream == "") // if there is no Station Name, we put 3 lines
       { 
         stationStringScroll = "---" ;
         stationStringWeb = "---" ;
       } 
-      else // jezeli jest station name to prawiamy w "-- NAZWA --" i wysylamy do scrollera
+      else // if there is a station name, we type "-- NAME --" and send it to the scroller
       { 
         stationStringScroll = ("-- " + stationNameStream + " --");
         stationStringWeb = ("-- " + stationNameStream + " --");
-      }  // Zmienna stationStringScroller przyjmuje wartość stationNameStream
+      }  // The stationStringScroller variable takes the value of stationNameStream
     }
-    else // Jezeli stationString zawiera dane to przypisujemy go do stationStringScroll do funkcji scrollera
+    else // If stationString contains data, we assign it to stationStringScroll to the scroller function
     {
       stationStringWeb = stationString;
-      processText(stationString);  // przetwarzamy polsie znaki
-      stationStringScroll = stationString + "    "; // dodajemy separator do przewijanego tekstu jesli się nie miesci na ekranie
+      processText(stationString);  // we process Polish characters
+      stationStringScroll = stationString + "    "; // we add a separator to the scrolling text if it does not fit on the screen
     }             
     
-    //Liczymy długość napisu stationStringScroll 
+    // We count the length of the stationStringScroll string
     stationStringScrollWidth = stationStringScroll.length() * 6;    
     if (f_debug_on) 
     {
@@ -3316,10 +3316,10 @@ void stationStringFormatting()
 
 }
 
-// ----------- GLOWNA OBSLUGA WYSWIETLACZA W FUNKCJI RADIA INTERNETOWEGO ----------- //
+// ----------- MAIN DISPLAY OPERATION IN THE INTERNET RADIO FUNCTION ----------- //
 void displayRadio() 
 {
-  int StationNameEnd = stationName.indexOf("  "); // Wycinamy nazwe stacji tylko do miejsca podwojnej spacji 
+  int StationNameEnd = stationName.indexOf("  "); // We cut out the station name only up to the double space
   stationName = stationName.substring(0, StationNameEnd);
 
   if (displayMode == 0)
@@ -3327,29 +3327,29 @@ void displayRadio()
     u8g2.clearBuffer();
     u8g2.setFont(u8g2_font_helvB14_tr);
     u8g2.drawStr(24, 16, stationName.substring(0, stationNameLenghtCut - 1).c_str());
-    u8g2.drawRBox(1, 1, 21, 16, 4);  // Biały kwadrat (tło) pod numerem stacji
+    u8g2.drawRBox(1, 1, 21, 16, 4);  // White square (background) under the station number
         
-    // Funkcja wyswietlania numeru Banku na dole ekranu
+    // Bank number display function at the bottom of the screen
     u8g2.setFont(spleen6x12PL);
     char BankStr[8];  
-    snprintf(BankStr, sizeof(BankStr), "B-%02d", bank_nr); // Formatujemy numer banku do postacji 00
+    snprintf(BankStr, sizeof(BankStr), "B-%02d", bank_nr); // We format the bank number to 00
 
-    // Wyswietlamy numer Banku w dolnej linijce
+    // We display the Bank number on the bottom line
     
     if (!urlPlaying) 
     {
-      u8g2.drawBox(161, 54, 1, 12);  // dorysowujemy 1px pasek przed napisem "Bank" dla symetrii
+      u8g2.drawBox(161, 54, 1, 12);  // we draw a 1px strip before the word "Bank" for symmetry
       u8g2.setDrawColor(0);
-      u8g2.setCursor(162, 63);  // Pozycja napisu Bank0x na dole ekranu
+      u8g2.setCursor(162, 63);  // Position of the Bank0x inscription at the bottom of the screen
       u8g2.print(BankStr);
     }
     
     u8g2.setDrawColor(0);
     char StationNrStr[3];
-    snprintf(StationNrStr, sizeof(StationNrStr), "%02d", station_nr);  //Formatowanie informacji o stacji i banku do postaci 00
-    // Pozycja numeru stacji na gorze po lewej ekranu
+    snprintf(StationNrStr, sizeof(StationNrStr), "%02d", station_nr);  // Formatting station and bank information to 00
+    // Station number position at the top left of the screen
     
-    // Rozroznienie czy wypisujemy numer stacji czy napis URL jesli gramy z linka ze strony www
+    // Distinguishing whether we enter the station number or the URL string if we are playing from a link from a website
     if (!urlPlaying) 
     {
       u8g2.setCursor(4, 14);
@@ -3364,7 +3364,7 @@ void displayRadio()
     
     u8g2.setDrawColor(1);
       
-    // Logo 3xZZZ w trybie dla timera SLEEP
+    // 3xZZZ logo in SLEEP timer mode
     if (f_sleepTimerOn) 
     {
       u8g2.setFont(u8g2_font_04b_03_tr); 
@@ -3373,24 +3373,24 @@ void displayRadio()
       u8g2.drawStr(195,59, "z");
     }
     
-    stationStringFormatting(); //Formatujemy stationString wyswietlany przez funkcję Scrollera
-    u8g2.drawLine(0, 52, 255, 52); // Dolna linia rozdzielajaca
+    stationStringFormatting(); //We format the stationString displayed by the Scroller function
+    u8g2.drawLine(0, 52, 255, 52); // Bottom dividing line
     
     u8g2.setFont(spleen6x12PL); 
-    u8g2.drawStr(135, 63, streamCodec.c_str()); // dopisujemy kodek minimalnie przesuniety o 1px aby zmiescil sie napis numeru banku
+    u8g2.drawStr(135, 63, streamCodec.c_str()); // we add the codec shifted slightly by 1px to fit the bank number text
     String displayString = String(SampleRate) + "." + String(SampleRateRest) + "kHz " + bitsPerSampleString + "bit " + bitrateString + "kbps";
     u8g2.setFont(spleen6x12PL);
     u8g2.drawStr(0, 63, displayString.c_str());
   }
   
-  else if (displayMode == 1) // ZEGAR - Tryb wświetlania zegara z 1 linijką radia na dole
+  else if (displayMode == 1) // CLOCK - Clock display mode with 1 radio line at the bottom
   {
     u8g2.clearBuffer();
     u8g2.setDrawColor(1);
     u8g2.setFont(spleen6x12PL);
-    u8g2.drawLine(0, 50, 255, 50); // Linia separacyjna zegar, dolna linijka radia
+    u8g2.drawLine(0, 50, 255, 50); // Clock separation line, radio bottom line
 
-    // Logo 3xZZZ w trybie dla timera SLEEP
+    // 3xZZZ logo in SLEEP timer mode
     if (f_sleepTimerOn) 
     {
       u8g2.setFont(u8g2_font_04b_03_tr); 
@@ -3418,7 +3418,7 @@ void displayRadio()
       u8g2.drawStr(23, 11, stationName.substring(0, stationNameLenghtCut).c_str()); // Cropping and displaying this way we do not change the content of the station Name variable
       u8g2.drawRBox(1, 1, 18, 13, 4);  // Rbox under the station number
     }
-    else // gramy z URL powiekszamy pole od numer stacji aby zmiescil sie napis URL
+    else // we play with the URL, we enlarge the field from the station number to fit the URL text
     {
       u8g2.drawStr(29, 11, stationName.substring(0, stationNameLenghtCut).c_str()); // Cropping and displaying this way we do not change the content of the station Name variable
       u8g2.drawRBox(1, 1, 24, 13, 4);  // Rbox under the station number
@@ -3489,7 +3489,7 @@ void displayRadio()
     
     if (flac == true || opus == true) 
     {
-      if (u8g2.getStrWidth(bitrateString.c_str()) > 19) {u8g2.drawFrame(x_codec,2,45,9);}  // 128 ->18px, regulujemy ranke w zaleznosci czy bitrate ma 4 czy 3 cyfry
+      if (u8g2.getStrWidth(bitrateString.c_str()) > 19) {u8g2.drawFrame(x_codec,2,45,9);}  // 128 ->18px, we adjust the rank depending on whether the bitrate is 4 or 3 digits
       else { u8g2.drawFrame(x_codec,2,39,9);}
       
       u8g2.drawBox(x_codec+1,2,21,9);
@@ -4226,7 +4226,7 @@ void drawSignalPower(uint8_t xpwr, uint8_t ypwr, bool print, bool mode)
 
   if ((WiFi.status() == WL_CONNECTED) && (mode == 1))
   {
-      // Rysujemy kreseczki
+      // We draw lines
     if (signalpwr > -88) { wifiSignalLevel = 1; u8g2.drawBox(xpwr, ypwr - 2, 1, 1); }     // 0-14
     if (signalpwr > -81) { wifiSignalLevel = 2; u8g2.drawBox(xpwr + 2, ypwr - 3, 1, 2); } // > 28
     if (signalpwr > -74) { wifiSignalLevel = 3; u8g2.drawBox(xpwr + 4, ypwr - 4, 1, 3); } // > 42
@@ -4402,7 +4402,7 @@ void saveStationOnSD()
     {
       Serial.println("debug SD -> File bank_nr.txt does not exist. Creating...");
 
-      // Utwórz plik i zapisz w nim aktualną wartość bank_nr
+      // Create a file and save the current value of bank_nr in it
       myFile = STORAGE.open("/bank_nr.txt", FILE_WRITE);
       if (myFile) {
         myFile.println(bank_nr);
@@ -8508,7 +8508,7 @@ void saveRemoteControlConfig()
   {
 	  Serial.println("RC - Config, remote.txt file already exists.");
 	  
-    // Otwórz plik do zapisu i nadpisz aktualną wartość konfiguracji
+    // Open the file for writing and overwrite the current configuration value
     myFile = STORAGE.open("/remote.txt", FILE_WRITE);
 	  if (myFile)
 	  {
@@ -8551,7 +8551,7 @@ void saveRemoteControlConfig()
   {
     Serial.println("RC - Config, remote.txt file does not exist. Creating...");
 
-    // Utwórz plik i zapisz w nim aktualne wartości konfiguracji
+    // Create a file and save the current configuration values ​​in it
     myFile = STORAGE.open("/remote.txt", FILE_WRITE);
     if (myFile)
     {
@@ -8603,7 +8603,7 @@ void readRemoteControlConfig()
     // Tworzymy nazwę pliku
   String fileName = String("/remote.txt");
 
-  // Sprawdzamy, czy plik istnieje
+  // We check if the file exists
   if (!STORAGE.exists(fileName)) 
   {
     Serial.println("RC - Config, error, IR remote configuration file remote.txt does not exist.");
@@ -8611,26 +8611,26 @@ void readRemoteControlConfig()
     return;
   }
 
-  // Otwieramy plik w trybie do odczytu
+  // We open the file in read mode
   File configRemoteFile = STORAGE.open(fileName, FILE_READ);
-  if (!configRemoteFile)  // jesli brak pliku to...
+  if (!configRemoteFile)  // if the file is missing then...
   {
     Serial.println("RC - Config, error, unable to open IR remote configuration file");
     configIrExist = false;
     return;
   }
-  // Przechodzimy do odpowiedniego wiersza pliku
+  // We go to the appropriate line of the file
   configIrExist = true;
   int currentLine = 0;
   String configValue = "";
   while (configRemoteFile.available())
   {
     String line = configRemoteFile.readStringUntil(';'); //('\n');
-    int lineStart = line.indexOf("0x") + 2;  // Szukamy miejsca, gdzie zaczyna wartość zmiennej
-    if ((lineStart != -1)) //&& (currentLine != 0)) // Pomijamy pierwszą linijkę gdzie jest opis pliku
+    int lineStart = line.indexOf("0x") + 2;  // We are looking for the place where the value of the variable begins
+    if ((lineStart != -1)) //&& (currentLine != 0)) // We skip the first line where the file description is
 	  {
-      configValue = line.substring(lineStart, lineStart + 5);  // Wyciągamy adres i komende
-      configValue.trim();                      // Usuwamy białe znaki na początku i końcu
+      configValue = line.substring(lineStart, lineStart + 5);  // We extract the address and command
+      configValue.trim();                      // We remove whitespace at the beginning and end
       Serial.print(" Code read: " + String(currentLine) + " value:");
       Serial.print(configValue + " wartosc ConfigArray: ");
       configRemoteArray[currentLine] = strtol(configValue.c_str(), NULL, 16);
@@ -8640,7 +8640,7 @@ void readRemoteControlConfig()
   }
   //Serial.print("We close the config file at the currentLine value:");
   //Serial.println(currentLine);
-  configRemoteFile.close();  // Zamykamy plik po odczycie kodow pilota
+  configRemoteFile.close();  // We close the file after reading the remote control codes
 }
 
 void assignRemoteCodes()
@@ -8653,66 +8653,66 @@ void assignRemoteCodes()
   if (configIrExist == true)  
   {
   Serial.println("RC - Config, file exists, assigns values ​​from Remote.txt file");
-  rcCmdVolumeUp = configRemoteArray[0];    // Głosnosc +
-  rcCmdVolumeDown = configRemoteArray[1];  // Głośnosc -
-  rcCmdArrowRight = configRemoteArray[2];  // strzałka w prawo - nastepna stacja
-  rcCmdArrowLeft = configRemoteArray[3];   // strzałka w lewo - poprzednia stacja  
-  rcCmdArrowUp = configRemoteArray[4];     // strzałka w góre - lista stacji krok do gory
-  rcCmdArrowDown = configRemoteArray[5];   // strzałka w dół - lista stacj krok na dół
-  rcCmdBack = configRemoteArray[6]; 	     // Przycisk powrotu
-  rcCmdOk = configRemoteArray[7];          // Przycisk Ent - zatwierdzenie stacji
-  rcCmdSrc = configRemoteArray[8];         // Przełączanie źródła radio, odtwarzacz
-  rcCmdMute = configRemoteArray[9];        // Wyciszenie dzwieku
-  rcCmdAud = configRemoteArray[10];        // Equalizer dzwieku
-  rcCmdDirect = configRemoteArray[11];     // Janość ekranu, dwa tryby 1/16 lub pełna janość     
-  rcCmdBankMinus = configRemoteArray[12];  // Wysweitla wybór banku
-  rcCmdBankPlus = configRemoteArray[13];   // Wysweitla wybór banku
+  rcCmdVolumeUp = configRemoteArray[0];    // Loudness +
+  rcCmdVolumeDown = configRemoteArray[1];  // Volume -
+  rcCmdArrowRight = configRemoteArray[2];  // right arrow - next station
+  rcCmdArrowLeft = configRemoteArray[3];   // left arrow - previous station 
+  rcCmdArrowUp = configRemoteArray[4];     // up arrow - list of stations one step up
+  rcCmdArrowDown = configRemoteArray[5];   // down arrow - list of stations step down
+  rcCmdBack = configRemoteArray[6]; 	     // Back button
+  rcCmdOk = configRemoteArray[7];          // Ent button - confirm station
+  rcCmdSrc = configRemoteArray[8];         // Switching the radio or player source
+  rcCmdMute = configRemoteArray[9];        // Sound mute
+  rcCmdAud = configRemoteArray[10];        // Sound equalizer
+  rcCmdDirect = configRemoteArray[11];     // Screen brightness, two modes 1/16 or full brightness    
+  rcCmdBankMinus = configRemoteArray[12];  // Display bank selection
+  rcCmdBankPlus = configRemoteArray[13];   // Display bank selection
   rcCmdRed = configRemoteArray[14];        // Toggles SD card bank loading - GitHub server in the bank menu
-  rcCmdPower = configRemoteArray[14];      // PRZYCISK POWER Z KODEM Czerwonej Słuchawki
-  rcCmdGreen = configRemoteArray[15];      // VU wyłaczony, VU tryb 1, VU tryb 2, zegar
-  rcCmdKey0 = configRemoteArray[16];       // Przycisk "0"
-  rcCmdKey1 = configRemoteArray[17];       // Przycisk "1"
-  rcCmdKey2 = configRemoteArray[18];       // Przycisk "2"
-  rcCmdKey3 = configRemoteArray[19];       // Przycisk "3"
-  rcCmdKey4 = configRemoteArray[20];       // Przycisk "4"
-  rcCmdKey5 = configRemoteArray[21];       // Przycisk "5"
-  rcCmdKey6 = configRemoteArray[22];       // Przycisk "6"
-  rcCmdKey7 = configRemoteArray[23];       // Przycisk "7"
-  rcCmdKey8 = configRemoteArray[24];       // Przycisk "8"
-  rcCmdKey9 = configRemoteArray[25];       // Przycisk "9"
+  rcCmdPower = configRemoteArray[14];      // POWER BUTTON WITH RED PHONE CODE
+  rcCmdGreen = configRemoteArray[15];      // VU off, VU mode 1, VU mode 2, clock
+  rcCmdKey0 = configRemoteArray[16];       // Button "0"
+  rcCmdKey1 = configRemoteArray[17];       // Button "1"
+  rcCmdKey2 = configRemoteArray[18];       // Button "2"
+  rcCmdKey3 = configRemoteArray[19];       // Button "3"
+  rcCmdKey4 = configRemoteArray[20];       // Button "4"
+  rcCmdKey5 = configRemoteArray[21];       // Button "5"
+  rcCmdKey6 = configRemoteArray[22];       // Button "6"
+  rcCmdKey7 = configRemoteArray[23];       // Button "7"
+  rcCmdKey8 = configRemoteArray[24];       // Button "8"
+  rcCmdKey9 = configRemoteArray[25];       // Button "9"
   }
   
-  //else if ((noSDcard == true) || (configIrExist == false)) // Jesli nie ma karty SD przypisujemy standardowe wartosci dla pilota Kenwood RC-406
-  else if (configIrExist == false) // Jesli nie ma karty SD przypisujemy standardowe wartosci dla pilota Kenwood RC-406
+  //else if ((noSDcard == true) || (configIrExist == false)) // If there is no SD card, we assign standard values ​​for the Kenwood RC-406 remote control
+  else if (configIrExist == false) // If there is no SD card, we assign standard values ​​for the Kenwood RC-406 remote control
   {
     Serial.println("IR Config - NO remote configuration, assigns default values");
-    rcCmdVolumeUp = 0xB914;   // Głosnosc +
-    rcCmdVolumeDown = 0xB915; // Głośnosc -
-    rcCmdArrowRight = 0xB90B; // strzałka w prawo - nastepna stacja
-    rcCmdArrowLeft = 0xB90A;  // strzałka w lewo - poprzednia stacja  
-    rcCmdArrowUp = 0xB987;    // strzałka w góre - lista stacji krok do gory
-    rcCmdArrowDown = 0xB986;  // strzałka w dół - lista stacj krok na dół
-    rcCmdBack = 0xB985;	   	  // Przycisk powrotu
-    rcCmdOk = 0xB90E;         // Przycisk Ent - zatwierdzenie stacji
-    rcCmdSrc = 0xB913;        // Przełączanie źródła radio, odtwarzacz
-    rcCmdMute = 0xB916;       // Wyciszenie dzwieku
-    rcCmdAud = 0xB917;        // Equalizer dzwieku
-    rcCmdDirect = 0xB90F;     // Janość ekranu, dwa tryby 1/16 lub pełna janość     
-    rcCmdBankMinus = 0xB90C;  // Wysweitla wybór banku
-    rcCmdBankPlus = 0xB90D;   // Wysweitla wybór banku
-    rcCmdRed = 0xB988;        // Przycisk czerwonej sluchawki - obecnie power
-    rcCmdPower = 0xB988;      // Przycisk power - brak obecnie na pilocie
-    rcCmdGreen = 0xB992;      // Przycisk zielonej sluchawki - obecnie sleep
-    rcCmdKey0 = 0xB900;       // Przycisk "0"
-    rcCmdKey1 = 0xB901;       // Przycisk "1"
-    rcCmdKey2 = 0xB902;       // Przycisk "2"
-    rcCmdKey3 = 0xB903;       // Przycisk "3"
-    rcCmdKey4 = 0xB904;       // Przycisk "4"
-    rcCmdKey5 = 0xB905;       // Przycisk "5"
-    rcCmdKey6 = 0xB906;       // Przycisk "6"
-    rcCmdKey7 = 0xB907;       // Przycisk "7"
-    rcCmdKey8 = 0xB908;       // Przycisk "8"
-    rcCmdKey9 = 0xB909;       // Przycisk "9"
+    rcCmdVolumeUp = 0xB914;   // Loudness +
+    rcCmdVolumeDown = 0xB915; // Volume -
+    rcCmdArrowRight = 0xB90B; // right arrow - next station
+    rcCmdArrowLeft = 0xB90A;  // left arrow - previous station  
+    rcCmdArrowUp = 0xB987;    // up arrow - list of stations one step up
+    rcCmdArrowDown = 0xB986;  // down arrow - list of stations step down
+    rcCmdBack = 0xB985;	   	  // Back button
+    rcCmdOk = 0xB90E;         // Ent button - confirm station
+    rcCmdSrc = 0xB913;        // Switching the radio or player source
+    rcCmdMute = 0xB916;       // Sound mute
+    rcCmdAud = 0xB917;        // Sound equalizer
+    rcCmdDirect = 0xB90F;     // Screen brightness, two modes 1/16 or full brightness    
+    rcCmdBankMinus = 0xB90C;  // Display bank selection
+    rcCmdBankPlus = 0xB90D;   // Display bank selection
+    rcCmdRed = 0xB988;        // Red handset button - currently power
+    rcCmdPower = 0xB988;      // Power button - currently missing on the remote control
+    rcCmdGreen = 0xB992;      // Green handset button - currently sleep
+    rcCmdKey0 = 0xB900;       // Button "0"
+    rcCmdKey1 = 0xB901;       // Button "1"
+    rcCmdKey2 = 0xB902;       // Button "2"
+    rcCmdKey3 = 0xB903;       // Button "3"
+    rcCmdKey4 = 0xB904;       // Button "4"
+    rcCmdKey5 = 0xB905;       // Button "5"
+    rcCmdKey6 = 0xB906;       // Button "6"
+    rcCmdKey7 = 0xB907;       // Button "7"
+    rcCmdKey8 = 0xB908;       // Button "8"
+    rcCmdKey9 = 0xB909;       // Button "9"
 
     configRemoteArray[0]  = rcCmdVolumeUp;
     configRemoteArray[1]  = rcCmdVolumeDown;
@@ -8761,7 +8761,7 @@ void listFiles(String path, String &html)
         return;
     }
 
-    // Przeglądanie plików w katalogu
+    // Browsing files in a directory
     File file = root.openNextFile();
     while (file) {
         if (!file.isDirectory()) {
@@ -8771,25 +8771,25 @@ void listFiles(String path, String &html)
             html += "<td>" + String(file.size()) + "</td>";
             html += "<td>" + String("\n");
             
-            // Kasowanie pliku
+            // Deleting a file
             html += "<form action=\"/delete\" method=\"POST\" style=\"display:inline; margin-right: 35px;\">";
             html += "<input type=\"hidden\" name=\"filename\" value=\"" + String(file.name()) + "\">";
             html += "<input type=\"submit\" value=\"Delete\">";
             html += "</form>" + String("\n");
 
-            // Podglad pliku
+            // File preview
             html += "<form action=\"/view\" method=\"GET\" style=\"display:inline;\">";
             html += "<input type=\"hidden\" name=\"filename\" value=\"" + String(file.name()) + "\">";
             html += "<input type=\"submit\" value=\"View\">";
             html += "</form>" + String("\n");
             
-            // Edycja pliku
+            // Edit file
             html += "<form action=\"/edit\" method=\"GET\" style=\"display:inline;\">";
             html += "<input type=\"hidden\" name=\"filename\" value=\"" + String(file.name()) + "\">";
             html += "<input type=\"submit\" value=\"Edit\">";
             html += "</form>" + String("\n");            
             
-            // Pobieranie pliku
+            // Downloading a file
             html += "<form action=\"/download\" method=\"GET\" style=\"display:inline;\">";
             html += "<input type=\"hidden\" name=\"filename\" value=\"" + String(file.name()) + "\">";
             html += "<input type=\"submit\" value=\"Download\">";
